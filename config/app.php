@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        hisorange\BrowserDetect\Provider\BrowserDetectService::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 

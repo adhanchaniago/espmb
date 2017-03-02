@@ -46,15 +46,15 @@ class User extends Authenticatable
     }
 
     public function groups() {
-        return $this->belongsToMany('App\Group','users_groups');
+        return $this->belongsToMany('App\Group','users_groups', 'user_id', 'group_id');
     }
 
     public function medias() {
-        return $this->belongsToMany('App\Media','users_medias');
+        return $this->belongsToMany('App\Media','users_medias', 'user_id', 'media_id');
     }
 
     public function mediagroups() {
-        return $this->belongsToMany('App\MediaGroup','users_media_groups');
+        return $this->belongsToMany('App\MediaGroup','users_media_groups', 'user_id', 'media_group_id');
     }
 
     public function religion() {
@@ -67,63 +67,5 @@ class User extends Authenticatable
                 return true;
             }
         }
-    }
-
-    public function agendas() {
-        return $this->belongsToMany('App\Agenda', 'agendas_users');
-    }
-
-    public function activities() {
-        return $this->belongsToMany('App\Activity', 'activities_users');
-    }
-
-    public function projecttasktypes()
-    {
-        return $this->hasMany('App\ProjectTaskType', 'user_id');
-    }
-
-    public function gridprojectcurrentuser()
-    {
-        return $this->hasMany('App\Project', 'current_user');
-    }
-
-    public function gridprojectpic()
-    {
-        return $this->hasMany('App\Project', 'pic');
-    }
-
-    public function gridprojecttaskcurrentuser()
-    {
-        return $this->hasMany('App\ProjectTask', 'current_user');
-    }
-
-    public function gridprojecttaskpic()
-    {
-        return $this->hasMany('App\ProjectTask', 'pic');
-    }
-
-    public function gridproposalcurrentuser()
-    {
-        return $this->hasMany('App\GridProposal', 'current_user');
-    }
-
-    public function gridproposalapproval1()
-    {
-        return $this->hasMany('App\GridProposal', 'approval_1');
-    }
-
-    public function gridproposalpic1()
-    {
-        return $this->hasMany('App\GridProposal', 'pic_1');
-    }
-
-    public function gridproposalpic2()
-    {
-        return $this->hasMany('App\GridProposal', 'pic_2');
-    }
-
-    public function gridproposalcreatedby()
-    {
-        return $this->hasMany('App\GridProposal', 'created_by');
     }
 }

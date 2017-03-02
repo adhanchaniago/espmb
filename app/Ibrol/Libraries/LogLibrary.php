@@ -10,7 +10,7 @@ use App\User;
 
 class LogLibrary{
 	public function store(Request $request) {
-		/*$browser = BrowserDetect::detect();
+		$browser = BrowserDetect::detect();
 
     	$log = new Log;
     	$log->log_url = $request->path();
@@ -19,6 +19,6 @@ class LogLibrary{
         $log->log_device = $browser->deviceFamily;
     	$log->log_browser = $browser->browserFamily;
     	$log->created_by = $request->user()->user_id;
-    	$log->save();*/
+    	$log->save();
 	}
 }

@@ -22,9 +22,4 @@ class MediaCategory extends Model
 	{
 		return $this->hasMany('App\Media','media_category_id');
 	}
-
-	public function creatives()
-	{
-		return $this->hasMany('App\Creative','media_category_id');	
-	}
 }

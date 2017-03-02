@@ -22,7 +22,7 @@ class MediaGroup extends Model
 
 	public function users()
 	{
-        return $this->belongsToMany('App\User','users_media_groups');
+        return $this->belongsToMany('App\User','users_media_groups', 'media_group_id', 'user_id');
     }
 
 	public function media()
@@ -33,10 +33,5 @@ class MediaGroup extends Model
 	public function publisher()
 	{
 		return $this->belongsTo('App\Publisher', 'publisher_id');
-	}
-
-	public function actionplans()
-	{
-		return $this->belongsToMany('App\ActionPlan', 'action_plan_media_group');
 	}
 }

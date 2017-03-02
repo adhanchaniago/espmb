@@ -16,14 +16,4 @@ class Implementation extends Model
 	protected $hidden = [
 				'active', 'created_by', 'created_at', 'updated_by', 'updated_at'
 	];
-
-	public function eventplans()
-    {
-    	return $this->belongsToMany('App\EventPlan','action_plans_implementations');
-    }
-
-    public function inventoriesplanner()
-    {
-    	return $this->belongsToMany('App\InventoryPlanner', 'inventory_planner_implementation');
-    }
 }

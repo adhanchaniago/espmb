@@ -23,14 +23,4 @@ class Unit extends Model
 	{
 		return $this->hasMany('App\Paper','paper_id');
 	}
-
-	public function advertisesizes()
-	{
-		return $this->hasMany('App\AdvertiseSize','unit_id');	
-	}
-
-	public function creatives()
-	{
-		return $this->hasMany('App\Creative','unit_id');		
-	}
 }

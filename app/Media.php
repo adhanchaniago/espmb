@@ -35,91 +35,11 @@ class Media extends Model
 
 	public function users()
 	{
-        return $this->belongsToMany('App\User','users_medias');
+        return $this->belongsToMany('App\User','users_medias', 'media_id', 'user_id');
     }
 
     public function mediaedition()
     {
     	return $this->hasMany('App\MediaEdition','media_id');
     }
-
-    public function advertiserate()
-    {
-    	return $this->hasMany('App\AdvertiseRate','advertise_rate_id');
-    }
-
-    public function actionplan()
-    {
-    	return $this->belongsToMany('App\ActionPlan','action_plan_media');
-    }
-
-    public function eventplans()
-    {
-    	return $this->belongsToMany('App\EventPlan','action_plans_medias');
-    }
-
-    public function inventoriesplanner()
-	{
-		return $this->belongsToMany('App\InventoryPlanner', 'inventory_planner_media');
-	}
-
-	public function inventoryplannerprices()
-	{
-		return $this->hasMany('App\InventoryPlannerPrice', 'media_id');
-	}
-
-	public function inventoryplannerprintprices()
-	{
-		return $this->hasMany('App\InventoryPlannerPrintPrice', 'media_id');
-	}
-
-	public function inventoryplannerdigitalprices()
-	{
-		return $this->hasMany('App\InventoryPlannerDigitalPrice', 'media_id');
-	}
-
-	public function inventoryplannereventprices()
-	{
-		return $this->hasMany('App\InventoryPlannerEventPrice', 'media_id');
-	}
-
-	public function inventoryplannercreativeprices()
-	{
-		return $this->hasMany('App\InventoryPlannerCreativePrice', 'media_id');
-	}
-
-	public function inventoryplannerotherprices()
-	{
-		return $this->hasMany('App\InventoryPlannerOtherPrice', 'media_id');
-	}
-
-	public function proposals()
-	{
-		return $this->belongsToMany('App\Proposal', 'proposal_media');
-	}
-
-	public function proposalprintprices()
-	{
-		return $this->hasMany('App\ProposalPrintPrice', 'media_id');
-	}
-
-	public function proposaldigitalprices()
-	{
-		return $this->hasMany('App\ProposalDigitalPrice', 'media_id');
-	}
-
-	public function proposaleventprices()
-	{
-		return $this->hasMany('App\ProposalEventPrice', 'media_id');
-	}
-
-	public function proposalcreativeprices()
-	{
-		return $this->hasMany('App\ProposalCreativePrice', 'media_id');
-	}
-
-	public function proposalotherprices()
-	{
-		return $this->hasMany('App\ProposalOtherPrice', 'media_id');
-	}
 }

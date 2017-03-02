@@ -25,24 +25,4 @@ class MediaEdition extends Model
 	{
 		return $this->belongsTo('App\Media','media_id');
 	}
-
-	public function actionplan()
-	{
-		return $this->belongsToMany('App\ActionPlan', 'action_plan_media_edition');
-	}
-
-	public function inventoryplannerprices()
-	{
-		return $this->hasMany('App\InventoryPlannerPrice', 'media_edition_id');
-	}
-
-	public function inventoryplannerprintprices()
-	{
-		return $this->hasMany('App\InventoryPlannerPrintPrice', 'media_edition_id');
-	}
-
-	public function proposalprintprices()
-	{
-		return $this->hasMany('App\ProposalPrintPrice', 'media_edition_id');
-	}
 }

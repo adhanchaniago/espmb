@@ -21,9 +21,4 @@ class Industry extends Model
 	{
 		return $this->hasMany('App\SubIndustry', 'subindustry_id');
 	}
-
-	public function proposals()
-	{
-		return $this->belongsToMany('App\Proposal', 'proposal_industry');
-	}
 }
