@@ -1,0 +1,1 @@
+{!! Cache::get('menus-'.Auth::user()->user_id) !!}
