@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 use App\Setting;
 use Cache;
@@ -16,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
+
         if(!Cache::has('allSettings')) {
             $allSettings = Setting::where('active', '1')->get();
 
