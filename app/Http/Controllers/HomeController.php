@@ -13,6 +13,7 @@ use Log;
 
 use App\Announcement;
 use Carbon\Carbon;
+use App\Mail\TestMail;
 
 use App\Ibrol\Libraries\UserLibrary;
 
@@ -46,6 +47,8 @@ class HomeController extends Controller
                                                     $query->where('announcement_startdate', '<=', $today)
                                                             ->where('announcement_enddate', '>=', $today);
                                                 })->where('active', '=', '1')->get();
+
+        //Mail::to('soni@gramedia-majalah.com')->send(new TestMail());
 
         return view('home', $data);
     }
