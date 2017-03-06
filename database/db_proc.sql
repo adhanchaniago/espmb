@@ -337,7 +337,7 @@ CREATE TABLE `groups` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,6 +346,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+INSERT INTO `groups` VALUES (1,'IT','IT','1',1,NULL,'2017-03-02 00:10:06','2017-03-02 00:10:06');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,7 +457,7 @@ CREATE TABLE `logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -465,6 +466,7 @@ CREATE TABLE `logs` (
 
 LOCK TABLES `logs` WRITE;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+INSERT INTO `logs` VALUES (1,'127.0.0.1','PC','user','Linux','Firefox',1,'2017-03-02 02:20:13','2017-03-02 02:20:13'),(2,'127.0.0.1','PC','user','Linux','Firefox',1,'2017-03-02 02:20:14','2017-03-02 02:20:14'),(3,'127.0.0.1','PC','user/apiList','Linux','Firefox',1,'2017-03-02 02:20:14','2017-03-02 02:20:14'),(4,'127.0.0.1','PC','config/log','Linux','Firefox',1,'2017-03-02 02:20:19','2017-03-02 02:20:19'),(5,'127.0.0.1','PC','config/log','Linux','Firefox',1,'2017-03-02 02:20:19','2017-03-02 02:20:19'),(6,'127.0.0.1','PC','config/log/apiList','Linux','Firefox',1,'2017-03-02 02:20:21','2017-03-02 02:20:21'),(7,'127.0.0.1','PC','profile','Linux','Firefox',1,'2017-03-02 02:21:47','2017-03-02 02:21:47'),(8,'127.0.0.1','PC','profile','Linux','Firefox',1,'2017-03-02 02:21:48','2017-03-02 02:21:48'),(9,'127.0.0.1','PC','/','Linux','Firefox',1,'2017-03-02 02:32:45','2017-03-02 02:32:45'),(10,'127.0.0.1','PC','/','Linux','Firefox',1,'2017-03-02 02:32:47','2017-03-02 02:32:47'),(11,'127.0.0.1','PC','profile','Linux','Firefox',1,'2017-03-02 02:32:52','2017-03-02 02:32:52'),(12,'127.0.0.1','PC','profile','Linux','Firefox',1,'2017-03-02 02:32:54','2017-03-02 02:32:54'),(13,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:34:25','2017-03-02 02:34:25'),(14,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:42:21','2017-03-02 02:42:21'),(15,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:43:24','2017-03-02 02:43:24'),(16,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:44:51','2017-03-02 02:44:51'),(17,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:44:53','2017-03-02 02:44:53'),(18,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:48:32','2017-03-02 02:48:32'),(19,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:48:32','2017-03-02 02:48:32'),(20,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:51:06','2017-03-02 02:51:06'),(21,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 02:51:10','2017-03-02 02:51:10'),(22,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 03:11:54','2017-03-02 03:11:54'),(23,'127.0.0.1','PC','home','Linux','Firefox',1,'2017-03-02 03:11:55','2017-03-02 03:11:55'),(24,'127.0.0.1','PC','/','Linux','Firefox',1,'2017-03-02 19:16:33','2017-03-02 19:16:33'),(25,'127.0.0.1','PC','/','Linux','Firefox',1,'2017-03-02 19:16:34','2017-03-02 19:16:34');
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1116,7 +1118,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1140,7 +1142,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_user_name_unique` (`user_name`),
   UNIQUE KEY `users_user_email_unique` (`user_email`),
   KEY `users_user_firstname_user_phone_user_birthdate_index` (`user_firstname`,`user_phone`,`user_birthdate`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1149,7 +1151,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'025407','soni@gramedia-majalah.com','$2y$10$TbDN8pnoBqubRR76fR29KupGc/jaY2hUXW0wFb2yo03c5zGHClvge','Soni','Rahayu','081111111111','1',1,'1990-01-01',NULL,NULL,'avatar.jpg','ACTIVE','1',1,1,'uz0QzLCp1R4C2iKdiIFXAyJosrkv77N7kfRmnwSuKx4N1tZrjxxSFAwFstWF','2017-03-01 19:28:32','2017-03-01 19:28:32');
+INSERT INTO `users` VALUES (1,'025407','soni@gramedia-majalah.com','$2y$10$.l.kwdKNvN2WjhVMM.DFE.rJHLMOk2H7Ub7Xu4R7yvbn8Ks8blieS','Soni','Rahayu','081111111111','1',1,'1990-01-01',NULL,NULL,'avatar.jpg','ACTIVE','1',1,1,'Bc9UidhWFZYLfOLrHOkpM9IyXg1sMj06l7QCGcvsffsjI4HLqUZvoK6yn30s','2017-03-01 19:28:32','2017-03-02 00:25:16'),(2,'000001','jakoeb@kompas.com','$2y$10$tXApGgxoZdYkRzd9tI1Pu.L8Qq1YT/oZacFrP2IcWTgsnX1qgVyWK','Jakoeb','Oetama','08212121212','1',7,'1950-01-01',NULL,NULL,'avatar.jpg','ACTIVE','1',1,1,NULL,'2017-03-02 00:11:10','2017-03-02 00:18:34');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1172,6 +1174,7 @@ CREATE TABLE `users_groups` (
 
 LOCK TABLES `users_groups` WRITE;
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
+INSERT INTO `users_groups` VALUES (2,1),(1,1);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1228,11 +1231,7 @@ DROP TABLE IF EXISTS `users_roles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users_roles` (
   `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1242,7 +1241,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1,1,1,'2016-05-19 02:00:10','2016-05-19 02:00:10'),(8,1,0,NULL,NULL,NULL),(8,4,0,NULL,NULL,NULL),(8,7,0,NULL,NULL,NULL),(10,7,0,NULL,NULL,NULL),(11,2,0,NULL,NULL,NULL),(12,1,0,NULL,NULL,NULL),(5,1,0,NULL,NULL,NULL),(13,12,0,NULL,NULL,NULL),(9,18,0,NULL,NULL,NULL),(2,1,0,NULL,NULL,NULL),(4,12,0,NULL,NULL,NULL),(15,9,0,NULL,NULL,NULL),(16,8,0,NULL,NULL,NULL),(17,2,0,NULL,NULL,NULL),(18,8,0,NULL,NULL,NULL),(14,9,0,NULL,NULL,NULL),(19,10,0,NULL,NULL,NULL),(20,13,0,NULL,NULL,NULL),(21,11,0,NULL,NULL,NULL),(23,11,0,NULL,NULL,NULL),(22,13,0,NULL,NULL,NULL),(24,32,0,NULL,NULL,NULL),(25,33,0,NULL,NULL,NULL),(26,34,0,NULL,NULL,NULL),(27,15,0,NULL,NULL,NULL);
+INSERT INTO `users_roles` VALUES (1,1),(8,1),(8,4),(8,7),(10,7),(11,2),(12,1),(5,1),(13,12),(9,18),(4,12),(15,9),(16,8),(17,2),(18,8),(14,9),(19,10),(20,13),(21,11),(23,11),(22,13),(24,32),(25,33),(26,34),(27,15),(2,2);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1285,4 +1284,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-02 14:06:27
+-- Dump completed on 2017-03-06 11:32:31
