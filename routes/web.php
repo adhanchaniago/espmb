@@ -157,6 +157,11 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('rule/apiDelete', 'RuleController@apiDelete');
         Route::resource('rule', 'RuleController');
 
+        //SPMB Type
+        Route::post('spmbtype/apiList', 'SPMBTypeController@apiList');
+        Route::post('spmbtype/apiDelete', 'SPMBTypeController@apiDelete');
+        Route::resource('spmbtype', 'SPMBTypeController');
+
         //Sub Industry
         Route::post('subindustry/apiList', 'SubIndustryController@apiList');
         Route::post('subindustry/apiDelete', 'SubIndustryController@apiDelete');
