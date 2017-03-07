@@ -16,26 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `action_types`
---
-
-DROP TABLE IF EXISTS `action_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `action_types` (
-  `action_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `action_type_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `action_type_desc` text COLLATE utf8mb4_unicode_ci,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`action_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `action_types`
 --
 
@@ -43,27 +23,6 @@ LOCK TABLES `action_types` WRITE;
 /*!40000 ALTER TABLE `action_types` DISABLE KEYS */;
 /*!40000 ALTER TABLE `action_types` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `actions`
---
-
-DROP TABLE IF EXISTS `actions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `actions` (
-  `action_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `action_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `action_alias` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `action_desc` text COLLATE utf8mb4_unicode_ci,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`action_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `actions`
@@ -76,19 +35,6 @@ INSERT INTO `actions` VALUES (1,'Create','C','Action Control to Create New Item'
 UNLOCK TABLES;
 
 --
--- Table structure for table `actions_modules`
---
-
-DROP TABLE IF EXISTS `actions_modules`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `actions_modules` (
-  `action_id` int(11) DEFAULT NULL,
-  `module_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `actions_modules`
 --
 
@@ -99,28 +45,6 @@ INSERT INTO `actions_modules` VALUES (1,2),(2,2),(3,2),(4,2),(2,1),(2,4),(1,5),(
 UNLOCK TABLES;
 
 --
--- Table structure for table `announcements`
---
-
-DROP TABLE IF EXISTS `announcements`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `announcements` (
-  `announcement_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `announcement_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `announcement_detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `announcement_startdate` date NOT NULL,
-  `announcement_enddate` date NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`announcement_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `announcements`
 --
 
@@ -128,25 +52,6 @@ LOCK TABLES `announcements` WRITE;
 /*!40000 ALTER TABLE `announcements` DISABLE KEYS */;
 /*!40000 ALTER TABLE `announcements` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `approval_types`
---
-
-DROP TABLE IF EXISTS `approval_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `approval_types` (
-  `approval_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `approval_type_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`approval_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `approval_types`
@@ -159,28 +64,6 @@ INSERT INTO `approval_types` VALUES (1,'Submitted','1',1,1,'2015-12-31 17:00:00'
 UNLOCK TABLES;
 
 --
--- Table structure for table `brands`
---
-
-DROP TABLE IF EXISTS `brands`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `brands` (
-  `brand_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `subindustry_id` int(11) NOT NULL,
-  `brand_code` char(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `brand_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `brand_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`brand_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `brands`
 --
 
@@ -188,26 +71,6 @@ LOCK TABLES `brands` WRITE;
 /*!40000 ALTER TABLE `brands` DISABLE KEYS */;
 /*!40000 ALTER TABLE `brands` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `companies`
---
-
-DROP TABLE IF EXISTS `companies`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `companies` (
-  `company_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `company_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `companies`
@@ -220,27 +83,6 @@ INSERT INTO `companies` VALUES (1,'AG01','PT Penerbitan Sarana Bobo','1',1,NULL,
 UNLOCK TABLES;
 
 --
--- Table structure for table `configs`
---
-
-DROP TABLE IF EXISTS `configs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `configs` (
-  `config_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `config_key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `config_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `config_desc` text COLLATE utf8mb4_unicode_ci,
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`config_id`),
-  UNIQUE KEY `configs_config_key_unique` (`config_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `configs`
 --
 
@@ -248,27 +90,6 @@ LOCK TABLES `configs` WRITE;
 /*!40000 ALTER TABLE `configs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `configs` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `divisions`
---
-
-DROP TABLE IF EXISTS `divisions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `divisions` (
-  `division_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `company_id` int(11) NOT NULL,
-  `division_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `division_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`division_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `divisions`
@@ -281,28 +102,6 @@ INSERT INTO `divisions` VALUES (1,2,'AE01040100','Tabloid Nova','1',1,1,'2017-03
 UNLOCK TABLES;
 
 --
--- Table structure for table `downloads`
---
-
-DROP TABLE IF EXISTS `downloads`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `downloads` (
-  `download_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `upload_file_id` int(11) NOT NULL,
-  `download_ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `download_device` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `download_os` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `download_browser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`download_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `downloads`
 --
 
@@ -310,27 +109,6 @@ LOCK TABLES `downloads` WRITE;
 /*!40000 ALTER TABLE `downloads` DISABLE KEYS */;
 /*!40000 ALTER TABLE `downloads` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `flow_groups`
---
-
-DROP TABLE IF EXISTS `flow_groups`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flow_groups` (
-  `flow_group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module_id` int(11) NOT NULL,
-  `flow_group_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `flow_group_desc` text COLLATE utf8mb4_unicode_ci,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`flow_group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `flow_groups`
@@ -342,35 +120,6 @@ LOCK TABLES `flow_groups` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `flows`
---
-
-DROP TABLE IF EXISTS `flows`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flows` (
-  `flow_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `flow_group_id` int(11) NOT NULL,
-  `flow_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `flow_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `flow_no` int(11) NOT NULL,
-  `flow_prev` int(11) NOT NULL,
-  `flow_next` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `flow_by` enum('AUTHOR','GROUP','INDUSTRY','PIC','MEDIA','MANUAL') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `flow_parallel` enum('true','false') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'false',
-  `flow_condition` enum('EQUAL','NOT_EQUAL','GREATER','LESS','GREATER_EQUAL','LESS_EQUAL') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `flow_condition_value` int(11) NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`flow_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `flows`
 --
 
@@ -378,26 +127,6 @@ LOCK TABLES `flows` WRITE;
 /*!40000 ALTER TABLE `flows` DISABLE KEYS */;
 /*!40000 ALTER TABLE `flows` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `groups`
---
-
-DROP TABLE IF EXISTS `groups`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `groups` (
-  `group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `group_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `groups`
@@ -410,26 +139,6 @@ INSERT INTO `groups` VALUES (1,'IT','IT','1',1,NULL,'2017-03-02 00:10:06','2017-
 UNLOCK TABLES;
 
 --
--- Table structure for table `holidays`
---
-
-DROP TABLE IF EXISTS `holidays`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `holidays` (
-  `holiday_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `holiday_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `holiday_date` date NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`holiday_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `holidays`
 --
 
@@ -437,26 +146,6 @@ LOCK TABLES `holidays` WRITE;
 /*!40000 ALTER TABLE `holidays` DISABLE KEYS */;
 /*!40000 ALTER TABLE `holidays` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `implementations`
---
-
-DROP TABLE IF EXISTS `implementations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `implementations` (
-  `implementation_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `implementation_month` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `implementation_month_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`implementation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `implementations`
@@ -469,27 +158,6 @@ INSERT INTO `implementations` VALUES (1,'01','January','1',1,1,'2017-03-01 19:28
 UNLOCK TABLES;
 
 --
--- Table structure for table `industries`
---
-
-DROP TABLE IF EXISTS `industries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `industries` (
-  `industry_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `industry_code` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `industry_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `industry_desc` text COLLATE utf8mb4_unicode_ci,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`industry_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `industries`
 --
 
@@ -497,27 +165,6 @@ LOCK TABLES `industries` WRITE;
 /*!40000 ALTER TABLE `industries` DISABLE KEYS */;
 /*!40000 ALTER TABLE `industries` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `logs`
---
-
-DROP TABLE IF EXISTS `logs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `logs` (
-  `log_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `log_ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `log_device` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `log_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `log_os` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `log_browser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `logs`
@@ -530,26 +177,6 @@ INSERT INTO `logs` VALUES (1,'127.0.0.1','PC','user','Linux','Firefox',1,'2017-0
 UNLOCK TABLES;
 
 --
--- Table structure for table `media_categories`
---
-
-DROP TABLE IF EXISTS `media_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `media_categories` (
-  `media_category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `media_category_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `media_category_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`media_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `media_categories`
 --
 
@@ -558,29 +185,6 @@ LOCK TABLES `media_categories` WRITE;
 INSERT INTO `media_categories` VALUES (1,'MAGAZINE 1','ukuran majalah NORMAL','1',1,0,'2017-01-17 10:26:07','2017-01-17 10:26:07'),(2,'MAGAZINE 2','ukuran majalah NGI','1',1,0,'2017-01-17 10:26:07','2017-01-17 10:26:07'),(3,'MAGAZINE 3','ukuran majalah INTISARI','1',1,0,'2017-01-17 10:26:07','2017-01-17 10:26:07'),(4,'TABLOID','','1',1,0,'2017-01-17 10:26:07','2017-01-17 10:26:07'),(5,'WEBSITE','','1',1,0,'2017-01-17 10:26:07','2017-01-17 10:26:07'),(6,'MOBILE SITE','','1',1,0,'2017-01-17 10:26:07','2017-01-17 10:26:07'),(7,'CUSTOM PUBLISHING','','1',1,0,'2017-01-17 10:26:08','2017-01-17 10:26:08');
 /*!40000 ALTER TABLE `media_categories` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `media_editions`
---
-
-DROP TABLE IF EXISTS `media_editions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `media_editions` (
-  `media_edition_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `media_id` int(11) NOT NULL,
-  `media_edition_no` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `media_edition_publish_date` date NOT NULL,
-  `media_edition_deadline_date` date NOT NULL,
-  `media_edition_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`media_edition_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `media_editions`
@@ -593,29 +197,6 @@ INSERT INTO `media_editions` VALUES (1,6,'1/2016','0000-00-00','0000-00-00','tes
 UNLOCK TABLES;
 
 --
--- Table structure for table `media_groups`
---
-
-DROP TABLE IF EXISTS `media_groups`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `media_groups` (
-  `media_group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `publisher_id` int(11) DEFAULT NULL,
-  `media_group_code` char(5) COLLATE utf8_unicode_ci NOT NULL,
-  `media_group_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `media_group_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`media_group_id`),
-  UNIQUE KEY `media_groups_media_group_code_unique` (`media_group_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `media_groups`
 --
 
@@ -624,31 +205,6 @@ LOCK TABLES `media_groups` WRITE;
 INSERT INTO `media_groups` VALUES (1,2,'ANGG','ANGKASA GROUP','Angkasa, Angkasa.co.id, Commando','1',1,0,'2017-01-17 10:37:34','2017-01-17 10:37:34'),(2,3,'AUTG','AUTOBILD GROUP','autobild, autobild.co.id','1',1,0,'2017-01-17 10:37:34','2017-01-17 10:37:34'),(3,1,'BOBG','BOBO GROUP','bobo, bobo junior. Kidnesia.com','1',1,0,'2017-01-17 10:37:34','2017-01-17 10:37:34'),(4,1,'CEWG','CEWEKBANGET.ID GROUP','cewekbanget.id','1',1,0,'2017-01-17 10:37:34','2017-01-17 10:37:34'),(5,2,'HAIG','HAI GROUP','hai, hai-online.com, hai mobile stage','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(6,2,'IDEG','IDEA RUMAH GROUP','idea, idea book, ideaonline.co.id, rumah, rumahguide.id','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(7,2,'INFG','INFOKOMPUTER GROUP','infokomputer, infokomputer.com','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(8,2,'INTG','INTISARI GROUP','intisari, intisari by product, intisari-online.com','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(9,1,'MOMG','DISNEY MOMBI  GROUP','awd, awd by product, barbie, disney junior, disney & me, mombi, mombi sd, cars, princess','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(10,3,'MPLG','MOTORPLUS GROUP','motorplus, motorplus by product, motorplus-online.com','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(11,1,'NAKG','NAKITA GROUP','nakita, tabloid-nakita.com','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(12,2,'NGIG','NATIONAL GEOGRAPHIC INDONESIA GROUP','national geographic indonesia, national geographic traveler, nationalgeographic.co.id, fotokita.net, digital camera, digitalcamera.co.id','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(13,1,'NOVG','NOVA GROUP','nova, tabloidnova.com, warta klub nova, mobil nova','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(14,3,'OTOG','OTOMOTIF GROUP','otomotif, otomotif by product, otomotifnet.com, jip, jip.co.id','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(15,3,'OPLG','OTOPLUS GROUP','otoplus, otoplus by product, otoplus.id','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(16,1,'SASG','SAJIANSEDAP GROUP','saji, sedap, sajiansedap.com, sedap pemula, sedap by product, saji by product','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35'),(17,1,'XYKG','XYKIDS GROUP','xykids, national geographic kids','1',1,0,'2017-01-17 10:37:35','2017-01-17 10:37:35');
 /*!40000 ALTER TABLE `media_groups` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `medias`
---
-
-DROP TABLE IF EXISTS `medias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `medias` (
-  `media_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `media_group_id` int(11) NOT NULL,
-  `media_category_id` int(11) NOT NULL,
-  `media_code` char(12) COLLATE utf8_unicode_ci NOT NULL,
-  `media_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `media_logo` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'logo.jpg',
-  `media_circulation` int(11) DEFAULT NULL,
-  `media_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`media_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `medias`
@@ -661,30 +217,6 @@ INSERT INTO `medias` VALUES (1,1,1,'NOVA','Tabloid Nova','logo.jpg',NULL,'Tabloi
 UNLOCK TABLES;
 
 --
--- Table structure for table `menus`
---
-
-DROP TABLE IF EXISTS `menus`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `menus` (
-  `menu_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module_id` int(11) NOT NULL,
-  `menu_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `menu_desc` text COLLATE utf8_unicode_ci,
-  `menu_icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `menu_order` int(11) NOT NULL,
-  `menu_parent` int(11) NOT NULL,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `menus`
 --
 
@@ -695,19 +227,6 @@ INSERT INTO `menus` VALUES (1,1,'Home','Menu for Home','zmdi zmdi-home',2,0,'1',
 UNLOCK TABLES;
 
 --
--- Table structure for table `menus_modules`
---
-
-DROP TABLE IF EXISTS `menus_modules`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `menus_modules` (
-  `menu_id` int(11) NOT NULL,
-  `module_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `menus_modules`
 --
 
@@ -715,21 +234,6 @@ LOCK TABLES `menus_modules` WRITE;
 /*!40000 ALTER TABLE `menus_modules` DISABLE KEYS */;
 /*!40000 ALTER TABLE `menus_modules` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `migrations`
---
-
-DROP TABLE IF EXISTS `migrations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `migrations`
@@ -742,27 +246,6 @@ INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,
 UNLOCK TABLES;
 
 --
--- Table structure for table `modules`
---
-
-DROP TABLE IF EXISTS `modules`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `modules` (
-  `module_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `module_action` text CHARACTER SET utf8,
-  `module_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`module_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `modules`
 --
 
@@ -771,29 +254,6 @@ LOCK TABLES `modules` WRITE;
 INSERT INTO `modules` VALUES (1,'/home','','Home for dashboard','1',1,NULL,'2016-07-13 20:37:38','2016-07-13 20:37:38'),(2,'/user','','Module for user management','1',1,NULL,'2016-07-13 20:38:20','2016-07-13 20:38:20'),(3,'/master/#','','Module for master data parent','1',1,NULL,'2016-07-13 20:39:14','2016-07-13 20:39:14'),(4,'/master/action','','Module for Action Control Management','1',1,1,'2016-07-13 20:40:30','2016-07-13 20:41:32'),(9,'/master/brand','','Module for Brand Management','1',1,NULL,'2016-07-13 20:48:22','2016-07-13 20:48:22'),(12,'/master/group','','Module for Group Management','1',1,NULL,'2016-07-13 20:49:51','2016-07-13 20:49:51'),(13,'/master/holiday','','Module for Holiday Management','1',1,NULL,'2016-07-13 20:50:21','2016-07-13 20:50:21'),(14,'/master/industry','','Module for Industry Management','1',1,NULL,'2016-07-13 20:52:45','2016-07-13 20:52:45'),(16,'/master/media','','Module for Media Management','1',1,NULL,'2016-07-13 20:53:57','2016-07-13 20:53:57'),(17,'/master/mediacategory','','Module for Media Category Management','1',1,NULL,'2016-07-13 20:55:05','2016-07-13 20:55:05'),(18,'/master/mediagroup','','Module for Media Group Management','1',1,NULL,'2016-07-13 20:56:55','2016-07-13 20:56:55'),(19,'/master/menu','','Module for Menu Management','1',1,NULL,'2016-07-13 20:57:30','2016-07-13 20:57:30'),(20,'/master/module','','Module for Module Management','1',1,NULL,'2016-07-13 20:58:39','2016-07-13 20:58:39'),(21,'/master/paper','','Module for Paper Type Management','1',1,1,'2016-07-13 20:59:21','2016-07-13 21:00:11'),(23,'/master/religion','','Module for Religion Management','1',1,NULL,'2016-07-13 21:00:40','2016-07-13 21:00:40'),(24,'/master/role','','Module for Role Management','1',1,NULL,'2016-07-13 21:01:10','2016-07-13 21:01:10'),(25,'/master/subindustry','','Module for Sub Industry Management','1',1,NULL,'2016-07-13 21:01:46','2016-07-13 21:01:46'),(26,'/master/unit','','Module for Unit Management','1',1,NULL,'2016-07-13 21:02:11','2016-07-13 21:02:11'),(27,'/master/flowgroup','','Module for Flow Group Management','1',1,NULL,'2016-07-20 21:38:03','2016-07-20 21:38:03'),(30,'/master/flow','','Flow Management','1',1,NULL,'2016-08-22 01:16:35','2016-08-22 01:16:35'),(31,'/master/notificationtype','','Module for Master Notification Type','1',1,NULL,'2016-08-31 20:40:21','2016-08-31 20:40:21'),(35,'/config/#','','Module for configuration','1',1,1,'2016-10-04 21:46:46','2016-10-04 21:48:07'),(36,'/config/setting','','Module for application settings','1',1,NULL,'2016-10-04 21:49:26','2016-10-04 21:49:26'),(37,'/config/announcement','','Module for Announcement Management','1',1,NULL,'2016-10-05 22:05:23','2016-10-05 22:05:23'),(43,'/master/publisher','','Module for Publisher Management','1',1,NULL,'2016-10-30 21:23:53','2016-10-30 21:23:53'),(55,'/config/log','','Module for User Log','1',1,NULL,'2017-01-26 07:55:25','2017-01-26 07:55:25'),(59,'/master/company',NULL,'Module for master company','1',1,NULL,'2017-03-06 21:11:16','2017-03-06 21:11:16'),(60,'/master/division',NULL,'Module for Division Management','1',1,NULL,'2017-03-06 21:11:46','2017-03-06 21:11:46'),(61,'/master/rule',NULL,'Module for rule management','1',1,NULL,'2017-03-06 23:47:19','2017-03-06 23:47:19');
 /*!40000 ALTER TABLE `modules` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `notification_types`
---
-
-DROP TABLE IF EXISTS `notification_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notification_types` (
-  `notification_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `notification_type_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notification_type_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notification_type_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notification_type_desc` text COLLATE utf8mb4_unicode_ci,
-  `notification_type_need_confirmation` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`notification_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `notification_types`
@@ -805,31 +265,6 @@ LOCK TABLES `notification_types` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `notifications`
---
-
-DROP TABLE IF EXISTS `notifications`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notifications` (
-  `notification_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `notification_type_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notification_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notification_ref_id` int(11) NOT NULL,
-  `notification_receiver` int(11) NOT NULL,
-  `notification_senttime` datetime NOT NULL,
-  `notification_readtime` datetime NOT NULL,
-  `notification_status` int(11) NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`notification_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `notifications`
 --
 
@@ -837,29 +272,6 @@ LOCK TABLES `notifications` WRITE;
 /*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
 /*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `papers`
---
-
-DROP TABLE IF EXISTS `papers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `papers` (
-  `paper_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `unit_id` int(11) NOT NULL,
-  `paper_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `paper_width` double(8,2) NOT NULL,
-  `paper_length` double(8,2) NOT NULL,
-  `paper_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`paper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `papers`
@@ -872,22 +284,6 @@ INSERT INTO `papers` VALUES (1,1,'AP',0.00,0.00,'','1',1,0,'2017-01-17 10:42:10'
 UNLOCK TABLES;
 
 --
--- Table structure for table `password_resets`
---
-
-DROP TABLE IF EXISTS `password_resets`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY `password_resets_email_index` (`email`),
-  KEY `password_resets_token_index` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `password_resets`
 --
 
@@ -895,28 +291,6 @@ LOCK TABLES `password_resets` WRITE;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `publishers`
---
-
-DROP TABLE IF EXISTS `publishers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `publishers` (
-  `publisher_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `publisher_code` char(5) COLLATE utf8_unicode_ci NOT NULL,
-  `publisher_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `publisher_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`publisher_id`),
-  UNIQUE KEY `publishers_publisher_code_unique` (`publisher_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `publishers`
@@ -929,25 +303,6 @@ INSERT INTO `publishers` VALUES (1,'CWM','Children Women Media','Children Women 
 UNLOCK TABLES;
 
 --
--- Table structure for table `religions`
---
-
-DROP TABLE IF EXISTS `religions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `religions` (
-  `religion_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `religion_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`religion_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `religions`
 --
 
@@ -956,26 +311,6 @@ LOCK TABLES `religions` WRITE;
 INSERT INTO `religions` VALUES (1,'Islam','1',1,1,'2016-05-19 02:00:10','2016-05-19 02:00:10'),(2,'Kristen Katolik','1',1,1,'2016-05-19 02:00:10','2016-05-19 02:00:10'),(3,'Kristen Protestan','1',1,1,'2016-05-19 02:00:10','2016-05-19 02:00:10'),(4,'Hindu','1',1,1,'2016-05-19 02:00:10','2016-05-19 02:00:10'),(5,'Budha','1',1,1,'2016-05-19 02:00:10','2016-05-19 02:00:10'),(6,'Konghucu Edit','0',1,1,'2016-05-23 02:08:49','2016-05-23 02:10:41'),(7,'tujuh','1',1,0,'2016-05-25 01:58:21','2016-05-25 01:58:21');
 /*!40000 ALTER TABLE `religions` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `role_levels`
---
-
-DROP TABLE IF EXISTS `role_levels`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role_levels` (
-  `role_level_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `role_level_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role_level_desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`role_level_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `role_levels`
@@ -988,27 +323,6 @@ INSERT INTO `role_levels` VALUES (1,'Level 1','Staff','1',1,1,'2017-03-01 19:28:
 UNLOCK TABLES;
 
 --
--- Table structure for table `roles`
---
-
-DROP TABLE IF EXISTS `roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `roles` (
-  `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `role_level_id` int(11) DEFAULT NULL,
-  `role_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `role_desc` text COLLATE utf8_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `roles`
 --
 
@@ -1017,21 +331,6 @@ LOCK TABLES `roles` WRITE;
 INSERT INTO `roles` VALUES (1,7,'Super Administrator','Role for Super Administrator','1',1,1,'2016-05-19 02:00:10','2016-09-02 00:29:53'),(2,6,'Administrator','Role for Adminstrator','1',1,1,'2016-05-20 00:31:22','2016-09-02 00:30:33'),(3,1,'Operator','Role for operator','1',1,1,'2016-05-20 00:33:20','2016-07-13 21:35:02'),(4,1,'Secretary','Role untuk secretary','1',1,1,'2016-05-20 00:35:15','2016-07-13 21:39:09');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `roles_modules`
---
-
-DROP TABLE IF EXISTS `roles_modules`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `roles_modules` (
-  `role_id` int(11) NOT NULL,
-  `module_id` int(11) NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `access` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `roles_modules`
@@ -1044,26 +343,6 @@ INSERT INTO `roles_modules` VALUES (16,1,2,1),(29,1,2,1),(30,1,2,1),(6,1,2,1),(1
 UNLOCK TABLES;
 
 --
--- Table structure for table `rules`
---
-
-DROP TABLE IF EXISTS `rules`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rules` (
-  `rule_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `rule_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rule_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`rule_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `rules`
 --
 
@@ -1072,28 +351,6 @@ LOCK TABLES `rules` WRITE;
 INSERT INTO `rules` VALUES (1,'Kontrak','Kontrak','1',1,NULL,'2017-03-07 00:04:41','2017-03-07 00:04:41'),(2,'Report Pekerjaan','Report Pekerjaan','1',1,NULL,'2017-03-07 00:05:07','2017-03-07 00:05:07'),(3,'Invoice','Invoice','1',1,NULL,'2017-03-07 00:05:21','2017-03-07 00:05:21'),(4,'Faktur Pajak','Faktur Pajak','1',1,NULL,'2017-03-07 00:05:36','2017-03-07 00:05:36'),(5,'RAB','RAB','1',1,NULL,'2017-03-07 00:05:49','2017-03-07 00:05:49'),(6,'Surat Penawaran','Surat Penawaran','1',1,NULL,'2017-03-07 00:06:07','2017-03-07 00:06:07'),(7,'Kelengkapan Materi Promosi','Kelengkapan Materi Promosi','1',1,NULL,'2017-03-07 00:06:28','2017-03-07 00:06:28'),(8,'Surat Rekomendasi TI','Surat Rekomendasi TI','1',1,NULL,'2017-03-07 00:06:46','2017-03-07 00:06:46'),(9,'BPB (Bon Permintaan Barang)','BPB (Bon Permintaan Barang)','1',1,1,'2017-03-07 00:07:21','2017-03-07 00:08:34'),(10,'No IO dan Aset','No IO dan Aset','1',1,NULL,'2017-03-07 00:07:48','2017-03-07 00:07:48'),(11,'Matrik Otorisasi','Matrik Otorisasi','1',1,NULL,'2017-03-07 00:08:05','2017-03-07 00:08:05');
 /*!40000 ALTER TABLE `rules` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `settings`
---
-
-DROP TABLE IF EXISTS `settings`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `settings` (
-  `setting_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `setting_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `setting_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `setting_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `setting_value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`setting_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `settings`
@@ -1106,19 +363,6 @@ INSERT INTO `settings` VALUES (1,'app_name','Application Setting','Application\'
 UNLOCK TABLES;
 
 --
--- Table structure for table `spmb_type_rule`
---
-
-DROP TABLE IF EXISTS `spmb_type_rule`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `spmb_type_rule` (
-  `spmb_type_id` int(11) NOT NULL,
-  `rule_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `spmb_type_rule`
 --
 
@@ -1126,25 +370,6 @@ LOCK TABLES `spmb_type_rule` WRITE;
 /*!40000 ALTER TABLE `spmb_type_rule` DISABLE KEYS */;
 /*!40000 ALTER TABLE `spmb_type_rule` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `spmb_types`
---
-
-DROP TABLE IF EXISTS `spmb_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `spmb_types` (
-  `spmb_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `spmb_type_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`spmb_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `spmb_types`
@@ -1156,28 +381,6 @@ LOCK TABLES `spmb_types` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `subindustries`
---
-
-DROP TABLE IF EXISTS `subindustries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `subindustries` (
-  `subindustry_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `industry_id` int(11) NOT NULL,
-  `subindustry_code` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subindustry_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subindustry_desc` text COLLATE utf8mb4_unicode_ci,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`subindustry_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `subindustries`
 --
 
@@ -1185,27 +388,6 @@ LOCK TABLES `subindustries` WRITE;
 /*!40000 ALTER TABLE `subindustries` DISABLE KEYS */;
 /*!40000 ALTER TABLE `subindustries` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `units`
---
-
-DROP TABLE IF EXISTS `units`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `units` (
-  `unit_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `unit_code` char(5) COLLATE utf8_unicode_ci NOT NULL,
-  `unit_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `unit_desc` text COLLATE utf8_unicode_ci,
-  `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`unit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `units`
@@ -1218,29 +400,6 @@ INSERT INTO `units` VALUES (1,'cm','Centimeter','Centimeter','1',1,1,'2016-06-07
 UNLOCK TABLES;
 
 --
--- Table structure for table `upload_files`
---
-
-DROP TABLE IF EXISTS `upload_files`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `upload_files` (
-  `upload_file_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `upload_file_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `upload_file_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `upload_file_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `upload_file_size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `upload_file_desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`upload_file_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `upload_files`
 --
 
@@ -1248,41 +407,6 @@ LOCK TABLES `upload_files` WRITE;
 /*!40000 ALTER TABLE `upload_files` DISABLE KEYS */;
 /*!40000 ALTER TABLE `upload_files` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_gender` enum('1','2') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `religion_id` int(11) NOT NULL,
-  `user_birthdate` date DEFAULT NULL,
-  `user_lastlogin` datetime DEFAULT NULL,
-  `user_lastip` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_status` enum('ACTIVE','INACTIVE','BLOCKED','EXPIRED') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `users_user_name_unique` (`user_name`),
-  UNIQUE KEY `users_user_email_unique` (`user_email`),
-  KEY `users_user_firstname_user_phone_user_birthdate_index` (`user_firstname`,`user_phone`,`user_birthdate`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
@@ -1295,19 +419,6 @@ INSERT INTO `users` VALUES (1,'025407','soni@gramedia-majalah.com','$2y$10$.l.kw
 UNLOCK TABLES;
 
 --
--- Table structure for table `users_groups`
---
-
-DROP TABLE IF EXISTS `users_groups`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users_groups` (
-  `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `users_groups`
 --
 
@@ -1316,19 +427,6 @@ LOCK TABLES `users_groups` WRITE;
 INSERT INTO `users_groups` VALUES (2,1),(1,1);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `users_media_groups`
---
-
-DROP TABLE IF EXISTS `users_media_groups`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users_media_groups` (
-  `user_id` int(11) NOT NULL,
-  `media_group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users_media_groups`
@@ -1340,19 +438,6 @@ LOCK TABLES `users_media_groups` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `users_medias`
---
-
-DROP TABLE IF EXISTS `users_medias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users_medias` (
-  `user_id` int(11) NOT NULL,
-  `media_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `users_medias`
 --
 
@@ -1360,19 +445,6 @@ LOCK TABLES `users_medias` WRITE;
 /*!40000 ALTER TABLE `users_medias` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users_medias` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `users_roles`
---
-
-DROP TABLE IF EXISTS `users_roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users_roles` (
-  `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users_roles`
@@ -1383,19 +455,6 @@ LOCK TABLES `users_roles` WRITE;
 INSERT INTO `users_roles` VALUES (1,1),(8,1),(8,4),(8,7),(10,7),(11,2),(12,1),(5,1),(13,12),(9,18),(4,12),(15,9),(16,8),(17,2),(18,8),(14,9),(19,10),(20,13),(21,11),(23,11),(22,13),(24,32),(25,33),(26,34),(27,15),(2,2);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `users_subindustries`
---
-
-DROP TABLE IF EXISTS `users_subindustries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users_subindustries` (
-  `user_id` int(11) NOT NULL,
-  `subindustry_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users_subindustries`
@@ -1415,4 +474,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-07 15:34:17
+-- Dump completed on 2017-03-07 15:41:39
