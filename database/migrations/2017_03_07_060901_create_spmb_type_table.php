@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMediaCategoriesTable extends Migration
+class CreateSpmbTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +13,13 @@ class CreateMediaCategoriesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('media_categories')) {
-            Schema::create('media_categories', function (Blueprint $table) {
-                $table->increments('media_category_id');
-                $table->string('media_category_name', 100);
-                $table->text('media_category_desc')->nullable();
+        if (!Schema::hasTable('spmb_types')) {
+            Schema::create('spmb_types', function (Blueprint $table) {
+                $table->increments('spmb_type_id');
+                $table->string('spmb_type_name');
                 $table->enum('active', ['0', '1'])->default('1');
                 $table->integer('created_by');
-                $table->integer('updated_by')->nullable();;
+                $table->integer('updated_by')->nullable();
                 $table->timestamps();
             });
         }
@@ -32,7 +32,6 @@ class CreateMediaCategoriesTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('media_categories');
+        Schema::dropIfExists('spmb_types');
     }
 }

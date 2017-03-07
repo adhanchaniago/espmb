@@ -23,7 +23,7 @@ class CreateMediasTable extends Migration
                 $table->text('media_desc')->nullable();
                 $table->enum('active', ['0', '1'])->default('1');
                 $table->integer('created_by');
-                $table->integer('updated_by');
+                $table->integer('updated_by')->nullable();;
                 $table->timestamps();
             });
         }
