@@ -236,16 +236,6 @@ LOCK TABLES `menus_modules` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `migrations`
---
-
-LOCK TABLES `migrations` WRITE;
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2016_05_11_093524_create_roles_table',1),(4,'2016_05_11_094826_create_users_roles_table',1),(5,'2016_05_11_094847_create_modules_table',1),(6,'2016_05_11_094858_create_menus_table',1),(7,'2016_05_11_094918_create_actions_table',1),(8,'2016_05_11_094929_create_configs_table',1),(9,'2016_05_11_094943_create_menus_modules_table',1),(10,'2016_05_11_094955_create_roles_modules_table',1),(11,'2016_05_12_071210_create_users_medias_table',1),(12,'2016_05_12_071232_create_users_subindustries_table',1),(13,'2016_05_12_071452_create_media_groups_table',1),(14,'2016_05_12_071922_create_media_categories_table',1),(15,'2016_05_12_072147_create_medias_table',1),(16,'2016_05_12_072517_create_media_editions_table',1),(17,'2016_05_12_072947_create_papers',1),(18,'2016_05_12_073325_create_units_table',1),(19,'2016_05_12_080341_create_holidays_table',1),(20,'2016_05_12_080353_create_religions_table',1),(21,'2016_05_12_080404_create_industries_table',1),(22,'2016_05_12_080412_create_subindustries_table',1),(23,'2016_05_12_080418_create_brands_table',1),(24,'2016_05_12_083339_create_flow_groups_table',1),(25,'2016_05_12_083347_create_flows_table',1),(26,'2016_05_12_084514_create_action_types_table',1),(27,'2016_05_26_072328_create_actions_modules_table',1),(28,'2016_06_10_043804_create_groups_table',1),(29,'2016_07_21_031419_create_users_groups_table',1),(30,'2016_08_19_083415_create_upload_files_table',1),(31,'2016_09_01_032400_create_notification_types_table',1),(32,'2016_09_01_032410_create_notifications_table',1),(33,'2016_09_02_040009_create_role_levels_table',1),(34,'2016_09_14_090001_create_download_table',1),(35,'2016_09_15_094726_create_approval_type_table',1),(36,'2016_10_05_043832_create_settings_table',1),(37,'2016_10_06_041740_create_announcements_table',1),(38,'2016_10_12_065451_create_implementations_table',1),(39,'2016_10_31_034256_create_table_publishers',1),(40,'2016_10_31_035006_update_table_media_groups_add_publisher_id_column',1),(41,'2016_11_01_040523_create_users_media_groups_table',1),(42,'2016_12_07_042548_create_logs_table',1),(43,'2016_12_20_104127_update_medias_table_add_column_media_circulation',1),(44,'2017_03_07_032539_create_company_table',2),(45,'2017_03_07_032546_create_division_table',2),(46,'2017_03_07_060854_create_rules_table',3),(47,'2017_03_07_060901_create_spmb_type_table',3),(48,'2017_03_07_061632_create_spmb_type_rule_table',3);
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `modules`
 --
 
