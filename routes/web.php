@@ -57,6 +57,16 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::resource('brand', 'BrandController');
         Route::post('brand/apiSearch', 'BrandController@apiSearch');
 
+        //Company
+        Route::post('company/apiList', 'CompanyController@apiList');
+        Route::post('company/apiDelete', 'CompanyController@apiDelete');
+        Route::resource('company', 'CompanyController');
+
+        //Division
+        Route::post('division/apiList', 'DivisionController@apiList');
+        Route::post('division/apiDelete', 'DivisionController@apiDelete');
+        Route::resource('division', 'DivisionController');
+
         //Flow
         Route::post('flow/apiList', 'FlowController@apiList');
         Route::post('flow/apiDelete', 'FlowController@apiDelete');
