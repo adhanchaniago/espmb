@@ -88,6 +88,11 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('holiday/apiDelete', 'HolidayController@apiDelete');
         Route::resource('holiday', 'HolidayController');
 
+        //Item Category
+        Route::post('itemcategory/apiList', 'ItemCategoryController@apiList');
+        Route::post('itemcategory/apiDelete', 'ItemCategoryController@apiDelete');
+        Route::resource('itemcategory', 'ItemCategoryController');
+
         //Industry
         Route::post('industry/apiList', 'IndustryController@apiList');
         Route::post('industry/apiDelete', 'IndustryController@apiDelete');
@@ -142,6 +147,11 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('publisher/apiDelete', 'PublisherController@apiDelete');
         Route::resource('publisher', 'PublisherController');
 
+        //Rating
+        Route::post('rating/apiList', 'RatingController@apiList');
+        Route::post('rating/apiDelete', 'RatingController@apiDelete');
+        Route::resource('rating', 'RatingController');
+
         //Religion
         Route::post('religion/apiList', 'ReligionController@apiList');
         Route::post('religion/apiEdit', 'ReligionController@apiEdit');
@@ -172,6 +182,11 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('unit/apiList', 'UnitController@apiList');
         Route::post('unit/apiDelete', 'UnitController@apiDelete');
         Route::resource('unit', 'UnitController');
+
+        //Vendor Type
+        Route::post('vendortype/apiList', 'VendorTypeController@apiList');
+        Route::post('vendortype/apiDelete', 'VendorTypeController@apiDelete');
+        Route::resource('vendortype', 'VendorTypeController');
     });
 
     Route::group(['prefix' => 'config'], function() {
