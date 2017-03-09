@@ -142,6 +142,11 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('paper/apiDelete', 'PaperController@apiDelete');
         Route::resource('paper', 'PaperController');
 
+        //Payment Type
+        Route::post('paymenttype/apiList', 'PaymentTypeController@apiList');
+        Route::post('paymenttype/apiDelete', 'PaymentTypeController@apiDelete');
+        Route::resource('paymenttype', 'PaymentTypeController');
+
         //Publisher
         Route::post('publisher/apiList', 'PublisherController@apiList');
         Route::post('publisher/apiDelete', 'PublisherController@apiDelete');
