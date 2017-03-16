@@ -50,16 +50,12 @@
                             </div>
                         </li>
 
-                        <li id="top-search">
-                            <a href="#"><i class="tm-icon zmdi zmdi-search"></i></a>
-                        </li>
-
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                             <a data-toggle="dropdown" href="#">
                                 <i class="tm-icon zmdi zmdi-email"></i>
                                 <i class="tmn-counts">0</i>
                             </a>
-                            <!-- <div class="dropdown-menu dropdown-menu-lg pull-right">
+                            <div class="dropdown-menu dropdown-menu-lg pull-right">
                                 <div class="listview">
                                     <div class="lv-header">
                                         Messages
@@ -79,8 +75,8 @@
                                     </div>
                                     <a class="lv-footer" href="#">View All</a>
                                 </div>
-                            </div> -->
-                        </li>
+                            </div>
+                        </li> -->
                         <li class="dropdown">
                             <a data-toggle="dropdown" href="#">
                                 <i class="tm-icon zmdi zmdi-notifications"></i>
@@ -117,6 +113,10 @@
                                 </div>
 
                             </div>
+                        </li>
+
+                        <li id="top-search">
+                            <a href="#"><i class="tm-icon zmdi zmdi-search"></i></a>
                         </li>
                         <!-- <li class="dropdown hidden-xs">
                             <a data-toggle="dropdown" href="#">
@@ -180,7 +180,7 @@
                                 </div>
                             </div>
                         </li> -->
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                             <a data-toggle="dropdown" href="#"><i class="tm-icon zmdi zmdi-more-vert"></i></a>
                             <ul class="dropdown-menu dm-icon pull-right">
                                 <li class="skin-switch hidden-xs">
@@ -196,7 +196,7 @@
                                     <a data-action="fullscreen" href="#"><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <!-- <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
                             <a href="#"><i class="tm-icon zmdi zmdi-comment-alt-text"></i></a>
                         </li> -->
@@ -209,7 +209,7 @@
             <div id="top-search-wrap">
                 <div class="tsw-inner">
                     <i id="top-search-close" class="zmdi zmdi-arrow-left"></i>
-                    <input type="text">
+                    <input type="text" placeholder="SPMB No Tracking">
                 </div>
             </div>
         </header>
@@ -375,7 +375,7 @@
         </section>
         
         <footer id="footer">
-            Copyright &copy; 2016 Gramedia Majalah IT
+            Copyright &copy; 2017 Gramedia Majalah IT
             
             <!-- <ul class="f-menu">
                 <li><a href="#">Home</a></li>
