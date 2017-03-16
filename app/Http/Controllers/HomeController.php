@@ -41,22 +41,22 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        /*$later = Carbon::now()->addMinutes(2);
+        $later = Carbon::now()->addMinutes(2);
 
         //dd($later);
 
         Mail::to('soni@gramedia-majalah.com')->later($later, new TestMail());
 
-        dd('ok');*/
+        //dd('ok');
 
-        /*$user = User::find(1);
-        Notification::send($user, new TestNotif());*/
+        $user = User::find(1);
+        Notification::send($user, new TestNotif());
         /*$user = User::find(1);
         foreach($user->unreadNotifications as $notif) {
             echo $notif->type;
         }*/
 
-        /*dd('mail');*/
+        dd('mail');
 
         $data = array();
 
