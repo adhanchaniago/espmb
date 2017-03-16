@@ -127,7 +127,7 @@
 	                <label for="user_phone" class="col-sm-2 control-label">Phone No</label>
 	                <div class="col-sm-10">
 	                    <div class="fg-line">
-	                        <input type="text" class="form-control input-mask" name="user_phone" id="user_phone" placeholder="Phone No" maxlength="14" value="{{ old('user_phone') }}" autocomplete="off" data-mask="000000000000">
+	                        <input type="text" class="form-control input-mask" name="user_phone" id="user_phone" placeholder="Phone No" maxlength="14" value="{{ old('user_phone') }}" autocomplete="off" data-mask="00000000000000">
 	                    </div>
 	                    @if ($errors->has('user_phone'))
 			                <span class="help-block">

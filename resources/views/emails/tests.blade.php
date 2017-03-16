@@ -1,10 +1,10 @@
 @component('mail::message')
-# Introduction
+# Nofication
 
-The body of your message.
+This is an example email from us.
 
 @component('mail::button', ['url' => ''])
-Button Text
+Click Here
 @endcomponent
 
 Thanks,<br>

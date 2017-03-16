@@ -10,12 +10,17 @@ use DB;
 use Gate;
 use Mail;
 use Log;
+use Notification;
 
 use App\Announcement;
+use App\Religion;
 use Carbon\Carbon;
 use App\Mail\TestMail;
 
 use App\Ibrol\Libraries\UserLibrary;
+
+//use Illuminate\Support\Facades\Redis;
+use App\Notifications\TestNotif;
 
 class HomeController extends Controller
 {
@@ -36,6 +41,23 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        /*$later = Carbon::now()->addMinutes(2);
+
+        //dd($later);
+
+        Mail::to('soni@gramedia-majalah.com')->later($later, new TestMail());
+
+        dd('ok');*/
+
+        /*$user = User::find(1);
+        Notification::send($user, new TestNotif());*/
+        /*$user = User::find(1);
+        foreach($user->unreadNotifications as $notif) {
+            echo $notif->type;
+        }*/
+
+        /*dd('mail');*/
+
         $data = array();
 
         $today = date('Y-m-d');
@@ -48,7 +70,6 @@ class HomeController extends Controller
                                                             ->where('announcement_enddate', '>=', $today);
                                                 })->where('active', '=', '1')->get();
 
-        //Mail::to('soni@gramedia-majalah.com')->send(new TestMail());
 
         return view('home', $data);
     }

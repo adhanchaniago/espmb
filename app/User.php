@@ -4,9 +4,13 @@ namespace App;
 
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -40,6 +44,16 @@ class User extends Authenticatable
     ];
 
     protected $primaryKey = 'user_id';
+
+    public function routeNotificationForMail()
+    {
+        return $this->user_email;
+    }
+
+    public function routeNotificationForNexmo()
+    {
+        return $this->user_phone;
+    }
 
     public function roles() {
         return $this->belongsToMany('App\Role','users_roles', 'user_id', 'role_id');

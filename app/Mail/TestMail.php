@@ -7,9 +7,13 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\Religion;
+
 class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $religion;
 
     /**
      * Create a new message instance.
@@ -19,6 +23,7 @@ class TestMail extends Mailable
     public function __construct()
     {
         //
+        $this->religion = Religion::find(1);
     }
 
     /**
@@ -28,6 +33,7 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.tests');
+        return $this->view('vendor.material.mail.test')->with(['nama' => 'soni']);
+        //return $this->view('');
     }
 }
