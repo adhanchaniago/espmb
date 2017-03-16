@@ -41,7 +41,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $later = Carbon::now()->addMinutes(2);
+        /*$later = Carbon::now()->addMinutes(2);
 
         //dd($later);
 
@@ -54,9 +54,9 @@ class HomeController extends Controller
         /*$user = User::find(1);
         foreach($user->unreadNotifications as $notif) {
             echo $notif->type;
-        }*/
+        }
 
-        dd('mail');
+        dd('mail');*/
 
         $data = array();
 
