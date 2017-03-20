@@ -62,7 +62,7 @@ class VendorController extends Controller
         	'vendor_type_id' => 'required',
             'vendor_name' => 'required|max:100',
             'vendor_address' => 'required',
-            'vendor_email' => 'required|unique:users,user_email|max:100',
+            'vendor_email' => 'required|unique:vendors,vendor_email|max:100',
             'vendor_phone' => 'digits_between:10, 14',
             'term_of_payment_id' => 'required',
             'term_of_payment_value' => 'numeric',
@@ -91,6 +91,95 @@ class VendorController extends Controller
         Vendor::find($obj->vendor_id)->itemcategories()->sync($request->input('item_category_id'));
 
         $request->session()->flash('status', 'Data has been saved!');
+
+        return redirect('vendor');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        if(Gate::denies('Vendor Management-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+        $data['vendor'] = Vendor::with('vendortype','termofpayment','itemcategories','ratings')->find($id);
+        
+        return view('vendor.material.vendor.show', $data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        if(Gate::denies('Vendor Management-Update')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+        $data['vendor'] = Vendor::with('vendortype','termofpayment','itemcategories','ratings')->find($id);
+        $data['vendortypes'] = VendorType::where('active', '1')->orderBy('vendor_type_name')->get();
+        $data['itemcategories'] = ItemCategory::where('active','1')->orderBy('item_category_name')->get();
+        $data['termofpayments'] = TermOfPayment::where('active','1')->orderBy('term_of_payment_name')->get();
+        $data['ratings'] = Rating::where('active','1')->orderBy('rating_name')->get();
+
+        return view('vendor.material.vendor.edit', $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $this->validate($request, [
+        	'vendor_type_id' => 'required',
+            'vendor_name' => 'required|max:100',
+            'vendor_address' => 'required',
+            'vendor_email' => 'required|unique:vendors,vendor_email,'.$id.',vendor_id|max:100',
+            'vendor_phone' => 'digits_between:10, 14',
+            'term_of_payment_id' => 'required',
+            'term_of_payment_value' => 'numeric',
+            'vendor_status' => 'required',
+            'item_category_id[]' => 'array',
+            'rating_id[]' => 'array',
+        ]);
+
+        $obj = Vendor::find($id);
+
+        $obj->vendor_type_id = $request->input('vendor_type_id');
+        $obj->vendor_name = $request->input('vendor_name');
+        $obj->vendor_address = $request->input('vendor_address');
+        $obj->vendor_email = $request->input('vendor_email');
+        $obj->vendor_phone = $request->input('vendor_phone');
+        $obj->vendor_fax = $request->input('vendor_fax');
+        $obj->vendor_note = $request->input('vendor_note');
+        $obj->term_of_payment_id = $request->input('term_of_payment_id');
+        $obj->term_of_payment_value = $request->input('term_of_payment_value');
+        $obj->vendor_status = $request->input('vendor_status');
+        $obj->updated_by = $request->user()->user_id;
+
+        $obj->save();
+
+        Vendor::find($id)->itemcategories()->sync($request->input('item_category_id'));
+        Vendor::find($id)->ratings()->sync($request->input('rating_id'));
+
+        $request->session()->flash('status', 'Data has been updated!');
 
         return redirect('vendor');
     }
@@ -139,5 +228,26 @@ class VendorController extends Controller
                             })->count();
 
         return response()->json($data);
+    }
+
+    public function apiDelete(Request $request)
+    {
+        if(Gate::denies('Vendor Management-Delete')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $vendor_id = $request->input('vendor_id');
+
+        $obj = Vendor::find($vendor_id);
+
+        $obj->active = '0';
+        $obj->updated_by = $request->user()->user_id;
+
+        if($obj->save())
+        {
+            return response()->json(100); //success
+        }else{
+            return response()->json(200); //failed
+        }
     }
 }
