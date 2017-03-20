@@ -194,6 +194,11 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::resource('vendortype', 'VendorTypeController');
     });
 
+    //Vendor Management
+    Route::post('vendor/apiList', 'VendorController@apiList');
+    Route::post('vendor/apiDelete', 'VendorController@apiDelete');
+    Route::resource('vendor', 'VendorController');
+
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
         Route::post('announcement/apiList', 'AnnouncementController@apiList');
