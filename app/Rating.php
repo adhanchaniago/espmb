@@ -16,4 +16,9 @@ class Rating extends Model
 	protected $hidden = [
 				'active', 'created_by', 'created_at', 'updated_by', 'updated_at'
 	];
+
+	public function vendors()
+	{
+        return $this->belongsToMany('App\Vendor','vendor_rating', 'rating_id', 'vendor_id');
+    }
 }

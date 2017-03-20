@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VendorType extends Model
+class TermOfPayment extends Model
 {
-    protected $table = 'vendor_types';
-	protected $primaryKey = 'vendor_type_id';
+    protected $table = 'term_of_payments';
+	protected $primaryKey = 'term_of_payment_id';
 
 	protected $fillable = [
-				'vendor_type_name', 'vendor_type_desc'
+				'term_of_payment_name'
 	];
 
 	protected $hidden = [
@@ -19,6 +19,6 @@ class VendorType extends Model
 
 	public function vendors() 
 	{
-		return $this->hasMany('App\Vendor', 'vendor_type_id');
+		return $this->hasMany('App\Vendor', 'term_of_payment_id');
 	}
 }

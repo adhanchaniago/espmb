@@ -16,4 +16,9 @@ class ItemCategory extends Model
 	protected $hidden = [
 				'active', 'created_by', 'created_at', 'updated_by', 'updated_at'
 	];
+
+	public function vendors()
+	{
+        return $this->belongsToMany('App\Vendor','vendor_item_category', 'item_category_id', 'vendor_id');
+    }
 }
