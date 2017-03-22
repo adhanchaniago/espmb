@@ -20,4 +20,8 @@ class SPMBType extends Model
 	public function rules() {
         return $this->belongsToMany('App\Rule','spmb_type_rule', 'spmb_type_id', 'rule_id');
     }
+
+    public function spmb() {
+    	return $this->hasMany('App\SPMB', 'spmb_type_id');
+    }
 }

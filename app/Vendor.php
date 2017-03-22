@@ -45,4 +45,9 @@ class Vendor extends Model
     {
     	return $this->belongsTo('App\TermOfPayment', 'term_of_payment_id');
     }
+
+    public function spmbdetailvendors()
+    {
+    	return $this->hasMany('App\SPMBDetailVendor', 'vendor_id');
+    }
 }

@@ -21,4 +21,9 @@ class Division extends Model
 	{
 		return $this->belongsTo('App\Company', 'company_id');
 	}
+
+	public function spmb()
+	{
+		return $this->hasMany('App\SPMB', 'division_id');
+	}
 }

@@ -23,4 +23,9 @@ class Unit extends Model
 	{
 		return $this->hasMany('App\Paper','paper_id');
 	}
+
+	public function spmbdetails()
+    {
+    	return $this->hasMany('App\SPMBDetail', 'unit_id');
+    }
 }

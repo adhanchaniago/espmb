@@ -21,4 +21,9 @@ class ItemCategory extends Model
 	{
         return $this->belongsToMany('App\Vendor','vendor_item_category', 'item_category_id', 'vendor_id');
     }
+
+    public function spmbdetails()
+    {
+    	return $this->hasMany('App\SPMBDetail', 'item_category_id');
+    }
 }

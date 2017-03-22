@@ -82,4 +82,14 @@ class User extends Authenticatable
             }
         }
     }
+
+    public function spmbcurrentuser()
+    {
+        return $this->hasMany('App\SPMB', 'current_user');
+    }
+
+    public function spmbpic()
+    {
+        return $this->hasMany('App\SPMB', 'pic');
+    }
 }

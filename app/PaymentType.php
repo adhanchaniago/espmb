@@ -16,4 +16,9 @@ class PaymentType extends Model
 	protected $hidden = [
 				'active', 'created_by', 'created_at', 'updated_by', 'updated_at'
 	];
+
+	public function spmbdetailpayments()
+	{
+		return $this->hasMany('App\SPMBDetailPayment', 'payment_type_id');
+	}
 }
