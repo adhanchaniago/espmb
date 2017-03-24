@@ -18,7 +18,7 @@ class FlowGroup extends Model
 	];
 
 	public function module() {
-		return $this->belongsTo('App\Module');
+		return $this->belongsTo('App\Module', 'module_id');
 	}
 
 	public function flows() {

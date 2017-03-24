@@ -199,6 +199,11 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('vendor/apiDelete', 'VendorController@apiDelete');
     Route::resource('vendor', 'VendorController');
 
+    //SPMB
+    Route::post('spmb/apiList/{listtype}', 'SPMBController@apiList');
+    Route::post('spmb/apiDelete', 'SPMBController@apiDelete');
+    Route::resource('spmb', 'SPMBController');
+
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
         Route::post('announcement/apiList', 'AnnouncementController@apiList');

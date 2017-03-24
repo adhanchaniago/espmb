@@ -24,8 +24,8 @@ class CreateFlowsTable extends Migration
                 $table->integer('role_id');
                 $table->enum('flow_by', ['AUTHOR', 'GROUP', 'INDUSTRY', 'PIC', 'MEDIA', 'MANUAL']);
                 $table->enum('flow_parallel', ['true', 'false'])->default('false');
-                $table->enum('flow_condition', ['EQUAL','NOT_EQUAL','GREATER','LESS','GREATER_EQUAL','LESS_EQUAL']);
-                $table->integer('flow_condition_value');
+                $table->enum('flow_condition', ['EQUAL','NOT_EQUAL','GREATER','LESS','GREATER_EQUAL','LESS_EQUAL'])->nullable();
+                $table->integer('flow_condition_value')->nullable();
                 $table->enum('active', ['0', '1'])->default('1');
                 $table->integer('created_by');
                 $table->integer('updated_by')->nullable();;

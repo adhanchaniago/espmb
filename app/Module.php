@@ -27,6 +27,6 @@ class Module extends Model
     }
 
     public function flowgroup() {
-    	return $this->hasOne('App\FlowGroup');
+    	return $this->hasOne('App\FlowGroup', 'module_id');
     }
 }
