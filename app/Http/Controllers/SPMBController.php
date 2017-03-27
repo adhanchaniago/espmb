@@ -22,7 +22,7 @@ use App\SPMBDetailPayment;
 use App\SPMBDetailReceipt;
 use App\SPMBDetailVendor;
 use App\SPMBHistory;
-use App\SMPBType;
+use App\SPMBType;
 use App\User;
 use App\Vendor;
 
@@ -59,6 +59,20 @@ class SPMBController extends Controller
         $data = array();
 
         return view('vendor.material.spmb.list', $data);
+    }
+
+    public function create(Request $request)
+    {
+		if(Gate::denies('SPMB-Create')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb_types'] = SPMBType::where('active', '1')->orderBy('spmb_type_name')->get();
+        $data['companies'] = Company::where('active', '1')->orderBy('company_name')->get();
+
+     	return view('vendor.material.spmb.create', $data);   
     }
 
     public function apiList($listtype, Request $request)

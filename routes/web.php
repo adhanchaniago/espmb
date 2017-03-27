@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('division/apiList', 'DivisionController@apiList');
         Route::post('division/apiDelete', 'DivisionController@apiDelete');
         Route::resource('division', 'DivisionController');
+        Route::post('division/apiGetPerCompany', 'DivisionController@apiGetPerCompany');
 
         //Flow
         Route::post('flow/apiList', 'FlowController@apiList');
@@ -203,6 +204,8 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/apiList/{listtype}', 'SPMBController@apiList');
     Route::post('spmb/apiDelete', 'SPMBController@apiDelete');
     Route::resource('spmb', 'SPMBController');
+    Route::get('spmb/approve/{flow_no}/{id}', 'SPMBController@approve');
+    Route::post('spmb/approve/{flow_no}/{id}', 'SPMBController@postApprove');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management

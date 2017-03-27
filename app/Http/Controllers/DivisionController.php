@@ -211,4 +211,13 @@ class DivisionController extends Controller
             return response()->json(200); //failed
         }
     }
+
+    public function apiGetPerCompany(Request $request)
+    {
+        $company_id = $request->input('company_id');
+
+        $data = Division::where('company_id', $company_id)->where('active', '1')->orderBy('division_name', 'asc')->get();
+
+        return response()->json($data);
+    }
 }
