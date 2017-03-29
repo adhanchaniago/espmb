@@ -23,6 +23,7 @@ use App\SPMBDetailReceipt;
 use App\SPMBDetailVendor;
 use App\SPMBHistory;
 use App\SPMBType;
+use App\Unit;
 use App\User;
 use App\Vendor;
 
@@ -71,6 +72,8 @@ class SPMBController extends Controller
 
         $data['spmb_types'] = SPMBType::where('active', '1')->orderBy('spmb_type_name')->get();
         $data['companies'] = Company::where('active', '1')->orderBy('company_name')->get();
+        $data['item_categories'] = ItemCategory::where('active', '1')->orderBy('item_category_name')->get();
+        $data['units'] = Unit::where('active', '1')->orderBy('unit_name')->get();
 
      	return view('vendor.material.spmb.create', $data);   
     }
@@ -320,5 +323,89 @@ class SPMBController extends Controller
         
 
         return response()->json($data);
+    }
+
+    public function apiLoadDetails(Request $request) {
+        if(Gate::denies('SPMB-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['details'] = $request->session()->get('spmb_details_' . $request->user()->user_id);
+
+        return response()->json($data);
+    }
+
+    public function apiStoreDetails(Request $request) {
+        if(Gate::denies('SPMB-Create')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $item_category_id = $request->input('item_category_id');
+        $item_category_name = $request->input('item_category_name');
+        $spmb_detail_account_no = $request->input('spmb_detail_account_no');
+        $spmb_detail_sequence_no = $request->input('spmb_detail_sequence_no');
+        $spmb_detail_item_name = $request->input('spmb_detail_item_name');
+        $unit_id = $request->input('unit_id');
+        $unit_name = $request->input('unit_name');
+        $spmb_detail_qty = $request->input('spmb_detail_qty');
+        $spmb_detail_note = $request->input('spmb_detail_note');
+
+        $detail = array();
+        $detail['item_category_id'] = $item_category_id;
+        $detail['item_category_name'] = $item_category_name;
+        $detail['spmb_detail_account_no'] = $spmb_detail_account_no;
+        $detail['spmb_detail_sequence_no'] = $spmb_detail_sequence_no;
+        $detail['spmb_detail_item_name'] = $spmb_detail_item_name;
+        $detail['unit_id'] = $unit_id;
+        $detail['unit_name'] = $unit_name;
+        $detail['spmb_detail_qty'] = $spmb_detail_qty;
+        $detail['spmb_detail_note'] = $spmb_detail_note;
+
+        $details = array();
+        if($request->session()->has('spmb_details_' . $request->user()->user_id)) {
+            $details = $request->session()->get('spmb_details_' . $request->user()->user_id);
+            $request->session()->forget('spmb_details_' . $request->user()->user_id);
+            $i = count($details) + 1;
+        }else{
+            $i = 1;
+        }
+
+        $details[] = $detail;
+
+        $request->session()->put('spmb_details_' . $request->user()->user_id, $details);
+        
+        $data['status'] = '200';
+
+        return response()->json($data);
+    }
+
+    public function apiDeleteDetails(Request $request) {
+        $data = array();
+
+        $key = $request->input('key');
+
+        $details = array();
+        if($request->session()->has('spmb_details_' . $request->user()->user_id)) {
+            $details = $request->session()->get('spmb_details_' . $request->user()->user_id);
+            $request->session()->forget('spmb_details_' . $request->user()->user_id);
+
+            unset($details[$key]);
+
+            $request->session()->put('spmb_details_' . $request->user()->user_id, $details);
+        
+            $data['status'] = '200';
+
+            return response()->json($data); 
+        }else{
+            $data['status'] = '500';
+
+            return response()->json($data);
+        }
+
+
     }
 }

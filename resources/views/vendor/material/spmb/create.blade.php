@@ -174,7 +174,8 @@
 	            	</div>
 	            </div>
 	            <hr>
-	            <button class="btn btn-success" id="btn_add_detail">Add Items</button><br/><br/>
+	            <a href="javascript:void(0)" class="btn btn-primary btn-sm waves-effect command-add-spmb-detail">Tambah Barang</a>
+	            <br/><br/>
 	            <table id="tabel_detail_spmb" class="table table-bordered table-hover">
 	            	<thead>
 	            		<tr>
@@ -199,6 +200,8 @@
 	        </form>
         </div>
     </div>
+
+    @include('vendor.material.spmb.modal')
 @endsection
 
 @section('vendorjs')

@@ -206,6 +206,9 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::resource('spmb', 'SPMBController');
     Route::get('spmb/approve/{flow_no}/{id}', 'SPMBController@approve');
     Route::post('spmb/approve/{flow_no}/{id}', 'SPMBController@postApprove');
+    Route::get('spmb/api/loadDetails', 'SPMBController@apiLoadDetails');
+    Route::post('spmb/api/storeDetail', 'SPMBController@apiStoreDetails');
+    Route::post('spmb/api/deleteDetail', 'SPMBController@apiDeleteDetails');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
