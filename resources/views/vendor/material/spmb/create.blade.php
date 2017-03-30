@@ -36,7 +36,7 @@
 	            	<label for="spmb_no" class="col-sm-2 control-label">SPMB No</label>
 	            	<div class="col-sm-10">
 	            		<div class="fg-line">
-	            			<input type="text" name="spmb_no" id="spmb_no" class="form-control input-sm" placeholder="SPMB No" maxlength="20" value="" disabled="true">
+	            			<input type="text" name="spmb_no" id="spmb_no" class="form-control input-sm" placeholder="SPMB No" maxlength="20" value="{{ $spmb_code }}" readonly="true">
 	            		</div>
 	            		@if ($errors->has('spmb_no'))
 	            			<span class="help-block">
@@ -160,7 +160,7 @@
 	            		@endif
 	            	</div>
 	            </div>
-	             <div class="form-group">
+	            <div class="form-group">
 	            	<label for="spmb_applicant_email" class="col-sm-2 control-label">E-mail Pemesan</label>
 	            	<div class="col-sm-10">
 	            		<div class="fg-line">
@@ -191,6 +191,43 @@
 	            	</tbody>
 	            </table>
 	            <br/>
+	            <hr/>
+	            <div class="form-group">
+	            	<label for="spmb_rules" class="col-sm-2 control-label">Persyaratan</label>
+	            	<div class="col-sm-10" id="spmb_rules_container">
+	            		
+	            	</div>
+	            </div>
+	            <hr/>
+	            <br/>
+	            <div class="form-group" id="pic_container">
+	                <label for="pic" class="col-sm-2 control-label">PIC</label>
+	                <div class="col-sm-10">
+	                    <div class="fg-line">
+	                        <select name="pic" id="pic" class="selectpicker" data-live-search="true">
+	                        	<option value=""></option>
+                                @foreach ($pics as $row)
+                                	{!! $selected = '' !!}
+                                	@if($row->user_id==old('pic'))
+                                		{!! $selected = 'selected' !!}
+                                	@endif
+								    <option value="{{ $row->user_id }}" {{ $selected }}>{{ $row->user_firstname . ' ' . $row->user_lastname }}</option>
+								@endforeach
+                            </select>
+	                    </div>
+	                    @if ($errors->has('pic'))
+			                <span class="help-block">
+			                    <strong>{{ $errors->first('pic') }}</strong>
+			                </span>
+			            @endif
+	                </div>
+	            </div>
+	            <div class="form-group">
+	            	<label for="notes" class="col-sm-2 control-label">Pesan</label>
+	            	<div class="col-sm-10">
+	            		<textarea name="notes" id="notes" class="form-control input-sm" placeholder="Ketikan pesan Anda disini" required="true">{{ old('notes') }}</textarea>
+	            	</div>
+	            </div>
 	            <div class="form-group">
 	                <div class="col-sm-offset-2 col-sm-10">
 	                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>

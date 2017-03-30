@@ -201,4 +201,15 @@ class SPMBTypeController extends Controller
             return response()->json(200); //failed
         }
     }
+
+    public function apiGetRules(Request $request)
+    {
+        $spmb_type_id = $request->input('id');
+
+        $spmbtype = SPMBType::with('rules')->find($spmb_type_id);
+
+        //dd($spmbtype->rules);
+
+        return response()->json($spmbtype->rules);
+    }
 }

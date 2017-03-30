@@ -1,7 +1,36 @@
 var myToken = $('meta[name="csrf-token"]').attr('content');
+var numberOfRules = 0;
 
 $(document).ready(function() {
     load_spmb_detail();
+    $('#pic_container').hide();
+
+    $('#spmb_type_id').change(function() {
+        var spmb_type_id = $(this).val();
+
+        $.ajax({
+            url: base_url + 'master/spmbtype/api/getRules',
+            dataType: 'json',
+            type: 'POST',
+            data: { 
+                    _token: myToken,
+                    id: spmb_type_id },
+            error: function(data) {
+                console.log('error loading data..');
+            },
+            success: function(data) {
+                var html = '';
+                numberOfRules = data.length;
+                $('#spmb_rules_container').empty();
+                $.each(data, function(key,value) {
+                    html += '<input type="checkbox" name="spmb_rules[]" class="rule_items" value="' + value.rule_id + '">&nbsp;' + value.rule_name + '<br/>';
+                });
+
+                $('#spmb_rules_container').append(html);
+                //alert(numberOfRules);
+            }
+        });
+    });
 
 	$('#company_id').change(function() {
 		var company_id = $(this).val();
@@ -29,6 +58,23 @@ $(document).ready(function() {
             }
     	});
 	});
+
+    //on change rules
+    var clicked_rules = [];
+    $('body').on('click','.rule_items',function() {
+        clicked_rules = [];
+        $.each($('.rule_items'), function(k,v) {
+            if(v.checked)
+                clicked_rules.push(v.value);
+        });
+        //alert(clicked_rules);
+
+        if(clicked_rules.length==numberOfRules) {
+            $('#pic_container').show();
+        }else{ 
+            $('#pic_container').hide();
+        }
+    });
 
     //modal
     $(".command-add-spmb-detail").click(function(){
