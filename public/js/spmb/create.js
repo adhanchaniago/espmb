@@ -8,28 +8,7 @@ $(document).ready(function() {
     $('#spmb_type_id').change(function() {
         var spmb_type_id = $(this).val();
 
-        $.ajax({
-            url: base_url + 'master/spmbtype/api/getRules',
-            dataType: 'json',
-            type: 'POST',
-            data: { 
-                    _token: myToken,
-                    id: spmb_type_id },
-            error: function(data) {
-                console.log('error loading data..');
-            },
-            success: function(data) {
-                var html = '';
-                numberOfRules = data.length;
-                $('#spmb_rules_container').empty();
-                $.each(data, function(key,value) {
-                    html += '<input type="checkbox" name="spmb_rules[]" class="rule_items" value="' + value.rule_id + '">&nbsp;' + value.rule_name + '<br/>';
-                });
-
-                $('#spmb_rules_container').append(html);
-                //alert(numberOfRules);
-            }
-        });
+        append_spmb_rules(spmb_type_id);
     });
 
 	$('#company_id').change(function() {
@@ -102,6 +81,32 @@ $(document).ready(function() {
             delete_spmb_detail(key);
         });
     });
+
+
+    function append_spmb_rules(spmb_type_id) {
+        $.ajax({
+            url: base_url + 'master/spmbtype/api/getRules',
+            dataType: 'json',
+            type: 'POST',
+            data: { 
+                    _token: myToken,
+                    id: spmb_type_id },
+            error: function(data) {
+                console.log('error loading data..');
+            },
+            success: function(data) {
+                var html = '';
+                numberOfRules = data.length;
+                $('#spmb_rules_container').empty();
+                $.each(data, function(key,value) {
+                    html += '<input type="checkbox" name="spmb_rules[]" class="rule_items" value="' + value.rule_id + '">&nbsp;' + value.rule_name + '<br/>';
+                });
+
+                $('#spmb_rules_container').append(html);
+                //alert(numberOfRules);
+            }
+        });
+    }
 
 
     function clearModalAdd() {

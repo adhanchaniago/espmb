@@ -167,6 +167,7 @@ class SPMBController extends Controller
             $nextFlow = $flow->getNextFlow($this->flow_group_id, 1, $request->user()->user_id, $request->input('pic'), $obj->created_by, $request->input('pic'));
 
             $spmb = SPMB::find($obj->spmb_id);
+            $spmb->pic = $request->input('pic');
             $spmb->flow_no = $nextFlow['flow_no'];
             $spmb->current_user = $nextFlow['current_user'];
             $spmb->updated_by = $request->user()->user_id;
@@ -239,7 +240,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.current_user')
                                 ->where('spmb.flow_no','<>','98')
@@ -268,7 +269,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.current_user')
                                 ->where('spmb.flow_no','<>','98')
@@ -296,7 +297,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
@@ -321,7 +322,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
@@ -345,7 +346,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
@@ -374,7 +375,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
@@ -402,7 +403,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','0')
@@ -428,7 +429,7 @@ class SPMBController extends Controller
                                             'spmb.flow_no',
                                             'users.user_firstname'
                                         )
-                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_id')
+                                ->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','0')
