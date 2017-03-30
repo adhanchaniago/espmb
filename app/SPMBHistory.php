@@ -29,4 +29,16 @@ class SPMBHistory extends Model
 	{
 		return $this->belongsTo('App\ApprovalType', 'approval_type_id');
 	}
+
+	public function getCreatedByAttribute($value)
+	{
+		$user = User::find($value); 
+		return $user;
+	}
+
+	public function getUpdatedByAttribute($value)
+	{
+		$user = User::find($value); 
+		return $user;
+	}
 }

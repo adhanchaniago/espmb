@@ -92,4 +92,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\SPMB', 'pic');
     }
+
+    public function spmbcreated()
+    {
+        return $this->hasMany('App\SPMB', 'created_by');
+    }
 }

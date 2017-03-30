@@ -61,4 +61,9 @@ class SPMB extends Model
 	{
 		return $this->belongsTo('App\User', 'pic');
 	}
+
+	public function _created()
+	{
+		return $this->belongsTo('App\User', 'created_by');
+	}
 }
