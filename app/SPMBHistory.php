@@ -41,4 +41,10 @@ class SPMBHistory extends Model
 		$user = User::find($value); 
 		return $user;
 	}
+
+	public function _flow($value)
+	{
+		$flow = Flow::where('flow_no',$value)->where('flow_group_id',1)->where('active','1')->get(); 
+		return $flow[0]->flow_name;
+	}
 }

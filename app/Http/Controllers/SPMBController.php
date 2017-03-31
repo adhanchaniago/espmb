@@ -225,6 +225,59 @@ class SPMBController extends Controller
         return view('vendor.material.spmb.show', $data);
     }
 
+    public function edit(Request $request, $id)
+    {
+        if(Gate::denies('SPMB-Update')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        //deleting session
+        $request->session()->forget('spmb_details_' . $request->user()->user_id);
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                '_pic',
+                                '_currentuser'
+                                )->find($id);
+        $data['spmb_types'] = SPMBType::where('active', '1')->orderBy('spmb_type_name')->get();
+        $data['companies'] = Company::where('active', '1')->orderBy('company_name')->get();
+        $data['item_categories'] = ItemCategory::where('active', '1')->orderBy('item_category_name')->get();
+        $data['units'] = Unit::where('active', '1')->orderBy('unit_name')->get();
+        $data['pics'] = User::where('active', '1')->whereHas('roles', function($query) {
+                            $query->where('role_name', '=', 'Officer Procurement');
+                        })->get();
+
+        //storing to session
+        $details = array();
+        foreach($data['spmb']->spmbdetails as $row) {
+            $detail = array();
+            $detail['item_category_id'] = $row->item_category_id;
+            $detail['item_category_name'] = $row->itemcategory->item_category_name;
+            $detail['spmb_detail_account_no'] = $row->spmb_detail_account_no;
+            $detail['spmb_detail_sequence_no'] = $row->spmb_detail_sequence_no;
+            $detail['spmb_detail_item_name'] = $row->spmb_detail_item_name;
+            $detail['unit_id'] = $row->unit_id;
+            $detail['unit_name'] = $row->unit->unit_name;
+            $detail['spmb_detail_qty'] = $row->spmb_detail_qty;
+            $detail['spmb_detail_note'] = $row->spmb_detail_note;
+
+            $details[] = $detail;
+
+            $request->session()->put('spmb_details_' . $request->user()->user_id, $details);
+        }
+
+        return view('vendor.material.spmb.edit', $data);
+    }
+
     public function apiList($listtype, Request $request)
     {
         $u = new UserLibrary;
