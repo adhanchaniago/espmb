@@ -4,6 +4,7 @@ var numberOfRules = 0;
 $(document).ready(function() {
     load_spmb_detail();
     $('#pic_container').hide();
+    append_spmb_rules($('#spmb_type_id').val());
 
     $('#spmb_type_id').change(function() {
         var spmb_type_id = $(this).val();
