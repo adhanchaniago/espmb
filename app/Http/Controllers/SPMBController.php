@@ -129,6 +129,8 @@ class SPMBController extends Controller
 
         $obj->save();
 
+        SPMB::find($obj->spmb_id)->rules()->sync($request->input('spmb_rules'));
+
         //store details
         if($request->session()->has('spmb_details_' . $request->user()->user_id)) {
             $details = $request->session()->get('spmb_details_' . $request->user()->user_id);
@@ -211,6 +213,7 @@ class SPMBController extends Controller
 
         $data['spmb'] = SPMB::with(
                                 'spmbtype',
+                                'spmbtype.rules',
                                 'division',
                                 'division.company',
                                 'spmbdetails',
@@ -218,6 +221,7 @@ class SPMBController extends Controller
                                 'spmbdetails.unit',
                                 'spmbhistories',
                                 'spmbhistories.approvaltype',
+                                'rules',
                                 '_pic',
                                 '_currentuser'
                                 )->find($id);
@@ -238,6 +242,7 @@ class SPMBController extends Controller
 
         $data['spmb'] = SPMB::with(
                                 'spmbtype',
+                                'spmbtype.rules',
                                 'division',
                                 'division.company',
                                 'spmbdetails',
@@ -245,6 +250,7 @@ class SPMBController extends Controller
                                 'spmbdetails.unit',
                                 'spmbhistories',
                                 'spmbhistories.approvaltype',
+                                'rules',
                                 '_pic',
                                 '_currentuser'
                                 )->find($id);
@@ -276,6 +282,121 @@ class SPMBController extends Controller
         }
 
         return view('vendor.material.spmb.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validation = [
+            'spmb_type_id' => 'required',
+            'spmb_no_pr_sap' => 'required',
+            'spmb_group' => 'required',
+            'division_id' => 'required',
+            'spmb_cost_center' => 'required',
+            'spmb_io_no' => 'required',
+            'spmb_buyer_no' => 'required',
+            'spmb_applicant_name' => 'required',
+            'spmb_applicant_email' => 'required',
+            'spmb_rules[]' => 'array',
+            'notes' => 'required',
+        ];
+
+        $spmb_type_id = $request->input('spmb_type_id');
+        $spmb_type = SPMBType::find($spmb_type_id);
+        $spmb_type_rules = count($spmb_type->rules);
+
+        if($spmb_type_rules==count($request->input('spmb_rules'))) {
+            $validation['pic'] = 'required';
+        }
+
+        $this->validate($request, $validation);
+
+        $obj = SPMB::find($id);
+        $obj->spmb_type_id = $request->input('spmb_type_id');
+        $obj->spmb_no_pr_sap = $request->input('spmb_no_pr_sap');
+        $obj->spmb_group = $request->input('spmb_group');
+        $obj->division_id = $request->input('division_id');
+        $obj->spmb_cost_center = $request->input('spmb_cost_center');
+        $obj->spmb_io_no = $request->input('spmb_io_no');
+        $obj->spmb_buyer_no = $request->input('spmb_buyer_no');
+        $obj->spmb_applicant_name = $request->input('spmb_applicant_name');
+        $obj->spmb_applicant_email = $request->input('spmb_applicant_email');
+        $obj->updated_by = $request->user()->user_id;
+
+        $obj->save();
+
+        SPMB::find($id)->rules()->sync($request->input('spmb_rules'));
+
+        //remove & store details
+        SPMBDetail::where('spmb_id', $id)->delete();
+        if($request->session()->has('spmb_details_' . $request->user()->user_id)) {
+            $details = $request->session()->get('spmb_details_' . $request->user()->user_id);
+            foreach($details as $detail) {
+                $det = new SPMBDetail;
+                $det->spmb_id = $id;
+                $det->spmb_detail_account_no = $detail['spmb_detail_account_no'];
+                $det->spmb_detail_sequence_no = $detail['spmb_detail_sequence_no'];
+                $det->item_category_id = $detail['item_category_id'];
+                $det->spmb_detail_item_name = $detail['spmb_detail_item_name'];
+                $det->unit_id = $detail['unit_id'];
+                $det->spmb_detail_qty = $detail['spmb_detail_qty'];
+                $det->spmb_detail_note = $detail['spmb_detail_note'];
+                $det->active = '1';
+                $det->created_by = $request->user()->user_id;
+
+                $det->save();
+            }
+
+            $request->session()->forget('spmb_details_' . $request->user()->user_id);
+        }
+
+        if($spmb_type_rules==count($request->input('spmb_rules'))) {
+            //pass rules
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 1;
+            $his->flow_no = 1;
+            $his->spmb_history_desc = $request->input('notes');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
+
+            $his->save();
+
+            $flow = new FlowLibrary;
+            $nextFlow = $flow->getNextFlow($this->flow_group_id, 1, $request->user()->user_id, $request->input('pic'), $obj->created_by, $request->input('pic'));
+
+            $spmb = SPMB::find($id);
+            $spmb->pic = $request->input('pic');
+            $spmb->flow_no = $nextFlow['flow_no'];
+            $spmb->current_user = $nextFlow['current_user'];
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
+
+        }else{
+            //failed to pass rules
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 5;
+            $his->flow_no = 1;
+            $his->spmb_history_desc = $request->input('notes');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
+
+            $his->save();
+
+            $flow = new FlowLibrary;
+            $prevFlow = $flow->getPreviousFlow($this->flow_group_id, 1, $request->user()->user_id, $request->input('pic'), $obj->created_by, $request->input('pic'));
+
+            $spmb = SPMB::find($id);
+            $spmb->flow_no = $prevFlow['flow_no'];
+            $spmb->current_user = $prevFlow['current_user'];
+            $spmb->revision = $spmb->revision + 1;
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
+        }
+
+        $request->session()->flash('status', 'Data has been updated!');
+
+        return redirect('spmb');
     }
 
     public function apiList($listtype, Request $request)

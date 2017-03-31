@@ -53,6 +53,11 @@ class SPMB extends Model
 		return $this->hasMany('App\SPMBHistory', 'spmb_id');
 	}
 
+	public function rules()
+	{
+		return $this->belongsToMany('App\Rule','spmb_rule', 'spmb_id', 'rule_id');
+	}
+
 	public function _currentuser()
 	{
 		return $this->belongsTo('App\User', 'current_user');

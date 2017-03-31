@@ -114,6 +114,21 @@
 </table>
 <br/>
 <hr/>
+<div class="form-group">
+	<label for="spmb_rules" class="col-sm-2 control-label">Persyaratan</label>
+	<div class="col-sm-10" id="spmb_rules_container">
+	@foreach($spmb->spmbtype->rules as $rule)
+		<?php $checked = '' ?>
+		@foreach($spmb->rules as $r)
+			@if($r->rule_id==$rule->rule_id)
+				<?php $checked = 'checked' ?>
+			@endif
+		@endforeach
+		<input type="checkbox" name="spmb_rules[]" value="{{ $rule->rule_id }}" {{ $checked }} disabled="true">&nbsp;{{ $rule->rule_name }}<br/>
+	@endforeach
+	</div>
+</div>
+<hr/>
 <br/>
 <div class="form-group">
     <label for="pic" class="col-sm-2 control-label">PIC</label>
@@ -136,6 +151,14 @@
     <div class="col-sm-10">
         <div class="fg-line">
             <input type="text" name="flow" id="flow" class="form-control input-sm" placeholder="Current Flow" value="{{ $spmb->_currentflow($spmb->flow_no) }}" disabled="true">
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="revision" class="col-sm-2 control-label">Revision</label>
+    <div class="col-sm-10">
+        <div class="fg-line">
+            <input type="text" name="revision" id="revision" class="form-control input-sm" placeholder="Revision" value="{{ $spmb->revision }}" disabled="true">
         </div>
     </div>
 </div>
