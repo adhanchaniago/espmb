@@ -272,4 +272,150 @@ class VendorController extends Controller
 
         return response()->json($data);
     }
+
+    public function apiSearchOthers(Request $request)
+    {
+        $item_category_ids = $request->input('filter_item_category_ids');
+        $vendor_type_ids = $request->input('filter_vendor_type_ids');
+        $vendor_status = $request->input('filter_vendor_status');
+        $vendor_name = $request->input('filter_vendor_name');
+        $data_views = $request->input('filter_data_views');
+
+        $data = array();
+
+        if(($item_category_ids=='') && ($vendor_type_ids=='') && ($vendor_status==''))
+        {
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }elseif(($item_category_ids=='') && ($vendor_type_ids==''))
+        {
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->where('vendors.vendor_status',$vendor_status)
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }elseif(($item_category_ids=='') && ($vendor_status==''))
+        {
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->whereIn('vendors.vendor_type_id',$vendor_type_ids)
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }elseif(($vendor_status=='') && ($vendor_type_ids==''))
+        {
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->whereHas('itemcategories', function($query) use($item_category_ids) {
+                            $query->whereIn('item_categories.item_category_id', $item_category_ids);
+                        })
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }elseif($item_category_ids=='')
+        {
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->whereIn('vendors.vendor_type_id',$vendor_type_ids)
+                        ->where('vendors.vendor_status',$vendor_status)
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }elseif($vendor_type_ids=='')
+        {
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->whereHas('itemcategories', function($query) use($item_category_ids) {
+                            $query->whereIn('item_categories.item_category_id', $item_category_ids);
+                        })
+                        ->where('vendors.vendor_status',$vendor_status)
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }elseif($vendor_status=='')
+        {
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->whereHas('itemcategories', function($query) use($item_category_ids) {
+                            $query->whereIn('item_categories.item_category_id', $item_category_ids);
+                        })
+                        ->whereIn('vendors.vendor_type_id',$vendor_type_ids)
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }else{
+            $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        ->whereHas('itemcategories', function($query) use($item_category_ids) {
+                            $query->whereIn('item_categories.item_category_id', $item_category_ids);
+                        })
+                        ->whereIn('vendors.vendor_type_id',$vendor_type_ids)
+                        ->where('vendors.vendor_status',$vendor_status)
+                        ->where('vendors.vendor_name','like','%' . $vendor_name . '%')
+                        ->limit($data_views)
+                        ->orderBy('vendors.vendor_name','asc')
+                        ->get();
+        }
+
+        return response()->json($data);
+    }
 }

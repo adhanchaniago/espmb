@@ -1,4 +1,11 @@
 var spmb_detail_id = '';
+
+var filter_item_category_ids = [];
+var filter_vendor_type_ids = [];
+var filter_vendor_status = '';
+var filter_vendor_name = '';
+var filter_data_view = '';
+
 $(document).ready(function() {
         $('.search-vendor-spmb-item').click(function() {
         	var item_category_id = $(this).data('item-id');
@@ -27,6 +34,15 @@ $(document).ready(function() {
         $('#modal_select_vendor_offer_price').keypress(function(evt) {
                 return isNumberKey(evt);
         });
+
+        //filter vendors
+        $('#btn-filter-ok').click(function() {
+                process_filter_vendor();
+        });
+
+        $('#btn-filter-reset').click(function() {
+                clear_filter_vendor();
+        });
 });
 
 function load_recommended_vendors(item_category_id)
@@ -51,7 +67,7 @@ function load_recommended_vendors(item_category_id)
         	$.each(data.vendors, function(key, value) {
         		items += '<tr>';
         		items += '<td>';
-        			items += '<b>' + value.vendor_name + '</b><br/>';
+        			items += '<b>' + value.vendor_name + '</b>&nbsp;&nbsp;&nbsp;<span class="badge">' + value.vendor_status + '</span><br/>';
         			items += '<small>' + value.vendortype.vendor_type_name + '</small><br/>';
         			items += '<small><i>';
         			$.each(value.itemcategories, function(k, v) {
@@ -126,4 +142,97 @@ function save_spmb_detail_vendor()
                         }
                 });
         }
+}
+
+function process_filter_vendor()
+{
+        filter_item_category_ids = $('#filter_item_category_id').val();
+        filter_vendor_type_ids = $('#filter_vendor_type_id').val();
+        filter_vendor_status = $('#filter_vendor_status').val();
+        filter_vendor_name = $('#filter_vendor_name').val();
+        filter_data_views = $('#filter_data_views').val();
+
+        $.ajax({
+                url: base_url + 'vendor/api/search-others',
+                dataType: 'json',
+                type: 'POST',
+                data: {
+                        _token: myToken,
+                        filter_item_category_ids : filter_item_category_ids,
+                        filter_vendor_type_ids : filter_vendor_type_ids,
+                        filter_vendor_status : filter_vendor_status,
+                        filter_vendor_name : filter_vendor_name,
+                        filter_data_views : filter_data_views
+                },
+                error: function(data) {
+                        console.log('error');
+                },
+                success: function(data) {
+                        var items = '';
+                        $('#filter_result').empty();
+
+                        items += '<table id="others-vendor-table" class="table table-bordered table-hover">'
+                                        +'<thead>'
+                                            +'<tr>'
+                                                +'<th><center>Nama Vendor</center></th>'
+                                                +'<th><center>Rating</center></th>'
+                                                +'<th><center>Transaksi Terakhir</center></th>'
+                                                +'<th><center>Action</center></th>'
+                                            +'</tr>'
+                                        +'</thead>'
+                                        +'<tbody>';
+
+                        $.each(data.vendors, function(key, value) {
+                                items += '<tr>';
+                                items += '<td>';
+                                        items += '<b>' + value.vendor_name + '</b>&nbsp;&nbsp;&nbsp;<span class="badge">' + value.vendor_status + '</span><br/>';
+                                        items += '<small>' + value.vendortype.vendor_type_name + '</small><br/>';
+                                        items += '<small><i>';
+                                        $.each(value.itemcategories, function(k, v) {
+                                                items += v.item_category_name;
+                                                if((k+1)!=value.itemcategories.length) {
+                                                        items += ', ';
+                                                }
+                                        });
+                                        items += '</i></small>';
+                                items += '</td>';
+                                items += '<td>';
+                                        $.each(value.ratings, function(k, v) {
+                                                items += v.rating_name + '<br/>';
+                                        });
+                                items += '</td>';
+                                items += '<td></td>';
+                                items += '<td><center><a href="javascript:void(0)" class="btn btn-success btn-select-vendor" data-vendor-name="' + value.vendor_name + '" data-vendor-id="' + value.vendor_id + '">Pilih</a></center></td>';
+                                items += '</tr>';
+                        });
+
+                        items += '</tbody></table>';
+
+                        $('#filter_result').append(items);
+                }
+        });
+}
+
+function clear_filter_vendor()
+{
+        var filter_item_category_ids = [];
+        var filter_vendor_type_ids = [];
+        var filter_vendor_status = '';
+        var filter_vendor_name = '';
+        var filter_data_views = '';
+
+        $('#filter_item_category_id').selectpicker('deselectAll');
+        $('#filter_vendor_type_id').selectpicker('deselectAll');
+        $('#filter_vendor_status').val('');
+        $('#filter_vendor_name').val('');
+        $('#filter_data_views').val('5');
+
+
+        $('#filter_item_category_id').selectpicker('refresh');
+        $('#filter_vendor_type_id').selectpicker('refresh');
+        $('#filter_vendor_status').selectpicker('refresh');
+        $('#filter_data_views').selectpicker('refresh');
+        
+        $('#filter_result').empty();
+        $('#filter_result').append('<p><center>No data</center></p>');
 }

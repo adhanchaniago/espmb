@@ -1,5 +1,9 @@
 @extends('vendor.material.layouts.app')
 
+@section('vendorcss')
+<link href="{{ url('css/bootstrap-select.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <div class="card">
         <div class="card-header"><h2>SURAT PERMINTAAN MEMBELI BARANG<small>Pencarian Vendor</small></h2></div>
@@ -33,4 +37,9 @@
     @include('vendor.material.spmb.detail-modal')
     @include('vendor.material.spmb.search-vendor-modal')
     @include('vendor.material.spmb.select-vendor-modal')
+@endsection
+
+@section('vendorjs')
+<script src="{{ url('js/bootstrap-select.min.js') }}"></script>
+<script src="{{ url('js/input-mask.min.js') }}"></script>
 @endsection

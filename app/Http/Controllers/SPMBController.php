@@ -26,6 +26,7 @@ use App\SPMBType;
 use App\Unit;
 use App\User;
 use App\Vendor;
+use App\VendorType;
 
 use App\Ibrol\Libraries\FlowLibrary;
 use App\Ibrol\Libraries\NotificationLibrary;
@@ -836,6 +837,8 @@ class SPMBController extends Controller
                                 '_pic',
                                 '_currentuser'
                                 )->find($id);
+        $data['item_categories'] = ItemCategory::where('active', '1')->orderBy('item_category_name', 'asc')->get();
+        $data['vendor_types'] = VendorType::where('active', '1')->orderBy('vendor_type_name', 'asc')->get();
 
         return view('vendor.material.spmb.approval_flow_2', $data);
     }
