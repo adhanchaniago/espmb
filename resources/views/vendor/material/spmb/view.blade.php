@@ -86,50 +86,6 @@
 		</div>
 	</div>
 </div>
-<hr>
-<br/>
-<table id="tabel_detail_spmb" class="table table-bordered table-hover">
-	<thead>
-		<tr>
-			<th><center>No. Acc<center></th>
-			<th><center>No.</center></th>
-			<th><center>Nama Barang</center></th>
-			<th><center>Satuan</center></th>
-			<th><center>Qty</center></th>
-			<th><center>Keterangan</center></th>
-		</tr>
-	</thead>
-	<tbody>
-	@foreach($spmb->spmbdetails as $detail)
-		<tr>
-			<td>{{ $detail->spmb_detail_account_no }}</td>
-			<td><center>{{ $detail->spmb_detail_sequence_no }}<center/></td>
-			<td>{{ $detail->spmb_detail_item_name }}</td>
-			<td>{{ $detail->unit->unit_name }}</td>
-			<td><center>{{ $detail->spmb_detail_qty }}<center></td>
-			<td>{{ $detail->spmb_detail_note }}</td>
-		</tr>
-	@endforeach
-	</tbody>
-</table>
-<br/>
-<hr/>
-<div class="form-group">
-	<label for="spmb_rules" class="col-sm-2 control-label">Persyaratan</label>
-	<div class="col-sm-10" id="spmb_rules_container">
-	@foreach($spmb->spmbtype->rules as $rule)
-		<?php $checked = '' ?>
-		@foreach($spmb->rules as $r)
-			@if($r->rule_id==$rule->rule_id)
-				<?php $checked = 'checked' ?>
-			@endif
-		@endforeach
-		<input type="checkbox" name="spmb_rules[]" value="{{ $rule->rule_id }}" {{ $checked }} disabled="true">&nbsp;{{ $rule->rule_name }}<br/>
-	@endforeach
-	</div>
-</div>
-<hr/>
-<br/>
 <div class="form-group">
     <label for="pic" class="col-sm-2 control-label">PIC</label>
     <div class="col-sm-10">
@@ -169,4 +125,19 @@
             <input type="text" name="created" id="created" class="form-control input-sm" placeholder="Created By" value="{{ $spmb->_created->user_firstname . ' ' . $spmb->_created->user_lastname }}" disabled="true">
         </div>
     </div>
+</div>
+<hr/>
+<div class="form-group">
+	<label for="spmb_rules" class="col-sm-2 control-label">Persyaratan</label>
+	<div class="col-sm-10" id="spmb_rules_container">
+	@foreach($spmb->spmbtype->rules as $rule)
+		<?php $checked = '' ?>
+		@foreach($spmb->rules as $r)
+			@if($r->rule_id==$rule->rule_id)
+				<?php $checked = 'checked' ?>
+			@endif
+		@endforeach
+		<input type="checkbox" name="spmb_rules[]" value="{{ $rule->rule_id }}" {{ $checked }} disabled="true">&nbsp;{{ $rule->rule_name }}<br/>
+	@endforeach
+	</div>
 </div>

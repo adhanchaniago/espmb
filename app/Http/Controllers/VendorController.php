@@ -250,4 +250,26 @@ class VendorController extends Controller
             return response()->json(200); //failed
         }
     }
+
+    public function apiSearchRecommended(Request $request)
+    {
+        $item_category_id = $request->input('item_category_id');
+
+        $data = array();
+
+        $data['vendors'] = Vendor::with(
+                            'itemcategories',
+                            'ratings',
+                            'vendortype',
+                            'termofpayment',
+                            'spmbdetailvendors'
+                        )
+                        ->where('vendors.active','1')
+                        //->where('spmb_detail_vendors.spmb_detail_vendor_status', '1')
+                        //->where('vendors.itemcategories.item_category_id', $item_category_id)
+                        //s->orderBy('vendors.active','1')
+                        ->get();
+
+        return response()->json($data);
+    }
 }

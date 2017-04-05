@@ -484,6 +484,7 @@
         @endif
 
         <script src="{{ url('js/app/notification.js') }}"></script>
+        <script src="{{ url('js/app/general-functions.js') }}"></script>
 
         @yield('customjs')
     </body>

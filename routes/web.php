@@ -200,6 +200,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('vendor/apiList', 'VendorController@apiList');
     Route::post('vendor/apiDelete', 'VendorController@apiDelete');
     Route::resource('vendor', 'VendorController');
+    Route::post('vendor/api/search-recommended', 'VendorController@apiSearchRecommended');
 
     //SPMB
     Route::post('spmb/apiList/{listtype}', 'SPMBController@apiList');
@@ -208,8 +209,10 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::get('spmb/approve/{flow_no}/{id}', 'SPMBController@approve');
     Route::post('spmb/approve/{flow_no}/{id}', 'SPMBController@postApprove');
     Route::get('spmb/api/loadDetails', 'SPMBController@apiLoadDetails');
+    Route::post('spmb/api/loadDetail', 'SPMBController@apiLoadDetail');
     Route::post('spmb/api/storeDetail', 'SPMBController@apiStoreDetails');
     Route::post('spmb/api/deleteDetail', 'SPMBController@apiDeleteDetails');
+    Route::post('spmb/api/storeDetailVendor', 'SPMBController@apiStoreDetailVendor');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management

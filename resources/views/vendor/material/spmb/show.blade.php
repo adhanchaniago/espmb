@@ -7,6 +7,7 @@
         	<form class="form-horizontal" role="form">
 	            
         		@include('vendor.material.spmb.view')
+        		@include('vendor.material.spmb.view-table')
 	            @include('vendor.material.spmb.history')
 
 	            <div class="form-group">
@@ -17,4 +18,11 @@
 	        </form>
         </div>
     </div>
+
+    @include('vendor.material.spmb.detail-modal')
 @endsection
+
+@section('customjs')
+<script src="{{ url('js/spmb/view-detail.js') }}"></script>
+@endsection
+
