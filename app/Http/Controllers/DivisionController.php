@@ -19,7 +19,7 @@ class DivisionController extends Controller
      */
     public function index()
     {
-        if(Gate::denies('Division Management-Read')) {
+        if(Gate::denies('Division/Unit Management-Read')) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -33,7 +33,7 @@ class DivisionController extends Controller
      */
     public function create()
     {
-        if(Gate::denies('Division Management-Create')) {
+        if(Gate::denies('Division/Unit Management-Create')) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -79,7 +79,7 @@ class DivisionController extends Controller
      */
     public function show($id)
     {
-        if(Gate::denies('Division Management-Read')) {
+        if(Gate::denies('Division/Unit Management-Read')) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -96,7 +96,7 @@ class DivisionController extends Controller
      */
     public function edit($id)
     {
-        if(Gate::denies('Division Management-Update')) {
+        if(Gate::denies('Division/Unit Management-Update')) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -193,7 +193,7 @@ class DivisionController extends Controller
 
     public function apiDelete(Request $request)
     {
-        if(Gate::denies('Division Management-Delete')) {
+        if(Gate::denies('Division/Unit Management-Delete')) {
             abort(403, 'Unauthorized action.');
         }
 
