@@ -10,6 +10,7 @@ class SPMBType extends Model
 	protected $primaryKey = 'spmb_type_id';
 
 	protected $fillable = [
+				'spmb_category_id',
 				'spmb_type_name'
 	];
 
@@ -23,5 +24,10 @@ class SPMBType extends Model
 
     public function spmb() {
     	return $this->hasMany('App\SPMB', 'spmb_type_id');
+    }
+
+    public function spmbcategory()
+    {
+    	return $this->belongsTo('App\SPMBCategory', 'spmb_category_id');
     }
 }

@@ -11,6 +11,28 @@
         	<form class="form-horizontal" role="form" method="POST" action="{{ url('master/spmbtype/'.$spmbtype->spmb_type_id) }}">
         		{{ csrf_field() }}
         		<input type="hidden" name="_method" value="PUT">
+        		<div class="form-group">
+	                <label for="spmb_category_id" class="col-sm-2 control-label">Category</label>
+	                <div class="col-sm-10">
+	                    <div class="fg-line">
+	                        <select name="spmb_category_id" id="spmb_category_id" class="selectpicker" data-live-search="true" required="true">
+	                        	<option value=""></option>
+                                @foreach ($spmbcategories as $row)
+                                	{!! $selected = '' !!}
+                            		@if($spmbtype->spmb_category_id==$row->spmb_category_id)
+                            			{!! $selected = 'selected' !!}
+                            		@endif
+								    <option value="{{ $row->spmb_category_id }}" {{ $selected }}>{{ $row->spmb_category_name }}</option>
+								@endforeach
+                            </select>
+	                    </div>
+	                    @if ($errors->has('spmb_category_id'))
+			                <span class="help-block">
+			                    <strong>{{ $errors->first('spmb_category_id') }}</strong>
+			                </span>
+			            @endif
+	                </div>
+	            </div>
 	            <div class="form-group">
 	                <label for="spmb_type_name" class="col-sm-2 control-label">SPMB Type Name</label>
 	                <div class="col-sm-10">

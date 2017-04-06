@@ -7,11 +7,9 @@ use Illuminate\Http\Response;
 
 use Gate;
 use App\Http\Requests;
-use App\Rule;
 use App\SPMBCategory;
-use App\SPMBType;
 
-class SPMBTypeController extends Controller
+class SPMBCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +18,11 @@ class SPMBTypeController extends Controller
      */
     public function index()
     {
-        if(Gate::denies('SPMB Types Management-Read')) {
+        if(Gate::denies('SPMB Categories Management-Read')) {
             abort(403, 'Unauthorized action.');
         }
 
-        return view('vendor.material.master.spmbtype.list');
+        return view('vendor.material.master.spmbcategory.list');
     }
 
     /**
@@ -34,14 +32,12 @@ class SPMBTypeController extends Controller
      */
     public function create()
     {
-        if(Gate::denies('SPMB Types Management-Create')) {
+        if(Gate::denies('SPMB Categories Management-Create')) {
             abort(403, 'Unauthorized action.');
         }
 
         $data = array();
-        $data['rules'] = Rule::where('active','1')->orderBy('rule_name')->get();
-        $data['spmbcategories'] = SPMBCategory::where('active','1')->orderBy('spmb_category_name')->get();
-        return view('vendor.material.master.spmbtype.create', $data);
+        return view('vendor.material.master.spmbcategory.create', $data);
     }
 
     /**
@@ -53,25 +49,20 @@ class SPMBTypeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'spmb_category_id' => 'required',
-            'spmb_type_name' => 'required|max:100',
-            'rule_id[]' => 'array',
+            'spmb_category_name' => 'required|max:100'
         ]);
 
-        $obj = new SPMBType;
+        $obj = new SPMBCategory;
 
-        $obj->spmb_category_id = $request->input('spmb_category_id');
-        $obj->spmb_type_name = $request->input('spmb_type_name');
+        $obj->spmb_category_name = $request->input('spmb_category_name');
         $obj->active = '1';
         $obj->created_by = $request->user()->user_id;
 
         $obj->save();
 
-        SPMBType::find($obj->spmb_type_id)->rules()->sync($request->input('rule_id'));
-
         $request->session()->flash('status', 'Data has been saved!');
 
-        return redirect('master/spmbtype');
+        return redirect('master/spmbcategory');
     }
 
     /**
@@ -82,13 +73,13 @@ class SPMBTypeController extends Controller
      */
     public function show($id)
     {
-        if(Gate::denies('SPMB Types Management-Read')) {
+        if(Gate::denies('SPMB Categories Management-Read')) {
             abort(403, 'Unauthorized action.');
         }
 
         $data = array();
-        $data['spmbtype'] = SPMBType::with('rules','spmbcategory')->where('active','1')->find($id);
-        return view('vendor.material.master.spmbtype.show', $data);
+        $data['spmbcategory'] = SPMBCategory::with('spmbtypes')->where('active','1')->find($id);
+        return view('vendor.material.master.spmbcategory.show', $data);
     }
 
     /**
@@ -99,15 +90,13 @@ class SPMBTypeController extends Controller
      */
     public function edit($id)
     {
-        if(Gate::denies('SPMB Types Management-Update')) {
+        if(Gate::denies('SPMB Categories Management-Update')) {
             abort(403, 'Unauthorized action.');
         }
 
         $data = array();
-        $data['rules'] = Rule::where('active','1')->orderBy('rule_name')->get();
-        $data['spmbtype'] = SPMBType::with('rules','spmbcategory')->where('active','1')->find($id);
-        $data['spmbcategories'] = SPMBCategory::where('active','1')->orderBy('spmb_category_name')->get();
-        return view('vendor.material.master.spmbtype.edit', $data);
+        $data['spmbcategory'] = SPMBCategory::where('active','1')->find($id);
+        return view('vendor.material.master.spmbcategory.edit', $data);
     }
 
     /**
@@ -120,24 +109,19 @@ class SPMBTypeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'spmb_category_id' => 'required',
-            'spmb_type_name' => 'required|max:100',
-            'rule_id[]' => 'array',
+            'spmb_category_name' => 'required|max:100'
         ]);
 
-        $obj = SPMBType::find($id);
+        $obj = SPMBCategory::find($id);
 
-        $obj->spmb_category_id = $request->input('spmb_category_id');
-        $obj->spmb_type_name = $request->input('spmb_type_name');
+        $obj->spmb_category_name = $request->input('spmb_category_name');
         $obj->updated_by = $request->user()->user_id;
 
         $obj->save();
 
-        SPMBType::find($id)->rules()->sync($request->input('rule_id'));
-
         $request->session()->flash('status', 'Data has been updated!');
 
-        return redirect('master/spmbtype');
+        return redirect('master/spmbcategory');
     }
 
     /**
@@ -158,7 +142,7 @@ class SPMBTypeController extends Controller
         $skip = ($current==1) ? 0 : (($current - 1) * $rowCount);
         $searchPhrase = $request->input('searchPhrase') or '';
         
-        $sort_column = 'spmb_type_id';
+        $sort_column = 'spmb_category_id';
         $sort_type = 'asc';
 
         if(is_array($request->input('sort'))) {
@@ -173,19 +157,15 @@ class SPMBTypeController extends Controller
         $data['current'] = intval($current);
         $data['rowCount'] = $rowCount;
         $data['searchPhrase'] = $searchPhrase;
-        $data['rows'] = SPMBType::where('spmb_types.active','1')
-                            ->join('spmb_categories','spmb_categories.spmb_category_id', '=', 'spmb_types.spmb_category_id')
+        $data['rows'] = SPMBCategory::where('active','1')
                             ->where(function($query) use($searchPhrase) {
-                                $query->where('spmb_category_name','like','%' . $searchPhrase . '%')
-                                        ->orWhere('spmb_type_name','like','%' . $searchPhrase . '%');
+                                $query->where('spmb_category_name','like','%' . $searchPhrase . '%');
                             })
                             ->skip($skip)->take($rowCount)
                             ->orderBy($sort_column, $sort_type)->get();
-        $data['total'] = SPMBType::where('spmb_types.active','1')
-                            ->join('spmb_categories','spmb_categories.spmb_category_id', '=', 'spmb_types.spmb_category_id')
+        $data['total'] = SPMBCategory::where('active','1')
                             ->where(function($query) use($searchPhrase) {
-                                $query->where('spmb_category_name','like','%' . $searchPhrase . '%')
-                                        ->orWhere('spmb_type_name','like','%' . $searchPhrase . '%');
+                                $query->where('spmb_category_name','like','%' . $searchPhrase . '%');
                             })->count();
 
         return response()->json($data);
@@ -194,13 +174,13 @@ class SPMBTypeController extends Controller
 
     public function apiDelete(Request $request)
     {
-        if(Gate::denies('SPMB Types Management-Delete')) {
+        if(Gate::denies('SPMB Categories Management-Delete')) {
             abort(403, 'Unauthorized action.');
         }
 
-        $id = $request->input('spmb_type_id');
+        $id = $request->input('spmb_category_id');
 
-        $obj = SPMBType::find($id);
+        $obj = SPMBCategory::find($id);
 
         $obj->active = '0';
         $obj->updated_by = $request->user()->user_id;
@@ -211,16 +191,5 @@ class SPMBTypeController extends Controller
         }else{
             return response()->json(200); //failed
         }
-    }
-
-    public function apiGetRules(Request $request)
-    {
-        $spmb_type_id = $request->input('id');
-
-        $spmbtype = SPMBType::with('rules')->find($spmb_type_id);
-
-        //dd($spmbtype->rules);
-
-        return response()->json($spmbtype->rules);
     }
 }
