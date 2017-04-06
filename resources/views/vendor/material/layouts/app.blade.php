@@ -441,6 +441,12 @@
         <![endif]-->
         <script type="text/javascript">
         var base_url = '{{ url('/') }}/';
+        var preloader = '';
+        preloader += '<div class="preloader pls-blue" style="align:center;margin-left:50%;margin-top:20%;">'
+                        +'<svg class="pl-circular" viewBox="25 25 50 50">'
+                            +'<circle class="plc-path" cx="50" cy="50" r="20"></circle>'
+                        +'</svg>'
+                    +'</div>';
         </script>
 
         

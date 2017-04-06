@@ -170,6 +170,7 @@ function process_filter_vendor()
                 success: function(data) {
                         var items = '';
                         $('#filter_result').empty();
+                        $('#filter_result').append(preloader);
 
                         items += '<table id="others-vendor-table" class="table table-bordered table-hover">'
                                         +'<thead>'
@@ -208,6 +209,7 @@ function process_filter_vendor()
 
                         items += '</tbody></table>';
 
+                        $('#filter_result').empty();
                         $('#filter_result').append(items);
                 }
         });

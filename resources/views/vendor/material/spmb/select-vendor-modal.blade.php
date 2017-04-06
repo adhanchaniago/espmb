@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalSelectVendor" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalSelectVendor" data-modal-color="bluegray" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -37,8 +37,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary waves-effect btn-save-select-vendor-modal">Save</button>
-                <button type="button" class="btn btn-danger waves-effect btn-close-select-vendor-modal" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-link waves-effect btn-save-select-vendor-modal">Save</button>
+                <button type="button" class="btn btn-link waves-effect btn-close-select-vendor-modal" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

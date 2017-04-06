@@ -817,10 +817,6 @@ class SPMBController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        if(Gate::denies('SPMB-Read')) {
-            abort(403, 'Unauthorized action.');
-        }
-
         $data = array();
 
         $data['spmb'] = SPMB::with(
@@ -841,5 +837,34 @@ class SPMBController extends Controller
         $data['vendor_types'] = VendorType::where('active', '1')->orderBy('vendor_type_name', 'asc')->get();
 
         return view('vendor.material.spmb.approval_flow_2', $data);
+    }
+
+    public function postApproveFlowNo2(Request $request, $id)
+    {
+        $this->validate($request, [
+                'comment' => 'required'
+            ]);
+
+        $spmb = SPMB::find($id);
+
+        $flow = new FlowLibrary;
+        $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->pic);
+
+        $spmb->flow_no = $nextFlow['flow_no'];
+        $spmb->current_user = $nextFlow['current_user'];
+        $spmb->updated_by = $request->user()->user_id;
+        $spmb->save();
+
+        $his = new SPMBHistory;
+        $his->spmb_id = $id;
+        $his->approval_type_id = 1;
+        $his->flow_no = 2;
+        $his->spmb_history_desc = $request->input('comment');
+        $his->active = '1';
+        $his->created_by = $request->user()->user_id;
+
+        $his->save();
+
+        $request->session()->flash('status', 'Data has been saved!');
     }
 }
