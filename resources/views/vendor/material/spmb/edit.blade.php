@@ -22,7 +22,7 @@
                                 	@if($row->spmb_type_id==$spmb->spmb_type_id)
                                 		{!! $selected = 'selected' !!}
                                 	@endif
-								    <option value="{{ $row->spmb_type_id }}" {{ $selected }}>{{ $row->spmb_type_name }}</option>
+								    <option value="{{ $row->spmb_type_id }}" {{ $selected }}>{{ $row->spmbcategory->spmb_category_name . ' - ' . $row->spmb_type_name }}</option>
 								@endforeach
                             </select>
 	                    </div>

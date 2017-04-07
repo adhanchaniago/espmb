@@ -71,7 +71,7 @@ class SPMBController extends Controller
 
         $data = array();
 
-        $data['spmb_types'] = SPMBType::where('active', '1')->orderBy('spmb_type_name')->get();
+        $data['spmb_types'] = SPMBType::with('spmbcategory')->where('active', '1')->orderBy('spmb_category_id', 'asc')->orderBy('spmb_type_name', 'asc')->get();
         $data['companies'] = Company::where('active', '1')->orderBy('company_name')->get();
         $data['item_categories'] = ItemCategory::where('active', '1')->orderBy('item_category_name')->get();
         $data['units'] = Unit::where('active', '1')->orderBy('unit_name')->get();
@@ -125,6 +125,7 @@ class SPMBController extends Controller
         $obj->current_user = $request->user()->user_id; //$nextFlow['current_user'];
         $obj->revision = 0;
         $obj->spmb_method = 'NORMAL';
+        $obj->spmb_token = $this->generateToken();
         $obj->active = '1';
         $obj->created_by = $request->user()->user_id;
 
@@ -243,6 +244,7 @@ class SPMBController extends Controller
 
         $data['spmb'] = SPMB::with(
                                 'spmbtype',
+                                'spmbtype.spmbcategory',
                                 'spmbtype.rules',
                                 'division',
                                 'division.company',
@@ -255,7 +257,7 @@ class SPMBController extends Controller
                                 '_pic',
                                 '_currentuser'
                                 )->find($id);
-        $data['spmb_types'] = SPMBType::where('active', '1')->orderBy('spmb_type_name')->get();
+        $data['spmb_types'] = SPMBType::with('spmbcategory')->where('active', '1')->orderBy('spmb_category_id', 'asc')->orderBy('spmb_type_name', 'asc')->get();
         $data['companies'] = Company::where('active', '1')->orderBy('company_name')->get();
         $data['item_categories'] = ItemCategory::where('active', '1')->orderBy('item_category_name')->get();
         $data['units'] = Unit::where('active', '1')->orderBy('unit_name')->get();
@@ -789,6 +791,11 @@ class SPMBController extends Controller
 
         return $code;
 
+    }
+
+    private function generateToken()
+    {
+        return substr(md5(microtime()),rand(0, 26), 6);
     }
 
     public function approve(Request $request, $flow_no, $id)

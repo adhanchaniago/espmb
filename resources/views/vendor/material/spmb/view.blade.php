@@ -2,7 +2,7 @@
     <label for="spmb_type_id" class="col-sm-2 control-label">Type</label>
     <div class="col-sm-10">
         <div class="fg-line">
-        	<input type="text" name="spmb_no" id="spmb_no" class="form-control input-sm" placeholder="SPMB Type" value="{{ $spmb->spmbtype->spmb_type_name }}" disabled="true">
+        	<input type="text" name="spmb_no" id="spmb_no" class="form-control input-sm" placeholder="SPMB Type" value="{{ $spmb->spmbcategory->spmb_category_name . ' - ' . $spmb->spmbtype->spmb_type_name }}" disabled="true">
         </div>
     </div>
 </div>

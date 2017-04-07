@@ -32,7 +32,7 @@
                                 <tr>
                                     <th data-column-id="spmb_type_name" data-order="asc">SPMB Type</th>
                                     <th data-column-id="spmb_no" data-order="asc">SPMB No</th>
-                                    <th data-column-id="division_name" data-order="asc">Division</th>
+                                    <th data-column-id="division_name" data-order="asc">Unit</th>
                                     <th data-column-id="spmb_applicant_name" data-order="asc">Applicant</th>
                                     <th data-column-id="user_firstname" data-order="asc">Created By</th>
                                     @can('SPMB-Update')
