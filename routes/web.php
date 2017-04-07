@@ -219,6 +219,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/api/storeDetail', 'SPMBController@apiStoreDetails');
     Route::post('spmb/api/deleteDetail', 'SPMBController@apiDeleteDetails');
     Route::post('spmb/api/storeDetailVendor', 'SPMBController@apiStoreDetailVendor');
+    Route::post('spmb/api/updateDetailVendor', 'SPMBController@apiUpdateDetailVendor');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
