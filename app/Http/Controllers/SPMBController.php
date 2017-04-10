@@ -838,6 +838,15 @@ class SPMBController extends Controller
         return response()->json($data);   
     }
 
+    public function apiLoadDetailPayment(Request $request)
+    {
+        $spmb_detail_id = $request->input('spmb_detail_id');
+
+        $data['detail_payments'] = SPMBDetailPayment::with('paymenttype')->where('spmb_detail_id', $spmb_detail_id)->where('active', '1')->get();
+
+        return response()->json($data);
+    }
+
     private function generateCode()
     {
         $total = SPMB::count();
@@ -1134,5 +1143,34 @@ class SPMBController extends Controller
         }
 
         return view('vendor.material.spmb.approval_flow_5', $data);
+    }
+
+    public function postApproveFlowNo5(Request $request, $id)
+    {
+        $this->validate($request, [
+                'comment' => 'required'
+            ]);
+
+        $spmb = SPMB::find($id);
+
+        $flow = new FlowLibrary;
+        $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->pic);
+
+        $spmb->flow_no = $nextFlow['flow_no'];
+        $spmb->current_user = $nextFlow['current_user'];
+        $spmb->updated_by = $request->user()->user_id;
+        $spmb->save();
+
+        $his = new SPMBHistory;
+        $his->spmb_id = $id;
+        $his->approval_type_id = 1;
+        $his->flow_no = 5;
+        $his->spmb_history_desc = $request->input('comment');
+        $his->active = '1';
+        $his->created_by = $request->user()->user_id;
+
+        $his->save();
+
+        $request->session()->flash('status', 'Data has been saved!');
     }
 }

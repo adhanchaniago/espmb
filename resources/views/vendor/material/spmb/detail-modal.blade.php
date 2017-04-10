@@ -1,6 +1,6 @@
 
 <div class="modal fade" id="modalViewDetailSPMB" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Lihat Detail Barang</h4>
@@ -59,20 +59,44 @@
                     <div class="form-group">
                         <h4>Vendor yang dipilih</h4>
                         <hr/>
-                        <table id="vendor-tables" class="table table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th><center>Vendor</center></th>
-                                    <th><center>Harga Awal</center></th>
-                                    <th><center>Harga Deal</center></th>
-                                    <th><center>Status</center></th>
-                                    <th><center>Keterangan</center></th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="table-responsive">
+                            <table id="vendor-tables" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><center>Vendor</center></th>
+                                        <th><center>Harga Awal</center></th>
+                                        <th><center>Harga Deal</center></th>
+                                        <th><center>Status</center></th>
+                                        <th><center>Keterangan</center></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h4>Pemesanan Dana</h4>
+                        <hr/>
+                        <div class="table-responsive">
+                            <table id="order-payment-tables" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><center>Tipe Pembayaran</center></th>
+                                        <th><center>Tgl Pemesanan</center></th>
+                                        <th><center>Tgl Pembayaran</center></th>
+                                        <th><center>Tgl Selesai</center></th>
+                                        <th><center>Total</center></th>
+                                        <th><center>Status</center></th>
+                                        <th><center>Keterangan</center></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </form>
             </div>
