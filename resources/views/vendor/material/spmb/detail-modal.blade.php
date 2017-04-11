@@ -98,6 +98,25 @@
                             </table>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <h4>Penerimaan Barang</h4>
+                        <hr/>
+                        <div class="table-responsive">
+                            <table id="receipt-tables" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><center>No Surat Jalan</center></th>
+                                        <th><center>Tgl Diterima</center></th>
+                                        <th><center>Nama Penerima</center></th>
+                                        <th><center>Keterangan</center></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

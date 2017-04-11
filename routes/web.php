@@ -221,8 +221,10 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/api/storeDetailVendor', 'SPMBController@apiStoreDetailVendor');
     Route::post('spmb/api/updateDetailVendor', 'SPMBController@apiUpdateDetailVendor');
     Route::post('spmb/api/loadDetailPayment', 'SPMBController@apiLoadDetailPayment');
+    Route::post('spmb/api/loadDetailReceipt', 'SPMBController@apiLoadDetailReceipt');
     Route::post('spmb/api/loadOrderPayment', 'SPMBController@apiLoadOrderPayment');
     Route::post('spmb/api/storeOrderPayment', 'SPMBController@apiStoreOrderPayment');
+    Route::post('spmb/api/storeAcceptance', 'SPMBController@apiStoreAcceptance');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management

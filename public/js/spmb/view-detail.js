@@ -5,6 +5,7 @@ $(document).ready(function() {
 		clearDetail();
 		loadDetail($(this).data('detail-id'));
 		loadDetailPayment($(this).data('detail-id'));
+		loadDetailReceipt($(this).data('detail-id'));
 		$('#modalViewDetailSPMB').modal();
 	});
 });
@@ -82,6 +83,38 @@ function loadDetailPayment(spmb_detail_id)
 	//return html;
 }
 
+function loadDetailReceipt(spmb_detail_id)
+{
+	$.ajax({
+		url: base_url + 'spmb/api/loadDetailReceipt',
+		dataType: 'json',
+		type: 'POST',
+		data: { 
+				_token: myToken,
+                spmb_detail_id: spmb_detail_id },
+        error: function(data) {
+        	console.log('error loading data..');
+        	alert('Error loading data...');
+        },
+        success: function(data) {
+        	var html = '';
+
+			$.each(data.detail_receipt, function(key, value) {
+				html += '<tr>';
+				html += '<td>' + value.spmb_detail_receipt_no + '</td>';
+				html += '<td>' + convertDate(value.spmb_detail_receipt_date) + '</td>';
+				html += '<td>' + value.spmb_detail_receipt_name + '</td>';
+				html += '<td>' + value.spmb_detail_receipt_note + '</td>';
+				html += '</tr>';
+			});
+
+			$('#receipt-tables tbody').append(html);
+        }
+	});
+
+	//return html;
+}
+
 function clearDetail()
 {
 	$('#span_item_category_name').empty();
@@ -93,4 +126,5 @@ function clearDetail()
 
 	$('#vendor-tables tbody').empty();
 	$('#order-payment-tables tbody').empty();
+	$('#receipt-tables tbody').empty();
 }
