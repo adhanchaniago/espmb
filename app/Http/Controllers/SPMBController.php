@@ -937,6 +937,8 @@ class SPMBController extends Controller
             return $this->approveFlowNo7($request, $id);
         }elseif($flow_no == 8) {
             return $this->approveFlowNo8($request, $id);
+        }elseif($flow_no == 9) {
+            return $this->approveFlowNo9($request, $id);
         }
     }
 
@@ -958,6 +960,8 @@ class SPMBController extends Controller
             $this->postApproveFlowNo7($request, $id);
         }elseif($flow_no == 8) {
             $this->postApproveFlowNo8($request, $id);
+        }elseif($flow_no == 9) {
+            $this->postApproveFlowNo9($request, $id);
         }
 
         return redirect('spmb');
@@ -1408,4 +1412,94 @@ class SPMBController extends Controller
 
         $request->session()->flash('status', 'Data has been saved!');
     }
+
+    public function approveFlowNo9(Request $request, $id)
+    {
+        if(Gate::denies('SPMB-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'spmbtype.spmbcategory',
+                                'spmbtype.rules',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                'rules',
+                                '_pic',
+                                '_currentuser'
+                                )->find($id);
+
+        if($data['spmb']->current_user!=$request->user()->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('vendor.material.spmb.approval_flow_9', $data);
+    }
+
+    public function postApproveFlowNo9(Request $request, $id)
+    {
+        $this->validate($request, [
+                'approval' => 'required',
+                'comment' => 'required'
+            ]);
+
+        if($request->input('approval')=='1')
+        {
+            $spmb = SPMB::find($id);
+
+            $flow = new FlowLibrary;
+            $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->pic);
+
+            $spmb->flow_no = $nextFlow['flow_no'];
+            $spmb->current_user = $nextFlow['current_user'];
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
+
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 2;
+            $his->flow_no = 9;
+            $his->spmb_history_desc = $request->input('comment');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
+
+            $his->save();
+
+            $request->session()->flash('status', 'Data has been saved!');
+        }else{
+            $spmb = SPMB::find($id);
+
+            $flow = new FlowLibrary;
+            //$nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->pic);
+            $prevFlow = $flow->getPreviousFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->created_by);
+
+            $spmb->flow_no = $prevFlow['flow_no'];
+            $spmb->revision = $spmb->revision + 1;
+            $spmb->current_user = $prevFlow['current_user'];
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
+
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 3;
+            $his->flow_no = 9;
+            $his->spmb_history_desc = $request->input('comment');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
+
+            $his->save();
+
+            $request->session()->flash('status', 'Data has been saved!');
+        }
+
+        
+    }    
 }
