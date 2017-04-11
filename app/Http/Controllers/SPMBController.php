@@ -893,6 +893,8 @@ class SPMBController extends Controller
             return $this->approveFlowNo4($request, $id);
         }elseif($flow_no == 5) {
             return $this->approveFlowNo5($request, $id);
+        }elseif($flow_no == 6) {
+            return $this->approveFlowNo6($request, $id);
         }
     }
 
@@ -908,6 +910,8 @@ class SPMBController extends Controller
             $this->postApproveFlowNo4($request, $id);
         }elseif($flow_no == 5) {
             $this->postApproveFlowNo5($request, $id);
+        }elseif($flow_no == 6) {
+            $this->postApproveFlowNo6($request, $id);
         }
 
         return redirect('spmb');
@@ -1165,6 +1169,71 @@ class SPMBController extends Controller
         $his->spmb_id = $id;
         $his->approval_type_id = 1;
         $his->flow_no = 5;
+        $his->spmb_history_desc = $request->input('comment');
+        $his->active = '1';
+        $his->created_by = $request->user()->user_id;
+
+        $his->save();
+
+        $request->session()->flash('status', 'Data has been saved!');
+    }
+
+    public function approveFlowNo6(Request $request, $id)
+    {
+        if(Gate::denies('SPMB-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'spmbtype.spmbcategory',
+                                'spmbtype.rules',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                'rules',
+                                '_pic',
+                                '_currentuser'
+                                )->find($id);
+
+        $data['pics'] = User::where('active', '1')->whereHas('roles', function($query) {
+                            $query->where('role_name', '=', 'MIGO');
+                        })->get();
+
+        if($data['spmb']->current_user!=$request->user()->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('vendor.material.spmb.approval_flow_6', $data);
+    }
+
+    public function postApproveFlowNo6(Request $request, $id)
+    {
+        $this->validate($request, [
+                'pic' => 'required',
+                'comment' => 'required'
+            ]);
+
+        $spmb = SPMB::find($id);
+
+        $flow = new FlowLibrary;
+        $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $request->input('pic'));
+
+        $spmb->flow_no = $nextFlow['flow_no'];
+        $spmb->current_user = $nextFlow['current_user'];
+        $spmb->updated_by = $request->user()->user_id;
+        $spmb->save();
+
+        $his = new SPMBHistory;
+        $his->spmb_id = $id;
+        $his->approval_type_id = 1;
+        $his->flow_no = 6;
         $his->spmb_history_desc = $request->input('comment');
         $his->active = '1';
         $his->created_by = $request->user()->user_id;
