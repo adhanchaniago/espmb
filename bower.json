@@ -1,0 +1,24 @@
+{
+  "name": "espmb",
+  "description": "file-file pendukung",
+  "main": "",
+  "authors": [
+    "sonigramediamajalah <soni@gramedia-majalah.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "espmb"
+  ],
+  "homepage": "https://github.com/sonigramediamajalah/espmb",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-bar-rating": "^1.2.2"
+  }
+}

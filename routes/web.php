@@ -225,6 +225,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/api/loadOrderPayment', 'SPMBController@apiLoadOrderPayment');
     Route::post('spmb/api/storeOrderPayment', 'SPMBController@apiStoreOrderPayment');
     Route::post('spmb/api/storeAcceptance', 'SPMBController@apiStoreAcceptance');
+    Route::post('spmb/api/updatePayment', 'SPMBController@apiUpdatePayment');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management

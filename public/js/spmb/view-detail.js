@@ -68,10 +68,10 @@ function loadDetailPayment(spmb_detail_id)
 				html += '<tr>';
 				html += '<td>' + value.paymenttype.payment_type_name + '</td>';
 				html += '<td>' + convertDate(value.spmb_detail_payment_request_date) + '</td>';
-				html += '<td>' + convertDate(value.spmb_detail_payment_finish_date) + '</td>';
-				html += '<td>' + ((value.spmb_detail_vendor_status=='1') ? convertDate(value.spmb_detail_payment_finish_date) : '-') + '</td>';
+				html += '<td>' + convertDate(value.spmb_detail_payment_transfer_date) + '</td>';
+				html += '<td>' + ((value.spmb_detail_payment_status=='1') ? convertDate(value.spmb_detail_payment_finish_date) : '-') + '</td>';
 				html += '<td>' + convertNumber(value.spmb_detail_payment_amount) + '</td>';
-				html += '<td>' + ((value.spmb_detail_vendor_status=='1') ? 'COMPLETED' : 'WAITING PAYMENT') + '</td>';
+				html += '<td>' + ((value.spmb_detail_payment_status=='1') ? 'COMPLETED' : 'WAITING PAYMENT') + '</td>';
 				html += '<td>' + value.spmb_detail_payment_note + '</td>';
 				html += '</tr>';
 			});

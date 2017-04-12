@@ -885,6 +885,27 @@ class SPMBController extends Controller
         return response()->json($data);
     }
 
+    public function apiUpdatePayment(Request $request)
+    {
+        if(Gate::denies('SPMB-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $obj = SPMBDetailPayment::find($request->input('spmb_detail_payment_id'));
+        $obj->spmb_detail_payment_finish_date = Carbon::createFromFormat('d/m/Y', $request->input('spmb_detail_payment_finish_date'))->toDateString();
+        $obj->spmb_detail_payment_note = $request->input('spmb_detail_payment_note');
+        $obj->spmb_detail_payment_status = '1';
+        $obj->updated_by = $request->user()->user_id;
+
+        $obj->save();
+
+        $data = array();
+
+        $data['status'] = '200';
+
+        return response()->json($data);
+    }
+
     private function generateCode()
     {
         $total = SPMB::count();
@@ -939,6 +960,8 @@ class SPMBController extends Controller
             return $this->approveFlowNo8($request, $id);
         }elseif($flow_no == 9) {
             return $this->approveFlowNo9($request, $id);
+        }elseif($flow_no == 10) {
+            return $this->approveFlowNo10($request, $id);
         }
     }
 
@@ -962,6 +985,8 @@ class SPMBController extends Controller
             $this->postApproveFlowNo8($request, $id);
         }elseif($flow_no == 9) {
             $this->postApproveFlowNo9($request, $id);
+        }elseif($flow_no == 10) {
+            $this->postApproveFlowNo10($request, $id);
         }
 
         return redirect('spmb');
@@ -1502,4 +1527,35 @@ class SPMBController extends Controller
 
         
     }    
+
+    public function approveFlowNo10(Request $request, $id)
+    {
+        if(Gate::denies('SPMB-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'spmbtype.spmbcategory',
+                                'spmbtype.rules',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                'rules',
+                                '_pic',
+                                '_currentuser'
+                                )->find($id);
+
+        if($data['spmb']->current_user!=$request->user()->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('vendor.material.spmb.approval_flow_10', $data);
+    }
 }
