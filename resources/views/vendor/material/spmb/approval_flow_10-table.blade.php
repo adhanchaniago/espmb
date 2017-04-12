@@ -40,4 +40,5 @@
 @section('customjs')
 <script src="{{ url('js/spmb/view-detail.js') }}"></script>
 <script src="{{ url('js/spmb/update-payment.js') }}"></script>
+<script src="{{ url('js/spmb/give-rating.js') }}"></script>
 @endsection

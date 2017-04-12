@@ -6,6 +6,7 @@ $(document).ready(function() {
 		loadDetail($(this).data('detail-id'));
 		loadDetailPayment($(this).data('detail-id'));
 		loadDetailReceipt($(this).data('detail-id'));
+		loadDetailRating($(this).data('detail-id'));
 		$('#modalViewDetailSPMB').modal();
 	});
 });
@@ -115,6 +116,58 @@ function loadDetailReceipt(spmb_detail_id)
 	//return html;
 }
 
+function loadDetailRating(spmb_detail_id)
+{
+	$.ajax({
+		url: base_url + 'spmb/api/loadModalRating',
+		dataType: 'json',
+		type: 'POST',
+		data: { 
+				_token: myToken,
+                spmb_detail_id: spmb_detail_id },
+        error: function(data) {
+        	console.log('error loading data..');
+        	alert('Error loading data...');
+        },
+        success: function(data) {
+        	var html = '';
+
+			$.each(data.detail_vendor.vendor.ratings, function(key, value) {
+				html += value.rating_name + '&nbsp;:&nbsp;<select class="select-rating" id="view_' + value.rating_name + '_' + value.rating_id + '"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br/>';
+			});
+
+			$('#rating-container').append(html);
+
+			$('.select-rating').barrating({
+					theme: 'fontawesome-stars'
+				});
+
+			$.each(data.detail_vendor.vendor.ratings, function(key, value) {
+				$.ajax({
+					url: base_url + 'spmb/api/loadDetailRating',
+					dataType: 'json',
+					type: 'POST',
+					data: { 
+							_token: myToken,
+			                spmb_detail_id: spmb_detail_id,
+			                rating_id: value.rating_id,
+			                vendor_id: data.detail_vendor.vendor_id },
+			        error: function(data) {
+			        	console.log('error loading data..');
+			        	alert('Error loading data...');
+			        },
+			        success: function(data) {
+			        	console.log(data.score.score);
+			  			$('#view_' + value.rating_name + '_' + value.rating_id).barrating('set', data.score.score);      	
+			        }
+				});		
+			});
+			//$('#' + value.rating_name + '_' + value.rating_id).barrating('set', 2);
+			//$('.select-rating').barrating('set', 2);
+        }
+	});
+}
+
 function clearDetail()
 {
 	$('#span_item_category_name').empty();
@@ -127,4 +180,5 @@ function clearDetail()
 	$('#vendor-tables tbody').empty();
 	$('#order-payment-tables tbody').empty();
 	$('#receipt-tables tbody').empty();
+	$('#rating-container').empty();
 }

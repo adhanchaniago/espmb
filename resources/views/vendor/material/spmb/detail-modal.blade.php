@@ -117,6 +117,13 @@
                             </table>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <h4>Rating</h4>
+                        <hr/>
+                        <div id="rating-container">
+                            
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

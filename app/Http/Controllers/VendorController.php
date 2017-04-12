@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
+use DB;
 
 use Gate;
 use App\Http\Requests;
@@ -415,6 +416,25 @@ class VendorController extends Controller
                         ->orderBy('vendors.vendor_name','asc')
                         ->get();
         }
+
+        return response()->json($data);
+    }
+
+    public function apiRating(Request $request)
+    {
+        $data = array();
+
+        $vendor = Vendor::with('ratings')->find($request->input('vendor_id'));
+
+        foreach ($vendor->ratings as $key => $value) {
+            $score = DB::table('spmb_detail_vendor_rating_score')->where('vendor_id', $request->input('vendor_id'))->where('rating_id', $value->rating_id)->avg('score');
+            $arr = array();
+            $arr['rating_name'] = $value->rating_name;
+            $arr['rating_score'] = $score;
+
+            array_push($data, $arr);
+        }
+
 
         return response()->json($data);
     }

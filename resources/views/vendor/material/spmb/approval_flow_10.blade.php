@@ -36,6 +36,7 @@
 
     @include('vendor.material.spmb.detail-modal')
     @include('vendor.material.spmb.update-payment-vendor-modal')
+    @include('vendor.material.spmb.give-rating-modal')
 @endsection
 
 @section('vendorjs')

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
+use DB;
 
 use File;
 use Gate;
@@ -906,6 +907,62 @@ class SPMBController extends Controller
         return response()->json($data);
     }
 
+    public function apiLoadModalRating(Request $request)
+    {
+        $spmbdetailvendor = SPMBDetailVendor::with('vendor', 'vendor.ratings')->where('spmb_detail_vendor_status', '1')->where('active', '1')->first();
+
+        $data = array();
+        $data['detail_vendor'] = $spmbdetailvendor;
+
+        return response()->json($data);
+    }
+
+    public function apiSaveRating(Request $request)
+    {
+        $this->validate($request, [
+                'spmb_detail_id' => 'required',
+                'vendor_id' => 'required',
+                'rating_id' => 'required',
+                'score' => 'required'
+            ]);
+
+        DB::table('spmb_detail_vendor_rating_score')
+                    ->where('spmb_detail_id', $request->input('spmb_detail_id'))
+                    ->where('vendor_id', $request->input('vendor_id'))
+                    ->where('rating_id', $request->input('rating_id'))
+                    ->delete();
+
+        DB::table('spmb_detail_vendor_rating_score')->insert([
+                'spmb_detail_id' => $request->input('spmb_detail_id'),
+                'vendor_id' => $request->input('vendor_id'),
+                'rating_id' => $request->input('rating_id'),
+                'score' => $request->input('score')
+            ]);
+
+        $data = array();
+
+        $data['status'] = '200';
+
+        return response()->json($data);
+    }
+
+    public function apiLoadDetailRating(Request $request)
+    {
+        $score = DB::table('spmb_detail_vendor_rating_score')
+                    ->where('spmb_detail_id', $request->input('spmb_detail_id'))
+                    ->where('vendor_id', $request->input('vendor_id'))
+                    ->where('rating_id', $request->input('rating_id'))
+                    ->select('score')->first();
+
+        if(count($score) > 0) {
+            $data['score'] = $score;
+        }else{
+            $data['score'] = 0;
+        }
+        
+        return response()->json($data);
+    }
+
     private function generateCode()
     {
         $total = SPMB::count();
@@ -1557,5 +1614,33 @@ class SPMBController extends Controller
         }
 
         return view('vendor.material.spmb.approval_flow_10', $data);
+    }
+
+    public function postApproveFlowNo10(Request $request, $id)
+    {
+        $this->validate($request, [
+                'comment' => 'required'
+            ]);
+
+        $spmb = SPMB::find($id);
+
+        $flow = new FlowLibrary;
+        $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->pic);
+
+        $spmb->flow_no = 98;
+        $spmb->updated_by = $request->user()->user_id;
+        $spmb->save();
+
+        $his = new SPMBHistory;
+        $his->spmb_id = $id;
+        $his->approval_type_id = 4;
+        $his->flow_no = 10;
+        $his->spmb_history_desc = $request->input('comment');
+        $his->active = '1';
+        $his->created_by = $request->user()->user_id;
+
+        $his->save();
+
+        $request->session()->flash('status', 'Data has been saved!');
     }
 }

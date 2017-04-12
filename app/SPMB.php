@@ -75,7 +75,11 @@ class SPMB extends Model
 
 	public function _currentflow($value)
 	{
-		$flow = Flow::where('flow_no',$value)->where('flow_group_id',1)->where('active','1')->get(); 
-		return $flow[0]->flow_name;
+		$flow = Flow::where('flow_no',$value)->where('flow_group_id',1)->where('active','1')->get();
+		if(count($flow) > 0) {
+			return $flow[0]->flow_name;
+		}else{
+			return 'FINISHED';
+		}
 	}
 }

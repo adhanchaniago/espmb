@@ -207,6 +207,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::resource('vendor', 'VendorController');
     Route::post('vendor/api/search-recommended', 'VendorController@apiSearchRecommended');
     Route::post('vendor/api/search-others', 'VendorController@apiSearchOthers');
+    Route::post('vendor/api/rating', 'VendorController@apiRating');
 
     //SPMB
     Route::post('spmb/apiList/{listtype}', 'SPMBController@apiList');
@@ -226,6 +227,9 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/api/storeOrderPayment', 'SPMBController@apiStoreOrderPayment');
     Route::post('spmb/api/storeAcceptance', 'SPMBController@apiStoreAcceptance');
     Route::post('spmb/api/updatePayment', 'SPMBController@apiUpdatePayment');
+    Route::post('spmb/api/loadModalRating', 'SPMBController@apiLoadModalRating');
+    Route::post('spmb/api/loadDetailRating', 'SPMBController@apiLoadDetailRating');
+    Route::post('spmb/api/saveRating', 'SPMBController@apiSaveRating');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
