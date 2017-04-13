@@ -208,6 +208,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('vendor/api/search-recommended', 'VendorController@apiSearchRecommended');
     Route::post('vendor/api/search-others', 'VendorController@apiSearchOthers');
     Route::post('vendor/api/rating', 'VendorController@apiRating');
+    Route::post('vendor/api/averageRating', 'VendorController@apiAverageRating');
 
     //SPMB
     Route::post('spmb/apiList/{listtype}', 'SPMBController@apiList');

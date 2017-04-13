@@ -909,7 +909,7 @@ class SPMBController extends Controller
 
     public function apiLoadModalRating(Request $request)
     {
-        $spmbdetailvendor = SPMBDetailVendor::with('vendor', 'vendor.ratings')->where('spmb_detail_vendor_status', '1')->where('active', '1')->first();
+        $spmbdetailvendor = SPMBDetailVendor::with('vendor', 'vendor.ratings')->where('spmb_detail_id', $request->input('spmb_detail_id'))->where('spmb_detail_vendor_status', '1')->where('active', '1')->first();
 
         $data = array();
         $data['detail_vendor'] = $spmbdetailvendor;
@@ -957,7 +957,7 @@ class SPMBController extends Controller
         if(count($score) > 0) {
             $data['score'] = $score;
         }else{
-            $data['score'] = 0;
+            $data['score']['score'] = 0;
         }
         
         return response()->json($data);

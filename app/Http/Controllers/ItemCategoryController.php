@@ -49,6 +49,7 @@ class ItemCategoryController extends Controller
     {
         $this->validate($request, [
             'item_category_name' => 'required|max:100',
+            'item_category_desc' => 'required',
         ]);
 
         $obj = new ItemCategory;
@@ -110,6 +111,7 @@ class ItemCategoryController extends Controller
     {
         $this->validate($request, [
             'item_category_name' => 'required|max:100',
+            'item_category_desc' => 'required',
         ]);
 
         $obj = ItemCategory::find($id);

@@ -82,6 +82,7 @@ function loadOrderPayment(id)
         	alert('Error loading data...');
         },
         success: function(data) {
+        	console.log(data);
 			$('#modal_vendor').val(data.vendor);
 			$('#modal_nama_barang').val(data.item_name);
 			$('#modal_qty').val(data.qty);

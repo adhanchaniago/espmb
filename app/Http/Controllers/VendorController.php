@@ -266,10 +266,16 @@ class VendorController extends Controller
                             'spmbdetailvendors'
                         )
                         ->where('vendors.active','1')
+                        ->whereHas('itemcategories', function($query) use($item_category_id) {
+                            $query->where('item_categories.item_category_id', $item_category_id);
+                        })
                         //->where('spmb_detail_vendors.spmb_detail_vendor_status', '1')
                         //->where('vendors.itemcategories.item_category_id', $item_category_id)
                         //s->orderBy('vendors.active','1')
                         ->get();
+
+        /*$rec = $this->apiGetRecommendedRating();
+        dd($rec);*/
 
         return response()->json($data);
     }
@@ -437,5 +443,30 @@ class VendorController extends Controller
 
 
         return response()->json($data);
+    }
+
+    public function apiAverageRating(Request $request)
+    {
+        $vendor_id = $request->input('vendor_id');
+        $rating_id = $request->input('rating_id');
+
+        $avg = DB::table('spmb_detail_vendor_rating_score')
+                    ->where('vendor_id', $vendor_id)
+                    ->where('rating_id', $rating_id)
+                    ->avg('score');
+
+        $data['result'] = $avg;
+
+        return response()->json($data);
+    }
+
+    private function apiGetRecommendedRating()
+    {
+        $result = DB::table('spmb_detail_vendor_rating_score')
+                    ->select(DB::raw('vendor_id,rating_id,avg(score)'))
+                    ->groupBy('vendor_id', 'rating_id')
+                    ->get();
+
+        return $result;
     }
 }

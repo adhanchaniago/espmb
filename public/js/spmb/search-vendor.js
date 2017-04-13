@@ -79,8 +79,26 @@ function load_recommended_vendors(item_category_id)
         			items += '</i></small>';
         		items += '</td>';
         		items += '<td>';
+                    var score = 0;
 	        		$.each(value.ratings, function(k, v) {
-	        			items += v.rating_name + '<br/>';
+                        $.ajax({
+                            url: base_url + 'vendor/api/averageRating',
+                            dataType: 'json',
+                            type: 'POST',
+                            data: { 
+                                    _token: myToken,
+                                    vendor_id: value.vendor_id,
+                                    rating_id: v.rating_id },
+                            error: function(data) {
+                                console.log('error loading data..');
+                                alert('Error loading data...');
+                            },
+                            success: function(data) {
+                                score = data.result;
+                                console.log(score);
+                            }
+                        });
+	        			items += v.rating_name + ' : ' + score + '<br/>';
 	        		});
         		items += '</td>';
         		items += '<td></td>';
