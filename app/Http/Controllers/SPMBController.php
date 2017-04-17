@@ -708,6 +708,22 @@ class SPMBController extends Controller
         return response()->json($data);
     }
 
+    public function apiUpdateAssetDetails(Request $request) {
+        if(Gate::denies('SPMB-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $obj = SPMBDetail::find($request->input('spmb_detail_id'));
+        $obj->spmb_detail_asset_no = $request->input('spmb_detail_asset_no');
+        $obj->updated_by = $request->user()->user_id;
+
+        $obj->save();
+
+        $data['status'] = '200';
+
+        return response()->json($data);
+    }
+
     public function apiDeleteDetails(Request $request) {
         $data = array();
 

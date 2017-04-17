@@ -31,6 +31,7 @@ function loadDetail(id)
 			$('#span_spmb_detail_item_name').append(data.detail.spmb_detail_item_name);
 			$('#span_unit_name').append(data.detail.unit.unit_name);
 			$('#span_spmb_detail_qty').append(data.detail.spmb_detail_qty);
+			$('#span_spmb_detail_asset_no').append(data.detail.spmb_detail_asset_no);
 			$('#span_spmb_detail_note').append(data.detail.spmb_detail_note);    
 
 			var tbl = '';

@@ -35,6 +35,7 @@
     </div>
 
     @include('vendor.material.spmb.detail-modal')
+    @include('vendor.material.spmb.input-no-asset-modal')
 @endsection
 
 @section('vendorjs')

@@ -25,6 +25,7 @@
 				<td>
 					<center>
 						<a title="Lihat Detail" href="javascript:void(0)" class="btn btn-icon command-detail waves-effect waves-circle view-detail-spmb-item" data-detail-id="{{ $detail->spmb_detail_id }}" type="button"><span class="zmdi zmdi-more"></span></a>&nbsp;
+						<a title="Input No Asset" href="javascript:void(0)" class="btn btn-icon waves-effect waves-circle input-no-asset-spmb-item" data-detail-id="{{ $detail->spmb_detail_id }}" type="button"><span class="zmdi zmdi-code-setting"></span></a>&nbsp;
 					</center>
 				</td>
 			</tr>
@@ -37,4 +38,5 @@
 
 @section('customjs')
 <script src="{{ url('js/spmb/view-detail.js') }}"></script>
+<script src="{{ url('js/spmb/input-no-asset.js') }}"></script>
 @endsection

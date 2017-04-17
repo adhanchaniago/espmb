@@ -281,8 +281,6 @@ class VendorController extends Controller
             }
         }
 
-        //dd($data['myrate']);
-
         return response()->json($data);
     }
 

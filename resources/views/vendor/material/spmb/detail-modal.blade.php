@@ -48,6 +48,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="span_spmb_detail_asset_no" class="col-sm-2 control-label">No Asset</label>
+                        <div class="col-sm-10">
+                            <div class="fg-line">
+                                <span id="span_spmb_detail_asset_no"></span>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="span_spmb_detail_note" class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-10">
                             <div class="fg-line">

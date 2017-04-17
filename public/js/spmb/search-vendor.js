@@ -67,7 +67,7 @@ function load_recommended_vendors(item_category_id)
         	$.each(data.vendors, function(key, value) {
         		items += '<tr>';
         		items += '<td>';
-        			items += '<b>' + value.vendor_name + '</b>&nbsp;&nbsp;&nbsp;<span class="badge">' + value.vendor_status + '</span><br/>';
+        			items += '<b><a href="' + base_url + 'vendor/' + value.vendor_id + '" target="_blank">' + value.vendor_name + '</a></b>&nbsp;&nbsp;&nbsp;<span class="badge">' + value.vendor_status + '</span><br/>';
         			items += '<small>' + value.vendortype.vendor_type_name + '</small><br/>';
         			items += '<small><i>';
         			$.each(value.itemcategories, function(k, v) {
@@ -195,7 +195,7 @@ function process_filter_vendor()
                         $.each(data.vendors, function(key, value) {
                                 items += '<tr>';
                                 items += '<td>';
-                                        items += '<b>' + value.vendor_name + '</b>&nbsp;&nbsp;&nbsp;<span class="badge">' + value.vendor_status + '</span><br/>';
+                                        items += '<b><a href="' + base_url + 'vendor/' + value.vendor_id + '" target="_blank">' + value.vendor_name + '</a></b>&nbsp;&nbsp;&nbsp;<span class="badge">' + value.vendor_status + '</span><br/>';
                                         items += '<small>' + value.vendortype.vendor_type_name + '</small><br/>';
                                         items += '<small><i>';
                                         $.each(value.itemcategories, function(k, v) {

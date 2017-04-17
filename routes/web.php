@@ -219,6 +219,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::get('spmb/api/loadDetails', 'SPMBController@apiLoadDetails');
     Route::post('spmb/api/loadDetail', 'SPMBController@apiLoadDetail');
     Route::post('spmb/api/storeDetail', 'SPMBController@apiStoreDetails');
+    Route::post('spmb/api/updateAssetDetails', 'SPMBController@apiUpdateAssetDetails');
     Route::post('spmb/api/deleteDetail', 'SPMBController@apiDeleteDetails');
     Route::post('spmb/api/storeDetailVendor', 'SPMBController@apiStoreDetailVendor');
     Route::post('spmb/api/updateDetailVendor', 'SPMBController@apiUpdateDetailVendor');
