@@ -1659,4 +1659,37 @@ class SPMBController extends Controller
 
         $request->session()->flash('status', 'Data has been saved!');
     }
+
+    public function tracking(Request $request)
+    {
+        if(Gate::denies('SPMB-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'spmbtype.rules',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                'rules',
+                                '_pic',
+                                '_currentuser'
+                                )->where('spmb_no', $request->input('tracking_spmb_no'))->first();
+
+        if(count($data['spmb']) > 0)
+        {
+            return view('vendor.material.spmb.show', $data);
+        }else{
+            $data['spmb_no'] = $request->input('tracking_spmb_no');
+            return view('vendor.material.spmb.notfound', $data);
+        }
+
+    }
 }

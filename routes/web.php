@@ -214,6 +214,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/apiList/{listtype}', 'SPMBController@apiList');
     Route::post('spmb/apiDelete', 'SPMBController@apiDelete');
     Route::resource('spmb', 'SPMBController');
+    Route::post('spmb/tracking', 'SPMBController@tracking');
     Route::get('spmb/approve/{flow_no}/{id}', 'SPMBController@approve');
     Route::post('spmb/approve/{flow_no}/{id}', 'SPMBController@postApprove');
     Route::get('spmb/api/loadDetails', 'SPMBController@apiLoadDetails');

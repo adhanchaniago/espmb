@@ -212,7 +212,10 @@
             <div id="top-search-wrap">
                 <div class="tsw-inner">
                     <i id="top-search-close" class="zmdi zmdi-arrow-left"></i>
-                    <input type="text" placeholder="SPMB No Tracking">
+                    <form method="POST" action="{{ url('/spmb/tracking') }}">
+                        {{ csrf_field() }}
+                        <input name="tracking_spmb_no" type="text" placeholder="SPMB No Tracking">
+                    </form>
                 </div>
             </div>
         </header>
