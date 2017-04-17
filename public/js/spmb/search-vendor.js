@@ -59,7 +59,7 @@ function load_recommended_vendors(item_category_id)
         	alert('Error loading data...');
         },
         success: function(data) {
-        	console.log(data);
+        	//console.log(data);
 
         	var items = '';
         	$('#recommended-vendor-table tbody').empty();
@@ -79,34 +79,26 @@ function load_recommended_vendors(item_category_id)
         			items += '</i></small>';
         		items += '</td>';
         		items += '<td>';
-                    var score = 0;
 	        		$.each(value.ratings, function(k, v) {
-                        $.ajax({
-                            url: base_url + 'vendor/api/averageRating',
-                            dataType: 'json',
-                            type: 'POST',
-                            data: { 
-                                    _token: myToken,
-                                    vendor_id: value.vendor_id,
-                                    rating_id: v.rating_id },
-                            error: function(data) {
-                                console.log('error loading data..');
-                                alert('Error loading data...');
-                            },
-                            success: function(data) {
-                                score = data.result;
-                                console.log(score);
-                            }
-                        });
-	        			items += v.rating_name + ' : ' + score + '<br/>';
+	        			items += v.rating_name + ' : &nbsp;<select data-current-rating="' + data.myrate[value.vendor_id][v.rating_id] + '" class="select-rating" id="' + v.rating_name + '_' + v.rating_id + '_' + value.vendor_id + '"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br/>';
 	        		});
         		items += '</td>';
-        		items += '<td></td>';
         		items += '<td><center><a href="javascript:void(0)" class="btn btn-success btn-select-vendor" data-vendor-name="' + value.vendor_name + '" data-vendor-id="' + value.vendor_id + '">Pilih</a></center></td>';
         		items += '</tr>';
         	});
 
         	$('#recommended-vendor-table tbody').append(items);
+
+            $.each(data.vendors, function(key, value) {
+                $.each(value.ratings, function(k, v) {
+                    $('#' + v.rating_name + '_' + v.rating_id + '_' + value.vendor_id).barrating({
+                        theme: 'fontawesome-stars-o',
+                        initialRating: data.myrate[value.vendor_id][v.rating_id],
+                        readonly: true,
+                        showSelectedRating: true
+                    });
+                });
+            });
         }
 	});
 }
@@ -195,7 +187,6 @@ function process_filter_vendor()
                                             +'<tr>'
                                                 +'<th><center>Nama Vendor</center></th>'
                                                 +'<th><center>Rating</center></th>'
-                                                +'<th><center>Transaksi Terakhir</center></th>'
                                                 +'<th><center>Action</center></th>'
                                             +'</tr>'
                                         +'</thead>'
@@ -217,10 +208,9 @@ function process_filter_vendor()
                                 items += '</td>';
                                 items += '<td>';
                                         $.each(value.ratings, function(k, v) {
-                                                items += v.rating_name + '<br/>';
+                                            items += v.rating_name + ' : &nbsp;<select data-current-rating="' + data.myrate[value.vendor_id][v.rating_id] + '" class="select-rating" id="other_' + v.rating_name + '_' + v.rating_id + '_' + value.vendor_id + '"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select><br/>';
                                         });
                                 items += '</td>';
-                                items += '<td></td>';
                                 items += '<td><center><a href="javascript:void(0)" class="btn btn-success btn-select-vendor" data-vendor-name="' + value.vendor_name + '" data-vendor-id="' + value.vendor_id + '">Pilih</a></center></td>';
                                 items += '</tr>';
                         });
@@ -229,6 +219,17 @@ function process_filter_vendor()
 
                         $('#filter_result').empty();
                         $('#filter_result').append(items);
+
+                        $.each(data.vendors, function(key, value) {
+                            $.each(value.ratings, function(k, v) {
+                                $('#other_' + v.rating_name + '_' + v.rating_id + '_' + value.vendor_id).barrating({
+                                    theme: 'fontawesome-stars-o',
+                                    initialRating: data.myrate[value.vendor_id][v.rating_id],
+                                    readonly: true,
+                                    showSelectedRating: true
+                                });
+                            });
+                        });
                 }
         });
 }

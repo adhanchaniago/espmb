@@ -274,8 +274,14 @@ class VendorController extends Controller
                         //s->orderBy('vendors.active','1')
                         ->get();
 
-        /*$rec = $this->apiGetRecommendedRating();
-        dd($rec);*/
+        foreach($data['vendors'] as $vendor) {
+            foreach($vendor->ratings as $rating) {
+                $myrate = $this->getAverageRating($vendor->vendor_id, $rating->rating_id);
+                $data['myrate'][$vendor->vendor_id][$rating->rating_id] = $myrate;
+            }
+        }
+
+        //dd($data['myrate']);
 
         return response()->json($data);
     }
@@ -423,6 +429,13 @@ class VendorController extends Controller
                         ->get();
         }
 
+        foreach($data['vendors'] as $vendor) {
+            foreach($vendor->ratings as $rating) {
+                $myrate = $this->getAverageRating($vendor->vendor_id, $rating->rating_id);
+                $data['myrate'][$vendor->vendor_id][$rating->rating_id] = $myrate;
+            }
+        }
+
         return response()->json($data);
     }
 
@@ -468,5 +481,14 @@ class VendorController extends Controller
                     ->get();
 
         return $result;
+    }
+
+    private function getAverageRating($vendor_id, $rating_id) {
+        $avg = DB::table('spmb_detail_vendor_rating_score')
+                    ->where('vendor_id', $vendor_id)
+                    ->where('rating_id', $rating_id)
+                    ->avg('score');
+
+        return $avg;        
     }
 }

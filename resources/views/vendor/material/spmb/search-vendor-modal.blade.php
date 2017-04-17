@@ -25,7 +25,6 @@
                                             <tr>
                                                 <th><center>Nama Vendor</center></th>
                                                 <th><center>Rating</center></th>
-                                                <th><center>Transaksi Terakhir</center></th>
                                                 <th><center>Action</center></th>
                                             </tr>
                                         </thead>

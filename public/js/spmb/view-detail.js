@@ -139,7 +139,7 @@ function loadDetailRating(spmb_detail_id)
 			$('#rating-container').append(html);
 
 			$('.select-rating').barrating({
-					theme: 'fontawesome-stars'
+					theme: 'fontawesome-stars-o'
 				});
 
 			$.each(data.detail_vendor.vendor.ratings, function(key, value) {
@@ -157,7 +157,6 @@ function loadDetailRating(spmb_detail_id)
 			        	alert('Error loading data...');
 			        },
 			        success: function(data) {
-			        	console.log(data.score.score);
 			  			$('#view_' + value.rating_name + '_' + value.rating_id).barrating('set', data.score.score);      	
 			        }
 				});		
