@@ -49,14 +49,16 @@ class HomeController extends Controller
 
         //dd('ok');
 
-        $user = User::find(1);
-        Notification::send($user, new TestNotif());
+        
         /*$user = User::find(1);
         foreach($user->unreadNotifications as $notif) {
             echo $notif->type;
         }
 
         dd('mail');*/
+
+        /*$user = User::find(1);
+        Notification::send($user, new TestNotif());*/
 
         $data = array();
 

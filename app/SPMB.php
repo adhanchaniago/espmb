@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use App\Flow;
 
 class SPMB extends Model
 {
+	use Notifiable;
+
     protected $table = 'spmb';
 	protected $primaryKey = 'spmb_id';
 
@@ -32,6 +35,11 @@ class SPMB extends Model
 	protected $hidden = [
 				'active', 'created_by', 'created_at', 'updated_by', 'updated_at'
 	];
+
+	public function routeNotificationForMail()
+    {
+        return $this->spmb_applicant_email;
+    }
 
 	public function spmbtype() 
 	{

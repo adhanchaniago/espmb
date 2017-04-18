@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
 use DB;
+use Notification;
+use App\Notifications\SPMBGenerated;
+use App\Notifications\SPMBRejected;
 
 use File;
 use Gate;
@@ -178,6 +181,10 @@ class SPMBController extends Controller
             $spmb->updated_by = $request->user()->user_id;
             $spmb->save();
 
+            //notification to applicant
+            $spmbdata = SPMB::with('spmbdetails')->find($obj->spmb_id);
+            Notification::send($spmbdata, new SPMBGenerated($spmbdata));
+
         }else{
             //failed to pass rules
             $his = new SPMBHistory;
@@ -199,6 +206,10 @@ class SPMBController extends Controller
             $spmb->revision = 1;
             $spmb->updated_by = $request->user()->user_id;
             $spmb->save();
+
+            //notification to applicant
+            $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules')->find($obj->spmb_id);
+            Notification::send($spmbdata, new SPMBRejected($spmbdata));
         }
 
         $request->session()->flash('status', 'Data has been saved!');
@@ -228,6 +239,9 @@ class SPMBController extends Controller
                                 '_pic',
                                 '_currentuser'
                                 )->find($id);
+
+        $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules')->find($id);
+        Notification::send($spmbdata, new SPMBRejected($spmbdata));
 
         return view('vendor.material.spmb.show', $data);
     }
@@ -1644,6 +1658,7 @@ class SPMBController extends Controller
         $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->pic);
 
         $spmb->flow_no = 98;
+        $spmb->spmb_finish_date = Carbon::createFromFormat('d/m/Y', date('d/m/Y'))->toDateString();
         $spmb->updated_by = $request->user()->user_id;
         $spmb->save();
 
