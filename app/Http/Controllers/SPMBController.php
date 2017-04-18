@@ -240,8 +240,8 @@ class SPMBController extends Controller
                                 '_currentuser'
                                 )->find($id);
 
-        $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules')->find($id);
-        Notification::send($spmbdata, new SPMBRejected($spmbdata));
+        /*$spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules')->find($id);
+        Notification::send($spmbdata, new SPMBRejected($spmbdata));*/
 
         return view('vendor.material.spmb.show', $data);
     }
