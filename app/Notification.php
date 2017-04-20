@@ -7,20 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     protected $table = 'notifications';
-	protected $primaryKey = 'notification_id';
+	protected $primaryKey = 'id';
+
+	public $incrementing = false;
 
 	protected $fillable = [
 				'type', 
 				'notifiable_id', 
 				'notifiable_type', 
 				'data', 
-				'read_at', 
-				'notification_readtime', 
-				'notification_status'
+				'read_at'
 	];
 
 	protected $hidden = [
-				'active', 'created_by', 'created_at', 'updated_by', 'updated_at'
+				'created_at', 'updated_at'
 	];
 
 	

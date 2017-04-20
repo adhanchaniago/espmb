@@ -41,6 +41,8 @@ class NotificationController extends Controller
                                             ->take(6)
                                             ->orderBy('notifications.created_at', 'desc')
                                             ->count();
+        
+        //dd($data);
 
     	echo json_encode($data);
     }
@@ -71,16 +73,10 @@ class NotificationController extends Controller
             'notification_id' => 'required'
         ]);
 
-        $obj = Notification::find($request->input('notification_id'));
+        $obj = Notification::where('id', $request->input('notification_id'))->first();
 
-        $obj->notification_readtime = Carbon::now()->format('Y-m-d H:i:s');
-        $obj->updated_by = $request->user()->user_id;
-
-        /*dd($obj->notification_type);*/
-
-        if($obj->notification_type->notification_type_need_confirmation==0) {
-            $obj->active = '0';
-        }
+        $obj->read_at = Carbon::now();
+        $obj->updated_at = Carbon::now();
 
         $result = $obj->save();
 

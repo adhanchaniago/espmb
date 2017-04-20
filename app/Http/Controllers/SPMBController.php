@@ -1153,6 +1153,9 @@ class SPMBController extends Controller
 
         $his->save();
 
+        //Notification to PIC
+        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+
         $request->session()->flash('status', 'Data has been saved!');
     }
 
@@ -1227,6 +1230,9 @@ class SPMBController extends Controller
 
         $his->save();
 
+        //Notification to PIC
+        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+
         $request->session()->flash('status', 'Data has been saved!');
     }
 
@@ -1288,6 +1294,9 @@ class SPMBController extends Controller
         $his->created_by = $request->user()->user_id;
 
         $his->save();
+
+        //Notification to Current User
+        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
 
         $request->session()->flash('status', 'Data has been saved!');
     }
@@ -1351,6 +1360,9 @@ class SPMBController extends Controller
         $his->created_by = $request->user()->user_id;
 
         $his->save();
+
+        //Notification to Current User
+        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
 
         $request->session()->flash('status', 'Data has been saved!');
     }
@@ -1417,6 +1429,9 @@ class SPMBController extends Controller
 
         $his->save();
 
+        //Notification to Current User
+        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+
         $request->session()->flash('status', 'Data has been saved!');
     }
 
@@ -1477,6 +1492,9 @@ class SPMBController extends Controller
 
         $his->save();
 
+        //Notification to Current User
+        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+
         $request->session()->flash('status', 'Data has been saved!');
     }
 
@@ -1536,6 +1554,9 @@ class SPMBController extends Controller
         $his->created_by = $request->user()->user_id;
 
         $his->save();
+
+        //Notification to Current User
+        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
 
         $request->session()->flash('status', 'Data has been saved!');
     }
@@ -1600,6 +1621,9 @@ class SPMBController extends Controller
 
             $his->save();
 
+            //Notification to Current User
+            Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+
             $request->session()->flash('status', 'Data has been saved!');
         }else{
             $spmb = SPMB::find($id);
@@ -1623,6 +1647,9 @@ class SPMBController extends Controller
             $his->created_by = $request->user()->user_id;
 
             $his->save();
+
+            //Notification to Previous User
+            Notification::send(User::find($prevFlow['current_user']), new SPMBNeedToCheck($spmb));
 
             $request->session()->flash('status', 'Data has been saved!');
         }

@@ -9,6 +9,8 @@ $('#notification_lists').on('click', '.notification-item', function(){
 	var notification_id = $(this).data('notification_id');
 
 	readNotification(notification_id);
+
+	//alert(notification_id);
 });
 
 function loadNotification() {
@@ -22,9 +24,10 @@ function loadNotification() {
 				$('#notification_lists').empty();
 				$('#notification_count').empty();
 				$.each(data.notifications, function(key, value) {
-					console.log(JSON.parse(value.data));
+					//console.log(JSON.parse(value.data));
+					//console.log(value.id);
 					var notif_data = JSON.parse(value.data);
-					html += '<a class="lv-item notification-item" href="' + notif_data.url + '" title="' + notif_data.text + '" data-notification_id="' + value.notification_id + '">'
+					html += '<a class="lv-item notification-item" href="' + notif_data.url + '" title="' + notif_data.text + '" data-notification_id="' + value.id + '">'
                                 +'<div class="media">'
                                     +'<div class="media-body">'
                                         +'<small class="lv-small">' + notif_data.text + '</small>'
