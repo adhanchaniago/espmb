@@ -10,6 +10,8 @@ use Notification;
 use App\Notifications\SPMBGenerated;
 use App\Notifications\SPMBRejected;
 use App\Notifications\SPMBNeedToCheck;
+use App\Notifications\SPMBRejectedByFinance;
+use App\Notifications\SPMBFinished;
 
 use File;
 use Gate;
@@ -1044,6 +1046,11 @@ class SPMBController extends Controller
 
     public function approve(Request $request, $flow_no, $id)
     {
+        $obj = SPMB::find($id);
+        if($obj->flow_no!=$flow_no) {
+            abort(403, 'Unauthorized action.');
+        }
+
         if($flow_no == 1) {
             return $this->approveFlowNo1($request, $id);
         }elseif($flow_no == 2) {
@@ -1651,6 +1658,13 @@ class SPMBController extends Controller
             //Notification to Previous User
             Notification::send(User::find($prevFlow['current_user']), new SPMBNeedToCheck($spmb));
 
+            //Notification to Applicant
+            $spmbdata = SPMB::with('spmbdetails','spmbhistories')->find($id);
+            Notification::send($spmbdata, new SPMBRejectedByFinance($spmbdata));
+
+            //Notification to PIC
+            Notification::send(User::find($spmbdata->pic), new SPMBRejectedByFinance($spmbdata));
+
             $request->session()->flash('status', 'Data has been saved!');
         }
 
@@ -1713,6 +1727,10 @@ class SPMBController extends Controller
         $his->created_by = $request->user()->user_id;
 
         $his->save();
+
+        //Notification to Applicant
+        $spmbdata = SPMB::with('spmbdetails','spmbhistories')->find($id);
+        Notification::send($spmbdata, new SPMBFinished($spmbdata));
 
         $request->session()->flash('status', 'Data has been saved!');
     }
