@@ -63,7 +63,7 @@ class SPMBRejected extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('e-SPMB NOTIFICATION - SPMB ' . $this->spmb->spmb_no . ' has been rejected')
+                    ->subject('e-SPMB NOTIFICATION - ' . $this->spmb->spmb_no . ' has been rejected')
                     ->line('SPMB ' . $this->spmb->spmb_no . ' has been rejected.')
                     ->line('Below are the details of SPMB:')
                     ->line('-------------------------------------------')

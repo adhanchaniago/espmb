@@ -14,11 +14,10 @@ class NotificationController extends Controller
     public function loadNotification(Request $request) {
     	$data = array();
 
-    	$data['notifications'] = Notification::join('users', 'users.user_id', '=', 'notifications.created_by')
+    	/*$data['notifications'] = Notification::join('users', 'users.user_id', '=', 'notifications.created_by')
                                             ->join('notification_types', 'notification_types.notification_type_code', '=', 'notifications.notification_type_code')
     										->where('notifications.notification_receiver', '=', $request->user()->user_id)
     										->where('notifications.active', '=', '1')
-    										/*->where('notification_status', '=', '0')*/
                                             ->take(6)
                                             ->orderBy('notifications.created_at', 'desc')
     										->get();
@@ -27,10 +26,21 @@ class NotificationController extends Controller
                                             ->join('notification_types', 'notification_types.notification_type_code', '=', 'notifications.notification_type_code')
     										->where('notifications.notification_receiver', '=', $request->user()->user_id)
     										->where('notifications.active', '=', '1')
-    										/*->where('notification_status', '=', '0')*/
                                             ->take(6)
                                             ->orderBy('notifications.created_at', 'desc')
-    										->count();
+    										->count();*/
+
+        $data['notifications'] = Notification::where('notifications.notifiable_id', '=', $request->user()->user_id)
+                                            ->where('notifications.read_at', '=', NULL)
+                                            ->take(6)
+                                            ->orderBy('notifications.created_at', 'desc')
+                                            ->get();
+
+        $data['total'] = Notification::where('notifications.notifiable_id', '=', $request->user()->user_id)
+                                            ->where('notifications.read_at', '=', NULL)
+                                            ->take(6)
+                                            ->orderBy('notifications.created_at', 'desc')
+                                            ->count();
 
     	echo json_encode($data);
     }

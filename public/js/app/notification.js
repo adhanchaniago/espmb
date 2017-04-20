@@ -22,21 +22,19 @@ function loadNotification() {
 				$('#notification_lists').empty();
 				$('#notification_count').empty();
 				$.each(data.notifications, function(key, value) {
-					html += '<a class="lv-item notification-item" href="' + value.notification_type_url + '" title="' + value.notification_text + '" data-notification_id="' + value.notification_id + '">'
+					console.log(JSON.parse(value.data));
+					var notif_data = JSON.parse(value.data);
+					html += '<a class="lv-item notification-item" href="' + notif_data.url + '" title="' + notif_data.text + '" data-notification_id="' + value.notification_id + '">'
                                 +'<div class="media">'
-                                    +'<div class="pull-left">'
-                                        +'<img class="lv-img-sm" src="img/avatar/' + value.user_avatar + '" alt="">'
-                                    +'</div>'
                                     +'<div class="media-body">'
-                                        +'<div class="lv-title">' + value.user_firstname + ' ' + value.user_lastname + '</div>'
-                                        +'<small class="lv-small">' + value.notification_text + '</small>'
+                                        +'<small class="lv-small">' + notif_data.text + '</small>'
                                     +'</div>'
                                 +'</div>'
                             +'</a>';
                     //notify(value.notification_text, 'info');
-                    if(value.notification_status == 0) {
+                    /*if(value.notification_status == 0) {
                     	sendNotification(value.notification_id, value.notification_text, 'info');
-                    }
+                    }*/
 				});
 				$('#notification_lists').append(html);
 				$('#notification_count').append(data.total);

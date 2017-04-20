@@ -9,6 +9,7 @@ use DB;
 use Notification;
 use App\Notifications\SPMBGenerated;
 use App\Notifications\SPMBRejected;
+use App\Notifications\SPMBNeedToCheck;
 
 use File;
 use Gate;
@@ -184,6 +185,9 @@ class SPMBController extends Controller
             //notification to applicant
             $spmbdata = SPMB::with('spmbdetails')->find($obj->spmb_id);
             Notification::send($spmbdata, new SPMBGenerated($spmbdata));
+
+            //Notification to PIC
+            Notification::send(User::find($request->input('pic')), new SPMBNeedToCheck($spmbdata));
 
         }else{
             //failed to pass rules
@@ -389,6 +393,13 @@ class SPMBController extends Controller
             $spmb->updated_by = $request->user()->user_id;
             $spmb->save();
 
+            //notification to applicant
+            $spmbdata = SPMB::with('spmbdetails')->find($id);
+            Notification::send($spmbdata, new SPMBGenerated($spmbdata));
+
+            //Notification to PIC
+            Notification::send(User::find($request->input('pic')), new SPMBNeedToCheck($spmbdata));
+
         }else{
             //failed to pass rules
             $his = new SPMBHistory;
@@ -410,6 +421,10 @@ class SPMBController extends Controller
             $spmb->revision = $spmb->revision + 1;
             $spmb->updated_by = $request->user()->user_id;
             $spmb->save();
+
+            //notification to applicant
+            $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules')->find($obj->spmb_id);
+            Notification::send($spmbdata, new SPMBRejected($spmbdata));
         }
 
         $request->session()->flash('status', 'Data has been updated!');
