@@ -110,6 +110,37 @@
 			            @endif
 	                </div>
 	            </div>
+	            <hr>
+				<br/>
+				<h5>Last 10 Transactions</h5>
+				<div class="table-responsive">
+					<table id="tabel_last_transaction" class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th><center>SPMB No<center></th>
+								<th><center>Item Name</center></th>
+								<th><center>Qty</center></th>
+								<th><center>Offer Price</center></th>
+								<th><center>Deal Price</center></th>
+								<th><center>Note</center></th>
+							</tr>
+						</thead>
+						<tbody>
+						@foreach($vendor->spmbdetailvendors as $detailvendor)
+							<tr>
+								<td><center>{{ $detailvendor->spmbdetail->spmb->spmb_no }}</center></td>
+								<td>{{ $detailvendor->spmbdetail->spmb_detail_item_name }}</td>
+								<td><center>{{ $detailvendor->spmbdetail->spmb_detail_qty }}<center></td>
+								<td><center>{{ number_format($detailvendor->spmb_detail_vendor_offer_price) }}<center></td>
+								<td><center>{{ number_format($detailvendor->spmb_detail_vendor_deal_price) }}<center></td>
+								<td>{{ $detailvendor->spmbdetail->spmb_detail_note }}</td>
+							</tr>
+						@endforeach
+						</tbody>
+					</table>
+				</div>
+				<br/>
+				<hr/>
 	            <div class="form-group">
 	                <div class="col-sm-offset-2 col-sm-10">
 	                    <a href="{{ url('vendor') }}" class="btn btn-danger btn-sm">Back</a>

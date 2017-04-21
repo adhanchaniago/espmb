@@ -110,7 +110,19 @@ class VendorController extends Controller
         }
 
         $data = array();
-        $data['vendor'] = Vendor::with('vendortype','termofpayment','itemcategories','ratings')->find($id);
+        $data['vendor'] = Vendor::with(
+                            'vendortype',
+                            'termofpayment',
+                            'itemcategories',
+                            'ratings')
+                            ->with(['spmbdetailvendors' => function($query){
+                                $query->where('spmb_detail_vendor_status', '=', '1')
+                                        ->limit(10)
+                                        ->orderBy('updated_at', 'desc');
+                            }])
+                            ->where('vendor_id', $id)->first();
+
+        //dd($data['vendor']);
         
         return view('vendor.material.vendor.show', $data);
     }
