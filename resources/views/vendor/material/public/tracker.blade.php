@@ -6,11 +6,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{!! Cache::get('setting_headtitle') !!}</title>
+        <title>{!! Cache::get('setting_headtitle') !!} Tracker</title>
         
         <!-- Vendor CSS -->
+        <link href="{{ url('css/sweet-alert.min.css') }}" rel="stylesheet">
         <link href="{{ url('css/animate.min.css') }}" rel="stylesheet">
         <link href="{{ url('css/material-design-iconic-font.min.css') }}" rel="stylesheet">
+        
             
         <!-- CSS -->
         <link href="{{ url('css/app.min.1.css') }}" rel="stylesheet">
@@ -20,75 +22,49 @@
     
     <body class="login-content">
         <!-- Login -->
-        <div class="lc-block toggled" id="l-login">
-            <form method="POST" role="form" action="{{ url('/login') }}" id="form-login">
+        <div class="lc-block toggled" id="l-login" style="margin-top:180px;">
+            <form method="POST" role="form" action="{{ url('/public/tracker') }}" id="form-login">
             {{ csrf_field() }}
             <div>
-                <h3>{!! Cache::get('setting_app_name') !!}</h3><br/>
+                <h3>{!! Cache::get('setting_app_name') !!} Tracker</h3><br/>
             </div>
             <div class="clearfix"></div>
-            <div class="input-group m-b-20 {{ $errors->has('user_name') ? ' has-error' : '' }}">
-                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+            <div class="input-group m-b-20 {{ $errors->has('spmb_no') ? ' has-error' : '' }}">
+                <span class="input-group-addon"><i class="zmdi zmdi-file"></i></span>
                 <div class="fg-line">
-                    <input type="text" class="form-control" placeholder="Username" name="user_name">
+                    <input type="text" class="form-control" placeholder="SPMB No" name="spmb_no" autocomplete="off">
                 </div>
-                @if ($errors->has('user_name'))
+                @if ($errors->has('spmb_no'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('user_name') }}</strong>
+                        <strong>{{ $errors->first('spmb_no') }}</strong>
                     </span>
                 @endif
             </div>
             
-            <div class="input-group m-b-20 {{ $errors->has('password') ? ' has-error' : '' }}">
+            <div class="input-group m-b-20 {{ $errors->has('spmb_token') ? ' has-error' : '' }}">
                 <span class="input-group-addon"><i class="zmdi zmdi-key"></i></span>
                 <div class="fg-line">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="text" class="form-control" placeholder="Token" name="spmb_token" maxlength="6" autocomplete="off">
                 </div>
-                @if ($errors->has('password'))
+                @if ($errors->has('spmb_token'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
+                        <strong>{{ $errors->first('spmb_token') }}</strong>
                     </span>
                 @endif
             </div>
             
             <div class="clearfix"></div>
             
-            <!-- <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="">
-                    <i class="input-helper"></i>
-                    Keep me signed in
-                </label>
-            </div> -->
+            <br/>
             
-            <button type="submit" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+            <div class="form-group m-b-20">
+                <center><button type="submit" class="btn btn-login btn-info">Track SPMB&nbsp;<i class="zmdi zmdi-arrow-forward"></i></button></center>
+            </div>
 
             </form>
-            
-            <ul class="login-navigation">
-                <!-- <li data-block="#l-register" class="bgm-red">Register</li> -->
-                <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
-            </ul>
         </div>
         
-        <!-- Forgot Password -->
-        <div class="lc-block" id="l-forget-password">
-            <p class="text-left">Please call administrator to reset your password.</p>
-            
-            <!-- <div class="input-group m-b-20">
-                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-                <div class="fg-line">
-                    <input type="text" class="form-control" placeholder="Email Address">
-                </div>
-            </div> -->
-            
-            <a href="#" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
-            
-            <ul class="login-navigation">
-                <li data-block="#l-login" class="bgm-green">Login</li>
-                <!-- <li data-block="#l-register" class="bgm-red">Register</li> -->
-            </ul>
-        </div>
+        
         
         <!-- Older IE warning message -->
         <!--[if lt IE 9]>
@@ -137,6 +113,8 @@
         <script src="{{ url('js/jquery.min.js') }}"></script>
         <script src="{{ url('js/bootstrap.min.js') }}"></script>
         <script src="{{ url('js/waves.min.js') }}"></script>
+
+        <script src="{{ url('js/sweet-alert.min.js') }}"></script>
         
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
@@ -145,31 +123,14 @@
         
         <script src="{{ url('js/functions.js') }}"></script>
 
+        <!-- for notification -->
+        @if(Session::has('error_tracker'))
         <script type="text/javascript">
-        $(document).ready(function(){
-            $('.btn-login').click(function(){
-                $('#form-login').submit();
-            });
-
-            /*setInterval(function(){
-                window.location.reload();
-            }, 10000);*/ // 1 hour 
-
-            var time = new Date().getTime();
-             $(document.body).bind("mousemove keypress", function(e) {
-                 time = new Date().getTime();
-             });
-
-             function refresh() {
-                 if(new Date().getTime() - time >= 900000) 
-                     window.location.reload(true);
-                 else 
-                     setTimeout(refresh, 10000);
-             }
-
-             setTimeout(refresh, 10000);
+        $(window).load(function(){
+            swal("Warning", "{{ Session::get('error_tracker') }}", "error");
         });
         </script>
+        @endif
         
     </body>
 

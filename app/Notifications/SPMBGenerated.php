@@ -61,7 +61,7 @@ class SPMBGenerated extends Notification implements ShouldQueue
                     ->line('-------------------------------------------')
                     ->line('')
                     ->line('Please click button below to check the current SPMB status.')
-                    ->action('Track SPMB', url('/spmb/' . $this->spmb->spmb_id))
+                    ->action('Track SPMB', url('/public/tracker'))
                     ->line('If you have question or need help, please call Administrator. ')
                     ->line('Thank you.');
     }

@@ -29,6 +29,10 @@ Route::get('/api/loadNotification', 'NotificationController@loadNotification');
 Route::post('/api/sendNotification', 'NotificationController@sendNotification');
 Route::post('/api/readNotification', 'NotificationController@readNotification');
 
+//Tracker
+Route::get('/public/tracker', 'TrackerController@index');
+Route::post('/public/tracker', 'TrackerController@spmb');
+
 //User
 Route::group(['middleware' => ['auth', 'menu']], function(){
     Route::post('user/apiList', 'UserController@apiList');
