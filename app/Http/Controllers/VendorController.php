@@ -114,15 +114,14 @@ class VendorController extends Controller
                             'vendortype',
                             'termofpayment',
                             'itemcategories',
-                            'ratings')
+                            'ratings',
+                            'spmbdetailvendors.spmbdetail','spmbdetailvendors.spmbdetail.spmb')
                             ->with(['spmbdetailvendors' => function($query){
                                 $query->where('spmb_detail_vendor_status', '=', '1')
                                         ->limit(10)
                                         ->orderBy('updated_at', 'desc');
                             }])
                             ->where('vendor_id', $id)->first();
-
-        //dd($data['vendor']);
         
         return view('vendor.material.vendor.show', $data);
     }
