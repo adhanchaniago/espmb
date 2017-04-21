@@ -18,6 +18,12 @@
         <link href="{{ url('css/app.min.1.css') }}" rel="stylesheet">
         <link href="{{ url('css/app.min.2.css') }}" rel="stylesheet">
 
+        <style type="text/css">
+        body.login-content::before{
+            background: #adc6c9;
+        }
+        </style>
+
     </head>
     
     <body class="login-content">

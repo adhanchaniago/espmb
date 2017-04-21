@@ -105,7 +105,7 @@
                                 <td><center>{{ $detail->spmb_detail_account_no }}</center></td>
                                 <td><center>{{ $detail->spmb_detail_sequence_no }}<center/></td>
                                 <td>{{ $detail->spmb_detail_item_name }}</td>
-                                <td><center>{{ $detail->unit->unit_name }}</center></td>
+                                <td><center>{{ $detail->unit->unit_code }}</center></td>
                                 <td><center>{{ $detail->spmb_detail_qty }}<center></td>
                                 <td>{{ $detail->spmb_detail_note }}</td>
                             </tr>

@@ -177,20 +177,22 @@
 	            <hr>
 	            <a href="javascript:void(0)" class="btn btn-primary btn-sm waves-effect command-add-spmb-detail">Tambah Barang</a>
 	            <br/><br/>
-	            <table id="tabel_detail_spmb" class="table table-bordered table-hover">
-	            	<thead>
-	            		<tr>
-	            			<th><center>No. Acc<center></th>
-	            			<th><center>No.</center></th>
-	            			<th><center>Nama Barang</center></th>
-	            			<th><center>Satuan</center></th>
-	            			<th><center>Qty</center></th>
-	            			<th><center>Keterangan</center></th>
-	            		</tr>
-	            	</thead>
-	            	<tbody>
-	            	</tbody>
-	            </table>
+	            <div class="table-responsive">
+		            <table id="tabel_detail_spmb" class="table table-bordered table-hover">
+		            	<thead>
+		            		<tr>
+		            			<th><center>No. Acc<center></th>
+		            			<th><center>No.</center></th>
+		            			<th><center>Nama Barang</center></th>
+		            			<th><center>Satuan</center></th>
+		            			<th><center>Qty</center></th>
+		            			<th><center>Keterangan</center></th>
+		            		</tr>
+		            	</thead>
+		            	<tbody>
+		            	</tbody>
+		            </table>
+	            </div>
 	            <br/>
 	            <hr/>
 	            <div class="form-group">
