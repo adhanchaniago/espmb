@@ -1767,4 +1767,93 @@ class SPMBController extends Controller
         }
 
     }
+
+    public function apiListMigo(Request $request)
+    {
+        $u = new UserLibrary;
+        $subordinate = $u->getSubOrdinateArrayID($request->user()->user_id);
+
+        $current = $request->input('current') or 1;
+        $rowCount = $request->input('rowCount') or 10;
+        $skip = ($current==1) ? 0 : (($current - 1) * $rowCount);
+        $searchPhrase = $request->input('searchPhrase') or '';
+        
+        $sort_column = 'spmb_id';
+        $sort_type = 'asc';
+
+        if(is_array($request->input('sort'))) {
+            foreach($request->input('sort') as $key => $value)
+            {
+                $sort_column = $key;
+                $sort_type = $value;
+            }
+        }
+
+        $data = array();
+        $data['current'] = intval($current);
+        $data['rowCount'] = $rowCount;
+        $data['searchPhrase'] = $searchPhrase;
+        
+        $data['rows'] = SPMBDetail::select(
+                                        'spmb.spmb_id',
+                                        'spmb.spmb_no',
+                                        'spmb.flow_no',
+                                        'divisions.division_name',
+                                        'spmb_details.spmb_detail_item_name',
+                                        'vendors.vendor_name'
+                                    )
+                            ->join('spmb', 'spmb.spmb_id', '=', 'spmb_details.spmb_id')
+                            ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+                            ->join('spmb_detail_vendors', 'spmb_detail_vendors.spmb_detail_id', '=', 'spmb_details.spmb_detail_id')
+                            ->join('vendors','vendors.vendor_id', '=', 'spmb_detail_vendors.vendor_id')
+                            ->where('spmb.flow_no','<>','98')
+                            ->where('spmb.flow_no','<>','99')
+                            ->where('spmb.active', '=', '1')
+                            ->where('spmb.current_user', '=' , $request->user()->user_id)
+                            ->where(function($query) use($searchPhrase) {
+                                $query->orWhere('spmb_no','like','%' . $searchPhrase . '%')
+                                        ->orWhere('division_name','like','%' . $searchPhrase . '%')
+                                        ->orWhere('spmb_detail_item_name','like','%' . $searchPhrase . '%')
+                                        ->orWhere('vendor_name','like','%' . $searchPhrase . '%');
+                            })
+                            ->skip($skip)->take($rowCount)
+                            ->orderBy($sort_column, $sort_type)->get();
+        $data['total'] = SPMBDetail::select(
+                                        'spmb.spmb_id',
+                                        'spmb.spmb_no',
+                                        'spmb.flow_no',
+                                        'divisions.division_name',
+                                        'spmb_details.spmb_detail_item_name',
+                                        'vendors.vendor_name'
+                                    )
+                            ->join('spmb', 'spmb.spmb_id', '=', 'spmb_details.spmb_id')
+                            ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+                            ->join('spmb_detail_vendors', 'spmb_detail_vendors.spmb_detail_id', '=', 'spmb_details.spmb_detail_id')
+                            ->join('vendors','vendors.vendor_id', '=', 'spmb_detail_vendors.vendor_id')
+                            ->where('spmb.flow_no','<>','98')
+                            ->where('spmb.flow_no','<>','99')
+                            ->where('spmb.active', '=', '1')
+                            ->where('spmb.current_user', '=' , $request->user()->user_id)
+                            ->where(function($query) use($searchPhrase) {
+                                $query->orWhere('spmb_no','like','%' . $searchPhrase . '%')
+                                        ->orWhere('division_name','like','%' . $searchPhrase . '%')
+                                        ->orWhere('spmb_detail_item_name','like','%' . $searchPhrase . '%')
+                                        ->orWhere('vendor_name','like','%' . $searchPhrase . '%');
+                            })->count();
+
+        
+
+        return response()->json($data);
+    }
+
+    public function migo() {
+        if(Gate::denies('MIGO-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+
+        $data = array();
+
+        return view('vendor.material.spmb.migo', $data);
+    }
 }

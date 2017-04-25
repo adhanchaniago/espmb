@@ -217,7 +217,8 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     //SPMB
     Route::post('spmb/apiList/{listtype}', 'SPMBController@apiList');
     Route::post('spmb/apiDelete', 'SPMBController@apiDelete');
-    Route::resource('spmb', 'SPMBController');
+    Route::get('spmb/migo', 'SPMBController@migo');
+    Route::post('spmb/apiListMigo', 'SPMBController@apiListMigo');
     Route::post('spmb/tracking', 'SPMBController@tracking');
     Route::get('spmb/approve/{flow_no}/{id}', 'SPMBController@approve');
     Route::post('spmb/approve/{flow_no}/{id}', 'SPMBController@postApprove');
@@ -237,6 +238,7 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/api/loadModalRating', 'SPMBController@apiLoadModalRating');
     Route::post('spmb/api/loadDetailRating', 'SPMBController@apiLoadDetailRating');
     Route::post('spmb/api/saveRating', 'SPMBController@apiSaveRating');
+    Route::resource('spmb', 'SPMBController');
 
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
