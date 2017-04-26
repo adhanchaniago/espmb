@@ -474,6 +474,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.current_user')
                                 ->where('spmb.flow_no','<>','98')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where('spmb.active', '=', '1')
                                 ->where('spmb.current_user', '<>' , $request->user()->user_id)
                                 ->where(function($query) use($request, $subordinate){
@@ -503,6 +504,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.current_user')
                                 ->where('spmb.flow_no','<>','98')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where('spmb.active', '=', '1')
                                 ->where('spmb.current_user', '<>' , $request->user()->user_id)
                                 ->where(function($query) use($request, $subordinate){
@@ -531,6 +533,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where('spmb.flow_no','<>','98')
                                 ->where('spmb.flow_no','<>','99')
                                 ->where('spmb.current_user', '=' , $request->user()->user_id)
@@ -556,6 +559,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where('spmb.flow_no','<>','98')
                                 ->where('spmb.flow_no','<>','99')
                                 ->where('spmb.current_user', '=' , $request->user()->user_id)
@@ -580,6 +584,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where('spmb.flow_no','=','98')
                                 ->where(function($query) use($request, $subordinate){
                                     $query->where('spmb.created_by', '=' , $request->user()->user_id)
@@ -609,6 +614,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','1')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where('spmb.flow_no','=','98')
                                 ->where(function($query) use($request, $subordinate){
                                     $query->where('spmb.created_by', '=' , $request->user()->user_id)
@@ -637,6 +643,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','0')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where(function($query) use($request, $subordinate){
                                     $query->where('spmb.created_by', '=' , $request->user()->user_id)
                                             ->orWhereIn('spmb.created_by', $subordinate);
@@ -663,6 +670,7 @@ class SPMBController extends Controller
                                 ->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
                                 ->join('users','users.user_id', '=', 'spmb.created_by')
                                 ->where('spmb.active','0')
+                                ->where('spmb.spmb_method','=','NORMAL')
                                 ->where(function($query) use($request, $subordinate){
                                     $query->where('spmb.created_by', '=' , $request->user()->user_id)
                                             ->orWhereIn('spmb.created_by', $subordinate);
@@ -1809,6 +1817,7 @@ class SPMBController extends Controller
                             ->where('spmb.flow_no','<>','98')
                             ->where('spmb.flow_no','<>','99')
                             ->where('spmb.active', '=', '1')
+                            ->where('spmb.spmb_method','=','NORMAL')
                             ->where('spmb.current_user', '=' , $request->user()->user_id)
                             ->where(function($query) use($searchPhrase) {
                                 $query->orWhere('spmb_no','like','%' . $searchPhrase . '%')
@@ -1833,6 +1842,7 @@ class SPMBController extends Controller
                             ->where('spmb.flow_no','<>','98')
                             ->where('spmb.flow_no','<>','99')
                             ->where('spmb.active', '=', '1')
+                            ->where('spmb.spmb_method','=','NORMAL')
                             ->where('spmb.current_user', '=' , $request->user()->user_id)
                             ->where(function($query) use($searchPhrase) {
                                 $query->orWhere('spmb_no','like','%' . $searchPhrase . '%')

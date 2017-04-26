@@ -240,6 +240,32 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('spmb/api/saveRating', 'SPMBController@apiSaveRating');
     Route::resource('spmb', 'SPMBController');
 
+    //Other SPMB
+    Route::post('otherspmb/apiList/{listtype}', 'POBelakangController@apiList');
+    Route::post('otherspmb/apiDelete', 'POBelakangController@apiDelete');
+    Route::get('otherspmb/migo', 'POBelakangController@migo');
+    Route::post('otherspmb/apiListMigo', 'POBelakangController@apiListMigo');
+    Route::post('otherspmb/tracking', 'POBelakangController@tracking');
+    Route::get('otherspmb/approve/{flow_no}/{id}', 'POBelakangController@approve');
+    Route::post('otherspmb/approve/{flow_no}/{id}', 'POBelakangController@postApprove');
+    Route::get('otherspmb/api/loadDetails', 'POBelakangController@apiLoadDetails');
+    Route::post('otherspmb/api/loadDetail', 'POBelakangController@apiLoadDetail');
+    Route::post('otherspmb/api/storeDetail', 'POBelakangController@apiStoreDetails');
+    Route::post('otherspmb/api/updateAssetDetails', 'POBelakangController@apiUpdateAssetDetails');
+    Route::post('otherspmb/api/deleteDetail', 'POBelakangController@apiDeleteDetails');
+    Route::post('otherspmb/api/storeDetailVendor', 'POBelakangController@apiStoreDetailVendor');
+    Route::post('otherspmb/api/updateDetailVendor', 'POBelakangController@apiUpdateDetailVendor');
+    Route::post('otherspmb/api/loadDetailPayment', 'POBelakangController@apiLoadDetailPayment');
+    Route::post('otherspmb/api/loadDetailReceipt', 'POBelakangController@apiLoadDetailReceipt');
+    Route::post('otherspmb/api/loadOrderPayment', 'POBelakangController@apiLoadOrderPayment');
+    Route::post('otherspmb/api/storeOrderPayment', 'POBelakangController@apiStoreOrderPayment');
+    Route::post('otherspmb/api/storeAcceptance', 'POBelakangController@apiStoreAcceptance');
+    Route::post('otherspmb/api/updatePayment', 'POBelakangController@apiUpdatePayment');
+    Route::post('otherspmb/api/loadModalRating', 'POBelakangController@apiLoadModalRating');
+    Route::post('otherspmb/api/loadDetailRating', 'POBelakangController@apiLoadDetailRating');
+    Route::post('otherspmb/api/saveRating', 'POBelakangController@apiSaveRating');
+    Route::resource('otherspmb', 'POBelakangController');
+
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
         Route::post('announcement/apiList', 'AnnouncementController@apiList');
