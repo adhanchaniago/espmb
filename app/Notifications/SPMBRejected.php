@@ -14,6 +14,7 @@ class SPMBRejected extends Notification implements ShouldQueue
     public $spmb;
     public $spmbdetail;
     public $ruless;
+    public $message;
 
     /**
      * Create a new notification instance.
@@ -39,6 +40,12 @@ class SPMBRejected extends Notification implements ShouldQueue
                 $this->ruless .= $value->rule_name . ' (Not Available) , ';
             }else{
                 $this->ruless .= $value->rule_name . ' (OK) , ';
+            }
+        }
+
+        foreach($this->spmb->spmbhistories as $key => $value) {
+            if($value->flow_no==1 && $value->approval_type_id==5) {
+                $this->message = $value->spmb_history_desc;
             }
         }
     }
@@ -76,6 +83,8 @@ class SPMBRejected extends Notification implements ShouldQueue
                     ->line('-------------------------------------------')
                     ->line('The reason of rejected SPMB listed here:')
                     ->line($this->ruless)
+                    ->line('')
+                    ->line($this->message)
                     ->line('Please complete the attachment of SPMB to continue the process.')
                     ->line('')
                     ->line('If you have question or need help, please call Administrator. ')

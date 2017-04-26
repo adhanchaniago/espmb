@@ -70,6 +70,26 @@ class POBelakangController extends Controller
         return view('vendor.material.otherspmb.list', $data);
     }
 
+    public function create(Request $request)
+    {
+		if(Gate::denies('PO Belakang-Create')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb_types'] = SPMBType::with('spmbcategory')->where('active', '1')->orderBy('spmb_category_id', 'asc')->orderBy('spmb_type_name', 'asc')->get();
+        $data['companies'] = Company::where('active', '1')->orderBy('company_name')->get();
+        $data['item_categories'] = ItemCategory::where('active', '1')->orderBy('item_category_name')->get();
+        $data['units'] = Unit::where('active', '1')->orderBy('unit_name')->get();
+        $data['pics'] = User::where('active', '1')->whereHas('roles', function($query) {
+                            $query->where('role_name', '=', 'Officer Procurement');
+                        })->get();
+        $data['spmb_code'] = $this->generateCode();
+
+     	return view('vendor.material.otherspmb.create', $data);   
+    }
+
     public function apiList($listtype, Request $request)
     {
         $u = new UserLibrary;
@@ -323,5 +343,39 @@ class POBelakangController extends Controller
         
 
         return response()->json($data);
+    }
+
+    private function generateCode()
+    {
+        $total = SPMB::count();
+        $code = 'SPMB-';
+
+        if($total > 0) {
+            $last_row = SPMB::select('spmb_id')->orderBy('spmb_id', 'desc')->first();
+
+            $id = $last_row->spmb_id + 1;
+
+            if($id >= 10000) {
+                $code .= date('y') . date('m') . $id;
+            }elseif($id >= 1000) {
+                $code .= date('y') . date('m') . '0' . $id;
+            }elseif($id >= 100) {
+                $code .= date('y') . date('m') . '00' . $id;
+            }elseif($id >= 10) {
+                $code .= date('y') . date('m') . '000' . $id;
+            }else{
+                $code .= date('y') . date('m') . '0000' . $id;
+            }
+        }else{
+            $code .= date('y') . date('m') . '00001';
+        }
+
+        return $code;
+
+    }
+
+    private function generateToken()
+    {
+        return substr(md5(microtime()),rand(0, 26), 6);
     }
 }

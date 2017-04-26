@@ -214,7 +214,7 @@ class SPMBController extends Controller
             $spmb->save();
 
             //notification to applicant
-            $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules')->find($obj->spmb_id);
+            $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules','spmbhistories')->find($obj->spmb_id);
             Notification::send($spmbdata, new SPMBRejected($spmbdata));
         }
 
@@ -425,7 +425,7 @@ class SPMBController extends Controller
             $spmb->save();
 
             //notification to applicant
-            $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules')->find($obj->spmb_id);
+            $spmbdata = SPMB::with('spmbdetails','spmbdetails.unit','rules','spmbtype','spmbtype.rules','spmbhistories')->find($obj->spmb_id);
             Notification::send($spmbdata, new SPMBRejected($spmbdata));
         }
 
