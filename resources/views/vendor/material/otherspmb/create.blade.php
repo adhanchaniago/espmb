@@ -199,29 +199,6 @@
 	            	</div>
 	            </div>
 	            <hr/>
-	            <br/>
-	            <div class="form-group" id="pic_container">
-	                <label for="pic" class="col-sm-2 control-label">PIC</label>
-	                <div class="col-sm-10">
-	                    <div class="fg-line">
-	                        <select name="pic" id="pic" class="selectpicker" data-live-search="true">
-	                        	<option value=""></option>
-                                @foreach ($pics as $row)
-                                	{!! $selected = '' !!}
-                                	@if($row->user_id==old('pic'))
-                                		{!! $selected = 'selected' !!}
-                                	@endif
-								    <option value="{{ $row->user_id }}" {{ $selected }}>{{ $row->user_firstname . ' ' . $row->user_lastname }}</option>
-								@endforeach
-                            </select>
-	                    </div>
-	                    @if ($errors->has('pic'))
-			                <span class="help-block">
-			                    <strong>{{ $errors->first('pic') }}</strong>
-			                </span>
-			            @endif
-	                </div>
-	            </div>
 	            <div class="form-group">
 	            	<label for="notes" class="col-sm-2 control-label">Pesan</label>
 	            	<div class="col-sm-10">

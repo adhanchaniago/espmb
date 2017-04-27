@@ -3,7 +3,6 @@ var numberOfRules = 0;
 
 $(document).ready(function() {
     load_spmb_detail();
-    $('#pic_container').hide();
     append_spmb_rules($('#spmb_type_id').val());
 
     $('#spmb_type_id').change(function() {
@@ -47,13 +46,6 @@ $(document).ready(function() {
             if(v.checked)
                 clicked_rules.push(v.value);
         });
-        //alert(clicked_rules);
-
-        if(clicked_rules.length==numberOfRules) {
-            $('#pic_container').show();
-        }else{ 
-            $('#pic_container').hide();
-        }
     });
 
     //modal
@@ -119,6 +111,10 @@ $(document).ready(function() {
         $('#modal_add_unit_id').val('');
         $('#modal_add_unit_id').selectpicker('refresh');
         $('#modal_add_spmb_detail_qty').val('');
+        $('#modal_add_spmb_detail_item_price').val('');
+        $('#modal_add_spmb_detail_asset_no').val('');
+        $('#modal_add_vendor_id').val('');
+        $('#modal_add_vendor_id').selectpicker('refresh');
         $('#modal_add_spmb_detail_note').val('');
     }
 
@@ -148,6 +144,14 @@ $(document).ready(function() {
             $('#modal_add_spmb_detail_qty').parents('.form-group').addClass('has-error').find('.help-block').html('Qty harus diisi.');
             $('#modal_add_spmb_detail_qty').focus();
             isValid = false;
+        }else if($('#modal_add_spmb_detail_item_price').val() == '') {
+            $('#modal_add_spmb_detail_item_price').parents('.form-group').addClass('has-error').find('.help-block').html('Harga satuan harus diisi.');
+            $('#modal_add_spmb_detail_item_price').focus();
+            isValid = false;
+        }else if($('#modal_add_vendor_id').val() == '') {
+            $('#modal_add_vendor_id').parents('.form-group').addClass('has-error').find('.help-block').html('Vendor harus dipilih.');
+            $('#modal_add_vendor_id').focus();
+            isValid = false;
         }else{
             $('#modal_add_item_category_id').parents('.form-group').removeClass('has-error').find('.help-block').html('');
             $('#modal_add_spmb_detail_account_no').parents('.form-group').removeClass('has-error').find('.help-block').html('');
@@ -155,10 +159,12 @@ $(document).ready(function() {
             $('#modal_add_spmb_detail_item_name').parents('.form-group').removeClass('has-error').find('.help-block').html('');
             $('#modal_add_unit_id').parents('.form-group').removeClass('has-error').find('.help-block').html('');
             $('#modal_add_spmb_detail_qty').parents('.form-group').removeClass('has-error').find('.help-block').html('');
+            $('#modal_add_spmb_detail_item_price').parents('.form-group').removeClass('has-error').find('.help-block').html('');
+            $('#modal_add_vendor_id').parents('.form-group').removeClass('has-error').find('.help-block').html('');
             isValid = true;
 
             $.ajax({
-                url: base_url + 'spmb/api/storeDetail',
+                url: base_url + 'otherspmb/api/storeDetail',
                 dataType: 'json',
                 data: {
                         item_category_id : $('#modal_add_item_category_id').val(),
@@ -169,6 +175,9 @@ $(document).ready(function() {
                         unit_id : $('#modal_add_unit_id').val(),
                         unit_name : $('#modal_add_unit_id option:selected').text(),
                         spmb_detail_qty : $('#modal_add_spmb_detail_qty').val(),
+                        spmb_detail_item_price : $('#modal_add_spmb_detail_item_price').val(),
+                        spmb_detail_asset_no : $('#modal_add_spmb_detail_asset_no').val(),
+                        vendor_id : $('#modal_add_vendor_id').val(),
                         spmb_detail_note : $('#modal_add_spmb_detail_note').val(),
                         _token: myToken
                     },
@@ -191,7 +200,7 @@ $(document).ready(function() {
 
     function delete_spmb_detail(key) {
         $.ajax({
-            url: base_url + 'spmb/api/deleteDetail',
+            url: base_url + 'otherspmb/api/deleteDetail',
             dataType: 'json',
             data: {
                     key : key,
@@ -214,7 +223,7 @@ $(document).ready(function() {
 
     function load_spmb_detail() {
         $.ajax({
-            url: base_url + 'spmb/api/loadDetails',
+            url: base_url + 'otherspmb/api/loadDetails',
             dataType: 'json',
             type: 'GET',
             error: function(data) {

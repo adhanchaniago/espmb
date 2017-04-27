@@ -71,6 +71,38 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="modal_add_spmb_detail_item_price" class="col-sm-2 control-label">Harga</label>
+                        <div class="col-sm-10">
+                            <div class="fg-line">
+                                <input type="text" class="form-control input-sm" name="modal_add_spmb_detail_item_price" id="modal_add_spmb_detail_item_price" placeholder="Harga Satuan" required="true" maxlength="15" value="{{ old('modal_add_spmb_detail_item_price') }}" autocomplete="off">
+                            </div>
+                            <small class="help-block"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal_add_spmb_detail_asset_no" class="col-sm-2 control-label">No. Asset</label>
+                        <div class="col-sm-10">
+                            <div class="fg-line">
+                                <input type="text" class="form-control input-sm" name="modal_add_spmb_detail_asset_no" id="modal_add_spmb_detail_asset_no" placeholder="No Asset" maxlength="25" value="{{ old('modal_add_spmb_detail_asset_no') }}" autocomplete="off">
+                            </div>
+                            <small class="help-block"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal_add_vendor_id" class="col-sm-2 control-label">Vendor</label>
+                        <div class="col-sm-10">
+                            <div class="fg-line">
+                                <select name="modal_add_vendor_id" id="modal_add_vendor_id" class="selectpicker" data-live-search="true" required="true">
+                                    <option value=""></option>
+                                    @foreach($vendors as $row)
+                                        <option value="{{ $row->vendor_id }}">{{ $row->vendor_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <small class="help-block"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="modal_add_spmb_detail_note" class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-10">
                             <div class="fg-line">
