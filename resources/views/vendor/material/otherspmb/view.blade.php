@@ -106,7 +106,7 @@
     <label for="flow" class="col-sm-2 control-label">Current Flow</label>
     <div class="col-sm-10">
         <div class="fg-line">
-            <input type="text" name="flow" id="flow" class="form-control input-sm" placeholder="Current Flow" value="{{ $spmb->_currentflow($spmb->flow_no) }}" disabled="true">
+            <input type="text" name="flow" id="flow" class="form-control input-sm" placeholder="Current Flow" value="{{ $spmb->_currentflow($spmb->flow_no, 2) }}" disabled="true">
         </div>
     </div>
 </div>

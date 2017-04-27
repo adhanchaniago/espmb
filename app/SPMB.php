@@ -81,9 +81,9 @@ class SPMB extends Model
 		return $this->belongsTo('App\User', 'created_by');
 	}
 
-	public function _currentflow($value)
+	public function _currentflow($value, $flow_group_id = 1)
 	{
-		$flow = Flow::where('flow_no',$value)->where('flow_group_id',1)->where('active','1')->get();
+		$flow = Flow::where('flow_no',$value)->where('flow_group_id',$flow_group_id)->where('active','1')->get();
 		if(count($flow) > 0) {
 			return $flow[0]->flow_name;
 		}else{

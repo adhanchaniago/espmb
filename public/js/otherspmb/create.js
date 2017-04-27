@@ -178,6 +178,7 @@ $(document).ready(function() {
                         spmb_detail_item_price : $('#modal_add_spmb_detail_item_price').val(),
                         spmb_detail_asset_no : $('#modal_add_spmb_detail_asset_no').val(),
                         vendor_id : $('#modal_add_vendor_id').val(),
+                        vendor_name : $('#modal_add_vendor_id option:selected').text(),
                         spmb_detail_note : $('#modal_add_spmb_detail_note').val(),
                         _token: myToken
                     },
