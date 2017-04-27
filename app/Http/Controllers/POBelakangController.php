@@ -142,8 +142,8 @@ class POBelakangController extends Controller
         SPMB::find($obj->spmb_id)->rules()->sync($request->input('spmb_rules'));
 
         //store details
-        if($request->session()->has('spmb_details_' . $request->user()->user_id)) {
-            $details = $request->session()->get('spmb_details_' . $request->user()->user_id);
+        if($request->session()->has('otherspmb_details_' . $request->user()->user_id)) {
+            $details = $request->session()->get('otherspmb_details_' . $request->user()->user_id);
             foreach($details as $detail) {
                 $det = new SPMBDetail;
                 $det->spmb_id = $obj->spmb_id;
@@ -174,7 +174,7 @@ class POBelakangController extends Controller
                 $detven->save();
             }
 
-            $request->session()->forget('spmb_details_' . $request->user()->user_id);
+            $request->session()->forget('otherspmb_details_' . $request->user()->user_id);
         }
 
         if($spmb_type_rules==count($request->input('spmb_rules'))) {
@@ -233,6 +233,32 @@ class POBelakangController extends Controller
         $request->session()->flash('status', 'Data has been saved!');
 
         return redirect('otherspmb');
+    }
+
+    public function show(Request $request, $id)
+    {
+        if(Gate::denies('PO Belakang-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'spmbtype.rules',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                'rules',
+                                '_pic',
+                                '_currentuser'
+                                )->find($id);
+
+        return view('vendor.material.otherspmb.show', $data);
     }
 
     public function apiList($listtype, Request $request)
@@ -584,6 +610,34 @@ class POBelakangController extends Controller
         $spmb_detail_id = $request->input('spmb_detail_id');
 
         $data['detail'] = SPMBDetail::with('itemcategory', 'unit', 'spmbdetailvendors', 'spmbdetailvendors.vendor')->find($spmb_detail_id);
+
+        return response()->json($data);
+    }
+
+    public function apiLoadDetailPayment(Request $request)
+    {
+        $spmb_detail_id = $request->input('spmb_detail_id');
+
+        $data['detail_payments'] = SPMBDetailPayment::with('paymenttype')->where('spmb_detail_id', $spmb_detail_id)->where('active', '1')->get();
+
+        return response()->json($data);
+    }
+
+    public function apiLoadDetailReceipt(Request $request)
+    {
+        $spmb_detail_id = $request->input('spmb_detail_id');
+
+        $data['detail_receipt'] = SPMBDetailReceipt::where('spmb_detail_id', $spmb_detail_id)->where('active', '1')->get();
+
+        return response()->json($data);
+    }
+
+    public function apiLoadModalRating(Request $request)
+    {
+        $spmbdetailvendor = SPMBDetailVendor::with('vendor', 'vendor.ratings')->where('spmb_detail_id', $request->input('spmb_detail_id'))->where('spmb_detail_vendor_status', '1')->where('active', '1')->first();
+
+        $data = array();
+        $data['detail_vendor'] = $spmbdetailvendor;
 
         return response()->json($data);
     }
