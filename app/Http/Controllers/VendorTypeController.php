@@ -115,6 +115,7 @@ class VendorTypeController extends Controller
         $obj = VendorType::find($id);
 
         $obj->vendor_type_name = $request->input('vendor_type_name');
+        $obj->vendor_type_desc = $request->input('vendor_type_desc');
         $obj->updated_by = $request->user()->user_id;
 
         $obj->save();
