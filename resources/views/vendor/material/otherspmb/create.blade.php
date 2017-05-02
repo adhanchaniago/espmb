@@ -49,7 +49,7 @@
 	            	<label for="spmb_no_pr_sap" class="col-sm-2 control-label">No PR SAP</label>
 	            	<div class="col-sm-10">
 	            		<div class="fg-line">
-	            			<input type="text" name="spmb_no_pr_sap" id="spmb_no_pr_sap" class="form-control input-sm" placeholder="No PR SAP" maxlength="20" value="{{ old('spmb_no_pr_sap') }}">
+	            			<input type="text" name="spmb_no_pr_sap" id="spmb_no_pr_sap" class="form-control input-sm" placeholder="No PR SAP" maxlength="10" value="{{ old('spmb_no_pr_sap') }}">
 	            		</div>
 	            		@if ($errors->has('spmb_no_pr_sap'))
 	            			<span class="help-block">
@@ -138,7 +138,7 @@
 	            	<label for="spmb_buyer_no" class="col-sm-2 control-label">No Pemesan</label>
 	            	<div class="col-sm-10">
 	            		<div class="fg-line">
-	            			<input type="text" name="spmb_buyer_no" id="spmb_buyer_no" class="form-control input-sm" placeholder="No Pemesan" maxlength="20" value="{{ old('spmb_buyer_no') }}" required="true">
+	            			<input type="text" name="spmb_buyer_no" id="spmb_buyer_no" class="form-control input-sm" placeholder="No Pemesan" maxlength="20" value="{{ $spmb_buyer_no }}" required="true" readonly="true">
 	            		</div>
 	            		@if ($errors->has('spmb_buyer_no'))
 	            			<span class="help-block">

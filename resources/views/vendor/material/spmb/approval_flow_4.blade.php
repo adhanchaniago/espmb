@@ -15,7 +15,18 @@
         		@include('vendor.material.spmb.approval_flow_4-table')
 	            @include('vendor.material.spmb.history')
 
-
+                <div class="form-group">
+                    <label for="skip_flow_5" class="col-sm-2 control-label">Skip Pemesanan Dana?</label>
+                    <div class="col-sm-10">
+                        <div class="fg-line">
+                            <select name="skip_flow_5" id="skip_flow_5" class="selectpicker" required>
+                                <option value=""></option>
+                                <option value="1">Ya, lanjut ke Pembuatan PO/Kontrak</option>
+                                <option value="0">Tidak, lanjut ke Pemesanan Dana</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="comment" class="col-sm-2 control-label">Comment</label>
                     <div class="col-sm-10">

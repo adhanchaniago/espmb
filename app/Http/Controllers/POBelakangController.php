@@ -85,6 +85,7 @@ class POBelakangController extends Controller
         $data['units'] = Unit::where('active', '1')->orderBy('unit_name')->get();
         
         $data['spmb_code'] = $this->generateCode();
+        $data['spmb_buyer_no'] = $this->generateBuyerNo();
 
      	return view('vendor.material.otherspmb.create', $data);   
     }
@@ -124,7 +125,7 @@ class POBelakangController extends Controller
         $obj->division_id = $request->input('division_id');
         $obj->spmb_cost_center = $request->input('spmb_cost_center');
         $obj->spmb_io_no = $request->input('spmb_io_no');
-        $obj->spmb_buyer_no = $request->input('spmb_buyer_no');
+        $obj->spmb_buyer_no = $this->generateBuyerNo();
         $obj->spmb_applicant_name = $request->input('spmb_applicant_name');
         $obj->spmb_applicant_email = $request->input('spmb_applicant_email');
         $obj->flow_no = 1; //$nextFlow['flow_no'];
@@ -348,7 +349,7 @@ class POBelakangController extends Controller
         $obj->division_id = $request->input('division_id');
         $obj->spmb_cost_center = $request->input('spmb_cost_center');
         $obj->spmb_io_no = $request->input('spmb_io_no');
-        $obj->spmb_buyer_no = $request->input('spmb_buyer_no');
+        //$obj->spmb_buyer_no = $request->input('spmb_buyer_no');
         $obj->spmb_applicant_name = $request->input('spmb_applicant_name');
         $obj->spmb_applicant_email = $request->input('spmb_applicant_email');
         $obj->updated_by = $request->user()->user_id;
@@ -867,6 +868,15 @@ class POBelakangController extends Controller
 
         return $code;
 
+    }
+
+    private function generateBuyerNo()
+    {
+        $last_row = SPMB::select('spmb_id')->orderBy('spmb_id', 'desc')->first();
+
+        $id = $last_row->spmb_id + 1;
+
+        return $id;
     }
 
     private function generateToken()

@@ -86,6 +86,7 @@ class SPMBController extends Controller
                             $query->where('role_name', '=', 'Officer Procurement');
                         })->get();
         $data['spmb_code'] = $this->generateCode();
+        $data['spmb_buyer_no'] = $this->generateBuyerNo();
 
      	return view('vendor.material.spmb.create', $data);   
     }
@@ -125,7 +126,7 @@ class SPMBController extends Controller
         $obj->division_id = $request->input('division_id');
         $obj->spmb_cost_center = $request->input('spmb_cost_center');
         $obj->spmb_io_no = $request->input('spmb_io_no');
-        $obj->spmb_buyer_no = $request->input('spmb_buyer_no');
+        $obj->spmb_buyer_no = $this->generateBuyerNo();
         $obj->spmb_applicant_name = $request->input('spmb_applicant_name');
         $obj->spmb_applicant_email = $request->input('spmb_applicant_email');
         $obj->flow_no = 1; //$nextFlow['flow_no'];
@@ -341,7 +342,7 @@ class SPMBController extends Controller
         $obj->division_id = $request->input('division_id');
         $obj->spmb_cost_center = $request->input('spmb_cost_center');
         $obj->spmb_io_no = $request->input('spmb_io_no');
-        $obj->spmb_buyer_no = $request->input('spmb_buyer_no');
+        //$obj->spmb_buyer_no = $request->input('spmb_buyer_no');
         $obj->spmb_applicant_name = $request->input('spmb_applicant_name');
         $obj->spmb_applicant_email = $request->input('spmb_applicant_email');
         $obj->updated_by = $request->user()->user_id;
@@ -1047,6 +1048,15 @@ class SPMBController extends Controller
 
     }
 
+    private function generateBuyerNo()
+    {
+        $last_row = SPMB::select('spmb_id')->orderBy('spmb_id', 'desc')->first();
+
+        $id = $last_row->spmb_id + 1;
+
+        return $id;
+    }
+
     private function generateToken()
     {
         return substr(md5(microtime()),rand(0, 26), 6);
@@ -1287,6 +1297,7 @@ class SPMBController extends Controller
     public function postApproveFlowNo4(Request $request, $id)
     {
         $this->validate($request, [
+                'skip_flow_5' => 'required',
                 'comment' => 'required'
             ]);
 
@@ -1295,23 +1306,46 @@ class SPMBController extends Controller
         $flow = new FlowLibrary;
         $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->pic);
 
-        $spmb->flow_no = $nextFlow['flow_no'];
-        $spmb->current_user = $nextFlow['current_user'];
-        $spmb->updated_by = $request->user()->user_id;
-        $spmb->save();
+        if($request->input('skip_flow_5')=='1') {
+            //Lewati Pemesanan Dana
+            $spmb->flow_no = 6; //flow Pembuatan Kontrak/PO
+            $spmb->current_user = $spmb->created_by; //Author
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
 
-        $his = new SPMBHistory;
-        $his->spmb_id = $id;
-        $his->approval_type_id = 1;
-        $his->flow_no = 4;
-        $his->spmb_history_desc = $request->input('comment');
-        $his->active = '1';
-        $his->created_by = $request->user()->user_id;
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 1;
+            $his->flow_no = 4;
+            $his->spmb_history_desc = $request->input('comment');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
 
-        $his->save();
+            $his->save();
 
-        //Notification to Current User
-        Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+            //Notification to Current User
+            Notification::send(User::find($spmb->created_by), new SPMBNeedToCheck($spmb));
+        }else{
+            //Flow Normal
+
+            $spmb->flow_no = $nextFlow['flow_no'];
+            $spmb->current_user = $nextFlow['current_user'];
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
+
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 1;
+            $his->flow_no = 4;
+            $his->spmb_history_desc = $request->input('comment');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
+
+            $his->save();
+
+            //Notification to Current User
+            Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+        }
 
         $request->session()->flash('status', 'Data has been saved!');
     }

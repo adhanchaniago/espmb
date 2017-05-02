@@ -34,9 +34,15 @@ $(document).ready(function() {
             	$('#division_id').append(dr);
 
             	$('#division_id').selectpicker('refresh');
+
+                $('#spmb_cost_center').val($('#division_id option:selected').data('costcenter'));
             }
     	});
 	});
+
+    $('#division_id').change(function() {
+        $('#spmb_cost_center').val($('#division_id option:selected').data('costcenter'));
+    });
 
     //on change rules
     var clicked_rules = [];
