@@ -9,7 +9,7 @@
                         <img class="img-responsive" src="{{ url('img/avatar/' . $value->created_by->user_avatar) }}" alt="$value->created_by->user_avatar">
                     </a>
                     <ul class="tvb-stats pull-right">
-                        <li class="tvbs-views">{{ $value->_flow($value->flow_no) }}</li>
+                        <li class="tvbs-views">{{ $value->_flow($value->flow_no, 2) }}</li>
                     </ul>
                     <div class="media-body p-t-5">
                         <strong class="d-block">{{ $value->created_by->user_firstname . ' ' . $value->created_by->user_lastname }}</strong>

@@ -36,11 +36,13 @@ class NotificationController extends Controller
                                             ->orderBy('notifications.created_at', 'desc')
                                             ->get();
 
-        $data['total'] = Notification::where('notifications.notifiable_id', '=', $request->user()->user_id)
+        /*$data['total'] = Notification::select('notifications.id')
+                                            ->where('notifications.notifiable_id', '=', $request->user()->user_id)
                                             ->where('notifications.read_at', '=', NULL)
                                             ->take(6)
                                             ->orderBy('notifications.created_at', 'desc')
-                                            ->count();
+                                            ->count();*/
+        $data['total'] = count($data['notifications']);
         
         //dd($data);
 

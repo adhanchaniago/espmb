@@ -44,6 +44,8 @@ class TrackerController extends Controller
         				->where('spmb_token', $request->input('spmb_token'))
         				->first();
 
+            $data['flow_group_id'] = ($data['spmb']->spmb_method=='NORMAL') ? '1' : '2';
+
         	$data['created_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $data['spmb']->created_at)->format('d/m/Y');
 
         	return view('vendor.material.public.tracker-result', $data);

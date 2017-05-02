@@ -76,7 +76,7 @@
                         <div class="col-xs-3">
                             <div class="bgm-green brd-2 p-15">
                                 <div class="c-white m-b-5">Status</div>
-                                <h2 class="m-0 c-white f-300">{{ $spmb->_currentflow($spmb->flow_no) }}</h2>
+                                <h2 class="m-0 c-white f-300">{{ $spmb->_currentflow($spmb->flow_no, $flow_group_id) }}</h2>
                             </div>
                         </div>
                         
@@ -127,7 +127,7 @@
                             @foreach($spmb->spmbhistories as $history)
                                 <tr>
                                     <td><center>{{ $history->created_at }}</center></td>
-                                    <td>{{ $history->_flow($history->flow_no) }}</td>
+                                    <td>{{ $history->_flow($history->flow_no, $flow_group_id) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
