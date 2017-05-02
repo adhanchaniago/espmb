@@ -7,15 +7,14 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header"><h2>SURAT PERMINTAAN MEMBELI BARANG PO BELAKANG<small>Pemesanan Dana</small></h2></div>
+        <div class="card-header"><h2>SURAT PERMINTAAN MEMBELI BARANG PO BELAKANG<small>Pembuatan Kontrak/PO</small></h2></div>
         <div class="card-body card-padding">
         	<form class="form-horizontal" role="form" method="POST" action="{{ url('otherspmb/approve/' . $spmb->flow_no . '/' . $spmb->spmb_id) }}">
                 {{ csrf_field() }}
 	            
         		@include('vendor.material.otherspmb.view')
-        		@include('vendor.material.otherspmb.approval_flow_2-table')
+        		@include('vendor.material.otherspmb.approval_flow_3-table')
 	            @include('vendor.material.otherspmb.history')
-
 
                 <div class="form-group">
                     <label for="comment" class="col-sm-2 control-label">Comment</label>
@@ -36,7 +35,6 @@
     </div>
 
     @include('vendor.material.otherspmb.detail-modal')
-    @include('vendor.material.otherspmb.order-payment-vendor-modal')
 @endsection
 
 @section('vendorjs')
