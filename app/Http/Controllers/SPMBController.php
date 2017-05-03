@@ -1802,7 +1802,12 @@ class SPMBController extends Controller
 
         if(count($data['spmb']) > 0)
         {
-            return view('vendor.material.spmb.show', $data);
+            if($data['spmb']->spmb_method=='NORMAL') {
+                return view('vendor.material.spmb.show', $data);
+            }else{
+                $data['flow_group_id'] = '2';
+                return view('vendor.material.otherspmb.show', $data);
+            }
         }else{
             $data['spmb_no'] = $request->input('tracking_spmb_no');
             return view('vendor.material.spmb.notfound', $data);

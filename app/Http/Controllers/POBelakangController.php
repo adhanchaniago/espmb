@@ -947,6 +947,105 @@ class POBelakangController extends Controller
         $request->session()->flash('status', 'Data has been saved!');
     }
 
+    public function approveFlowNo5(Request $request, $id)
+    {
+        if(Gate::denies('PO Belakang-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'spmbtype.spmbcategory',
+                                'spmbtype.rules',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                'rules',
+                                '_pic',
+                                '_currentuser'
+                                )->find($id);
+
+        if($data['spmb']->current_user!=$request->user()->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('vendor.material.otherspmb.approval_flow_5', $data);
+    }
+
+    public function postApproveFlowNo5(Request $request, $id)
+    {
+        $this->validate($request, [
+                'approval' => 'required',
+                'comment' => 'required'
+            ]);
+
+        if($request->input('approval')=='1')
+        {
+            $spmb = SPMB::find($id);
+
+            $flow = new FlowLibrary;
+            $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->created_by, $spmb->created_by, $spmb->created_by);
+
+            $spmb->flow_no = $nextFlow['flow_no'];
+            $spmb->current_user = $nextFlow['current_user'];
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
+
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 2;
+            $his->flow_no = 5;
+            $his->spmb_history_desc = $request->input('comment');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
+
+            $his->save();
+
+            //Notification to Current User
+            Notification::send(User::find($nextFlow['current_user']), new SPMBNeedToCheck($spmb));
+
+            $request->session()->flash('status', 'Data has been saved!');
+        }else{
+            $spmb = SPMB::find($id);
+
+            $flow = new FlowLibrary;
+            $prevFlow = $flow->getPreviousFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->created_by, $spmb->created_by, $spmb->created_by);
+
+            $spmb->flow_no = $prevFlow['flow_no'];
+            $spmb->revision = $spmb->revision + 1;
+            $spmb->current_user = $prevFlow['current_user'];
+            $spmb->updated_by = $request->user()->user_id;
+            $spmb->save();
+
+            $his = new SPMBHistory;
+            $his->spmb_id = $id;
+            $his->approval_type_id = 3;
+            $his->flow_no = 5;
+            $his->spmb_history_desc = $request->input('comment');
+            $his->active = '1';
+            $his->created_by = $request->user()->user_id;
+
+            $his->save();
+
+            //Notification to Previous User
+            Notification::send(User::find($prevFlow['current_user']), new SPMBNeedToCheck($spmb));
+
+            //Notification to Applicant
+            $spmbdata = SPMB::with('spmbdetails','spmbhistories')->find($id);
+            Notification::send($spmbdata, new SPMBRejectedByFinance($spmbdata));
+
+            $request->session()->flash('status', 'Data has been saved!');
+        }
+
+        
+    }
+
     public function apiLoadDetails(Request $request) {
         if(Gate::denies('PO Belakang-Read')) {
             abort(403, 'Unauthorized action.');
