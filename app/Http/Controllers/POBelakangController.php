@@ -1046,6 +1046,70 @@ class POBelakangController extends Controller
         
     }
 
+    public function approveFlowNo6(Request $request, $id)
+    {
+        if(Gate::denies('PO Belakang-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $data['spmb'] = SPMB::with(
+                                'spmbtype',
+                                'spmbtype.spmbcategory',
+                                'spmbtype.rules',
+                                'division',
+                                'division.company',
+                                'spmbdetails',
+                                'spmbdetails.itemcategory',
+                                'spmbdetails.unit',
+                                'spmbhistories',
+                                'spmbhistories.approvaltype',
+                                'rules',
+                                '_pic',
+                                '_currentuser'
+                                )->find($id);
+
+        if($data['spmb']->current_user!=$request->user()->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('vendor.material.otherspmb.approval_flow_6', $data);
+    }
+
+    public function postApproveFlowNo6(Request $request, $id)
+    {
+        $this->validate($request, [
+                'comment' => 'required'
+            ]);
+
+        $spmb = SPMB::find($id);
+
+        $flow = new FlowLibrary;
+        $nextFlow = $flow->getNextFlow($this->flow_group_id, $spmb->flow_no, $request->user()->user_id, $spmb->pic, $spmb->created_by, $spmb->created_by);
+
+        $spmb->flow_no = 98;
+        $spmb->spmb_finish_date = Carbon::createFromFormat('d/m/Y', date('d/m/Y'))->toDateString();
+        $spmb->updated_by = $request->user()->user_id;
+        $spmb->save();
+
+        $his = new SPMBHistory;
+        $his->spmb_id = $id;
+        $his->approval_type_id = 4;
+        $his->flow_no = 6;
+        $his->spmb_history_desc = $request->input('comment');
+        $his->active = '1';
+        $his->created_by = $request->user()->user_id;
+
+        $his->save();
+
+        //Notification to Applicant
+        $spmbdata = SPMB::with('spmbdetails','spmbhistories')->find($id);
+        Notification::send($spmbdata, new SPMBFinished($spmbdata));
+
+        $request->session()->flash('status', 'Data has been saved!');
+    }
+
     public function apiLoadDetails(Request $request) {
         if(Gate::denies('PO Belakang-Read')) {
             abort(403, 'Unauthorized action.');
@@ -1243,6 +1307,56 @@ class POBelakangController extends Controller
             $data['score']['score'] = 0;
         }
         
+        return response()->json($data);
+    }
+
+    public function apiUpdatePayment(Request $request)
+    {
+        if(Gate::denies('PO Belakang-Approval')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $obj = SPMBDetailPayment::find($request->input('spmb_detail_payment_id'));
+        $obj->spmb_detail_payment_finish_date = Carbon::createFromFormat('d/m/Y', $request->input('spmb_detail_payment_finish_date'))->toDateString();
+        $obj->spmb_detail_payment_note = $request->input('spmb_detail_payment_note');
+        $obj->spmb_detail_payment_status = '1';
+        $obj->updated_by = $request->user()->user_id;
+
+        $obj->save();
+
+        $data = array();
+
+        $data['status'] = '200';
+
+        return response()->json($data);
+    }
+
+    public function apiSaveRating(Request $request)
+    {
+        $this->validate($request, [
+                'spmb_detail_id' => 'required',
+                'vendor_id' => 'required',
+                'rating_id' => 'required',
+                'score' => 'required'
+            ]);
+
+        DB::table('spmb_detail_vendor_rating_score')
+                    ->where('spmb_detail_id', $request->input('spmb_detail_id'))
+                    ->where('vendor_id', $request->input('vendor_id'))
+                    ->where('rating_id', $request->input('rating_id'))
+                    ->delete();
+
+        DB::table('spmb_detail_vendor_rating_score')->insert([
+                'spmb_detail_id' => $request->input('spmb_detail_id'),
+                'vendor_id' => $request->input('vendor_id'),
+                'rating_id' => $request->input('rating_id'),
+                'score' => $request->input('score')
+            ]);
+
+        $data = array();
+
+        $data['status'] = '200';
+
         return response()->json($data);
     }
 
