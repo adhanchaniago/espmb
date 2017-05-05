@@ -266,6 +266,12 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
     Route::post('otherspmb/api/saveRating', 'POBelakangController@apiSaveRating');
     Route::resource('otherspmb', 'POBelakangController');
 
+    Route::group(['prefix' => 'report'], function() {
+        //Time Process Report
+        Route::get('time-process', 'ReportController@timeprocess');
+        Route::post('api/generate-time-process', 'ReportController@apiGenerateTimeProcess');
+    });
+
     Route::group(['prefix' => 'config'], function() {
         //Announcement Management
         Route::post('announcement/apiList', 'AnnouncementController@apiList');
