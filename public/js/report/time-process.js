@@ -112,8 +112,11 @@ function generate_report() {
 			console.log(data);
 
 			var html = '';
+			var sum_spmb = 0;
+			var sum_total_price = 0;
 			$('#grid-data-result tbody').empty();
 			$.each(data.result, function(key, value){
+				var total_price = (value.total_price==null) ? '-' : convertNumber(value.total_price);
 				html += '<tr>';
 				html += '<td>'  + value.company_name + '</td>';
 				html += '<td>'  + value.division_name + '</td>';
@@ -122,9 +125,22 @@ function generate_report() {
 				html += '<td>'  + value.revision + '</td>';
 				html += '<td>'  + value.author_firstname + '</td>';
 				html += '<td>'  + value.pic_firstname + '</td>';
-				html += '<td>'  + value.total_price + '</td>';
+				html += '<td>'  + total_price + '</td>';
 				html += '</tr>';
+				sum_spmb += 1;
+				sum_total_price += value.total_price;
 			});
+
+			html += '<tr>';
+			html += '<td></td>';
+			html += '<td></td>';
+			html += '<td></td>';
+			html += '<td></td>';
+			html += '<td></td>';
+			html += '<td></td>';
+			html += '<td>'  + sum_spmb + '</td>';
+			html += '<td>'  + convertNumber(sum_total_price) + '</td>';
+			html += '</tr>';
 
 			$('#grid-data-result tbody').append(html);
 		}
