@@ -85,6 +85,14 @@ $(document).ready(function() {
 	$('#btn_clear_report').click(function() {
 		clear_filter();
 	});
+
+	$('#btn_export_report').click(function() {
+		$('#grid-data-result').table2excel({
+			exclude: ".noExl",
+			name: "Report SPMB Time Process",
+			filename: "report_spmb_time_process"
+		});
+	});
 });
 
 function generate_report() {
@@ -184,4 +192,6 @@ function clear_filter(){
 	authors = [];
 	pics = [];
 	revision = '';
+
+	$('#grid-data-result tbody').empty();
 }
