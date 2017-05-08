@@ -131,10 +131,12 @@ function generate_report() {
 				html += '<td>'  + value.division_name + '</td>';
 				html += '<td>'  + value.created_at + '</td>';
 				html += '<td>'  + value.spmb_no + '</td>';
-				html += '<td>'  + value.spmb_type_name + '</td>';
-				html += '<td>'  + value.revision + '</td>';
-				html += '<td>'  + value.author_firstname + ' ' + value.author_lastname + '</td>';
+				html += '<td>'  + value.vendor_name + '</td>';
+				html += '<td>'  + value.item_category_name + '</td>';
 				html += '<td>'  + pic_name + '</td>';
+				html += '<td>'  + value.spmb_detail_vendor_offer_price + '</td>';
+				html += '<td>'  + value.spmb_detail_vendor_deal_price + '</td>';
+				html += '<td>'  + value.spmb_detail_qty + '</td>';
 				html += '<td>'  + total_price + '</td>';
 				html += '</tr>';
 				sum_spmb += 1;
@@ -142,7 +144,7 @@ function generate_report() {
 			});
 
 			html += '<tr>';
-			html += '<td colspan="6">Total</td>';
+			html += '<td colspan="9">Total</td>';
 			html += '<td>'  + sum_spmb + '</td>';
 			html += '<td>Rp '  + convertNumber(sum_total_price) + '</td>';
 			html += '</tr>';

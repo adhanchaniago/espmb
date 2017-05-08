@@ -142,7 +142,7 @@ function generate_report() {
 			});
 
 			html += '<tr>';
-			html += '<td colspan="6">Total</td>';
+			html += '<td colspan="7">Total</td>';
 			html += '<td>'  + sum_spmb + '</td>';
 			html += '<td>Rp '  + convertNumber(sum_total_price) + '</td>';
 			html += '</tr>';

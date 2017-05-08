@@ -305,4 +305,101 @@ class ReportController extends Controller
 
 		return response()->json($data);
     }
+
+    public function apiGenerateVendor(Request $request) {
+    	if(Gate::denies('Vendor Report-Create')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $report_type = $request->input('report_type');
+		$period_daily = $request->input('period_daily');
+		$period_month = $request->input('period_month');
+		$period_year = $request->input('period_year');
+		$period_start = $request->input('period_start');
+		$period_end = $request->input('period_end');
+		$division_ids = $request->input('division_ids');
+		$item_categories = $request->input('item_categories');
+		$vendors = $request->input('vendors');
+		$pics = $request->input('pics');
+
+		//dd($revision);
+		$mulai = '';
+		$selesai = '';
+		if($report_type=='daily') {
+			$mulai = Carbon::createFromFormat('d/m/Y', $period_daily)->toDateString() . ' 00:00:00';
+			$selesai = Carbon::createFromFormat('d/m/Y', $period_daily)->toDateString() . ' 23:59:59';
+		}elseif($report_type=='monthly') {
+			$mulai = $period_year.'-'.$period_month.'-01 00:00:00';
+			$tanggalakhir = cal_days_in_month(CAL_GREGORIAN, $period_month, $period_year);
+			$selesai = $period_year.'-'.$period_month.'-'.$tanggalakhir.' 23:59:59';
+		}elseif($report_type=='yearly') {
+			$mulai = $period_year.'-01-01 00:00:00';
+			$selesai = $period_year.'-12-31 23:59:59';
+		}elseif($report_type=='period') {
+			$mulai = Carbon::createFromFormat('d/m/Y', $period_start)->toDateString() . ' 00:00:00';
+			$selesai = Carbon::createFromFormat('d/m/Y', $period_end)->toDateString() . ' 23:59:59';
+		}else{
+			$mulai = '1990-01-01 00:00:00';
+			$selesai = '2050-12-31 23:59:59';
+		}
+
+		if(is_null($division_ids)) {
+			$division_ids = Division::select('division_id')->where('active', '1')->get();
+		}
+
+		if(is_null($vendors)) {
+			$vendors = Vendor::select('vendor_id')->where('active', '1')->get();
+		}
+
+		if(is_null($item_categories)) {
+			$item_categories = ItemCategory::select('item_category_id')->where('active', '1')->get();
+		}
+
+		if(is_null($pics)) {
+			$pics = User::select('user_id')->where('active', '1')->whereHas('roles', function($query) {
+                            $query->where('role_name', '=', 'Officer Procurement');
+                        })->get();
+		}		
+
+		$result = DB::table('spmb')
+							->select(DB::raw("spmb.*,
+									    company_name,
+									    division_code,
+									    division_name,
+									    vendor_name,
+									    item_category_name,
+									    pic.user_firstname AS pic_firstname,
+									    pic.user_lastname AS pic_lastname,
+									    spmb_detail_vendors.spmb_detail_vendor_offer_price,
+									    spmb_detail_vendors.spmb_detail_vendor_deal_price,
+									    spmb_details.spmb_detail_qty,
+									    (spmb_detail_vendors.spmb_detail_vendor_deal_price * spmb_details.spmb_detail_qty) AS total_price"))
+							->join('spmb_details', 'spmb_details.spmb_id', '=', 'spmb.spmb_id')
+							->join('spmb_detail_vendors', 'spmb_detail_vendors.spmb_detail_id', '=', 'spmb_details.spmb_detail_id')
+							->join('item_categories', 'item_categories.item_category_id', '=', 'spmb_details.item_category_id')
+							->join('vendors', 'vendors.vendor_id', '=', 'spmb_detail_vendors.vendor_id')
+							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+							->join('users AS pic', 'pic.user_id', '=', 'spmb.pic')
+							->where('spmb.active', '1')
+							->where('spmb_detail_vendors.spmb_detail_vendor_status', '1')
+							->whereBetween('spmb.created_at', [$mulai, $selesai])
+							->whereIn('spmb.division_id', $division_ids)
+							->whereIn('spmb.pic', $pics)
+							->whereIn('spmb_detail_vendors.vendor_id', $vendors)
+							->whereIn('spmb_details.item_category_id', $item_categories)
+							->orderBy('division_id', 'asc')
+							->orderBy('created_at', 'asc')
+							->orderBy('vendor_name', 'asc')
+							->orderBy('item_category_name', 'asc')
+							->orderBy('pic.user_firstname', 'asc')
+							->get();
+
+
+		$data['result'] = $result;
+
+		return response()->json($data);
+    }
 }
