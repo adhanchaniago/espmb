@@ -9,7 +9,9 @@ use Gate;
 use App\Http\Requests;
 use App\Company;
 use App\Division;
+use App\ItemCategory;
 use App\User;
+use App\Vendor;
 
 use DB;
 use Carbon\Carbon;
@@ -33,6 +35,22 @@ class ReportController extends Controller
                         })->get();
 
     	return view('vendor.material.report.time-process', $data);
+    }
+
+    public function vendor() {
+    	if(Gate::denies('Vendor Report-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+    	$data = array();
+    	$data['divisions'] = Division::with('company')->where('active', '1')->orderBy('company_id')->orderBy('division_name')->get();
+    	$data['vendors'] = Vendor::where('active', '1')->orderBy('vendor_name')->get();
+    	$data['itemcategories'] = ItemCategory::where('active', '1')->orderBy('item_category_name')->get();
+    	$data['pics'] = User::where('active', '1')->whereHas('roles', function($query) {
+                            $query->where('role_name', '=', 'Officer Procurement');
+                        })->get();
+
+    	return view('vendor.material.report.vendor', $data);
     }
 
     public function apiGenerateTimeProcess(Request $request) {
@@ -106,6 +124,7 @@ class ReportController extends Controller
 			if($revision=='yes'){
 				$result = DB::table('spmb')
 							->select(DB::raw("spmb.*,
+										spmb_type_name,
 									    company_name,
 									    division_code,
 									    division_name,
@@ -114,6 +133,7 @@ class ReportController extends Controller
 									    pic.user_firstname AS pic_firstname,
 									    pic.user_lastname AS pic_lastname,
 									    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+							->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
 							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
 							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
 							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
@@ -133,6 +153,7 @@ class ReportController extends Controller
 			}else if($revision=='no'){
 				$result = DB::table('spmb')
 						->select(DB::raw("spmb.*,
+									spmb_type_name,
 								    company_name,
 								    division_code,
 								    division_name,
@@ -141,6 +162,7 @@ class ReportController extends Controller
 								    pic.user_firstname AS pic_firstname,
 								    pic.user_lastname AS pic_lastname,
 								    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+						->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
 						->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
 						->join('companies', 'companies.company_id', '=', 'divisions.company_id')
 						->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
@@ -160,6 +182,7 @@ class ReportController extends Controller
 			}else{
 				$result = DB::table('spmb')
 						->select(DB::raw("spmb.*,
+									spmb_type_name,
 								    company_name,
 								    division_code,
 								    division_name,
@@ -168,6 +191,7 @@ class ReportController extends Controller
 								    pic.user_firstname AS pic_firstname,
 								    pic.user_lastname AS pic_lastname,
 								    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+						->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
 						->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
 						->join('companies', 'companies.company_id', '=', 'divisions.company_id')
 						->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
@@ -188,6 +212,7 @@ class ReportController extends Controller
 			if($revision=='yes') {
 				$result = DB::table('spmb')
 							->select(DB::raw("spmb.*,
+										spmb_type_name,
 									    company_name,
 									    division_code,
 									    division_name,
@@ -196,6 +221,7 @@ class ReportController extends Controller
 									    pic.user_firstname AS pic_firstname,
 									    pic.user_lastname AS pic_lastname,
 									    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+							->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
 							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
 							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
 							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
@@ -216,6 +242,7 @@ class ReportController extends Controller
 			}else if($revision=='no') {
 				$result = DB::table('spmb')
 							->select(DB::raw("spmb.*,
+										spmb_type_name,
 									    company_name,
 									    division_code,
 									    division_name,
@@ -224,6 +251,7 @@ class ReportController extends Controller
 									    pic.user_firstname AS pic_firstname,
 									    pic.user_lastname AS pic_lastname,
 									    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+							->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
 							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
 							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
 							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
@@ -244,6 +272,7 @@ class ReportController extends Controller
 			}else{
 				$result = DB::table('spmb')
 							->select(DB::raw("spmb.*,
+										spmb_type_name,
 									    company_name,
 									    division_code,
 									    division_name,
@@ -252,6 +281,7 @@ class ReportController extends Controller
 									    pic.user_firstname AS pic_firstname,
 									    pic.user_lastname AS pic_lastname,
 									    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+							->join('spmb_types', 'spmb_types.spmb_type_id', '=', 'spmb.spmb_type_id')
 							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
 							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
 							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')

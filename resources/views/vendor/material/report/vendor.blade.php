@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header"><h2>Time Process Report<small>Generate report</small></h2></div>
+        <div class="card-header"><h2>Vendor Report<small>Generate report</small></h2></div>
         <div class="card-body card-padding">
         	<div class="row">
         		<div class="col-md-3">
@@ -79,18 +79,18 @@
 			                            </select>
 						            </div>
 						            <div class="form-group">
-						                <label for="revision">Revision</label>
-						                <select name="revision" id="revision" class="form-control input-sm selectpicker" data-live-search="true">
-						                	<option value="">All</option>
-			                                <option value="yes">Yes</option>
-			                                <option value="no">No</option>
+						                <label for="vendors">Vendor</label>
+						                <select name="vendors[]" id="vendors" class="form-control input-sm selectpicker" data-live-search="true" multiple="true">
+			                                @foreach($vendors as $vendor)
+			                                <option value="{{ $vendor->vendor_id }}">{{ $vendor->vendor_name }}</option>
+			                                @endforeach
 			                            </select>
 						            </div>
 						            <div class="form-group">
-						                <label for="authors">Author</label>
-						                <select name="authors[]" id="authors" class="form-control input-sm selectpicker" data-live-search="true" multiple="true">
-			                                @foreach($authors as $author)
-			                                <option value="{{ $author->user_id }}">{{ $author->user_firstname . ' - ' . $author->user_lastname }}</option>
+						                <label for="item_categories">Item Category</label>
+						                <select name="item_categories[]" id="item_categories" class="form-control input-sm selectpicker" data-live-search="true" multiple="true">
+			                                @foreach($itemcategories as $item)
+			                                <option value="{{ $item->item_category_id }}">{{ $item->item_category_name }}</option>
 			                                @endforeach
 			                            </select>
 						            </div>
@@ -129,10 +129,12 @@
 							                    <th>DIVISION</th>
 							                    <th>DATE</th>
 							                    <th>SPMB NO</th>
-							                    <th>TYPE</th>
-							                    <th>REVISION</th>
-							                    <th>AUTHOR</th>
+							                    <th>VENDOR</th>
+							                    <th>ITEM CATEGORY</th>
 							                    <th>PIC</th>
+							                    <th>OFFER PRICE</th>
+							                    <th>DEAL PRICE</th>
+							                    <th>QTY</th>
 							                    <th>TOTAL PRICE</th>
 							                </tr>
 							            </thead>
@@ -156,5 +158,5 @@
 @endsection
 
 @section('customjs')
-<script src="{{ url('js/report/time-process.js') }}"></script>
+<script src="{{ url('js/report/vendor.js') }}"></script>
 @endsection

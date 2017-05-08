@@ -6,9 +6,9 @@ var period_year = '';
 var period_start = '';
 var period_end = '';
 var division_ids = [];
-var authors = [];
+var item_categories = [];
+var vendors = [];
 var pics = [];
-var revision = '';
 
 $(document).ready(function() {
 	clear_filter();
@@ -45,9 +45,9 @@ $(document).ready(function() {
 		period_start = $('#period_start').val();
 		period_end = $('#period_end').val();
 		division_ids = $('#division_ids').val();
-		authors = $('#authors').val();
+		item_categories = $('#item_categories').val();
+		vendors = $('#vendors').val();
 		pics = $('#pics').val();
-		revision = $('#revision').val();
 
 		if(report_type=='daily') {
 			if(period_daily=='') {
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
 function generate_report() {
 	$.ajax({
-		url: base_url + 'report/api/generate-time-process',
+		url: base_url + 'report/api/generate-vendor',
 		dataType: 'json',
 		type: 'POST',
 		data: {
@@ -109,9 +109,9 @@ function generate_report() {
 			period_start:period_start,
 			period_end:period_end,
 			division_ids:division_ids,
-			authors:authors,
-			pics:pics,
-			revision:revision
+			item_categories:item_categories,
+			vendors:vendors,
+			pics:pics
 		},
 		error: function(data) {
 			console.log('error');
@@ -172,15 +172,15 @@ function clear_filter(){
 	refresh_period_container();
 
 	$('#division_ids').selectpicker('deselectAll');
-	$('#authors').selectpicker('deselectAll');
+	$('#item_categories').selectpicker('deselectAll');
+	$('#vendors').selectpicker('deselectAll');
 	$('#pics').selectpicker('deselectAll');
-	$('#revision').val('');
 	$('#report_type').val('');
 
 	$('#division_ids').selectpicker('refresh');
-	$('#authors').selectpicker('refresh');
+	$('#item_categories').selectpicker('refresh');
 	$('#pics').selectpicker('refresh');
-	$('#revision').selectpicker('refresh');
+	$('#vendors').selectpicker('refresh');
 	$('#report_type').selectpicker('refresh');
 
 	report_type = '';
@@ -190,9 +190,9 @@ function clear_filter(){
 	period_start = '';
 	period_end = '';
 	division_ids = [];
-	authors = [];
+	vendors = [];
+	item_categories = [];
 	pics = [];
-	revision = '';
 
 	$('#grid-data-result tbody').empty();
 }
