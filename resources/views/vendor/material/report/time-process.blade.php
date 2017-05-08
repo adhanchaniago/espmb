@@ -81,7 +81,7 @@
 						            <div class="form-group">
 						                <label for="revision">Revision</label>
 						                <select name="revision" id="revision" class="form-control input-sm selectpicker" data-live-search="true">
-						                	<option value=""></option>
+						                	<option value="">All</option>
 			                                <option value="yes">Yes</option>
 			                                <option value="no">No</option>
 			                            </select>

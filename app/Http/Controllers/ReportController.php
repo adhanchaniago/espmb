@@ -12,6 +12,7 @@ use App\Division;
 use App\User;
 
 use DB;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -52,18 +53,27 @@ class ReportController extends Controller
 		$pics = $request->input('pics');
 		$revision = $request->input('revision');
 
-		//dd($report_type);
-
+		//dd($revision);
+		$mulai = '';
+		$selesai = '';
 		if($report_type=='daily') {
-
+			$mulai = Carbon::createFromFormat('d/m/Y', $period_daily)->toDateString() . ' 00:00:00';
+			$selesai = Carbon::createFromFormat('d/m/Y', $period_daily)->toDateString() . ' 23:59:59';
 		}elseif($report_type=='monthly') {
-
+			$mulai = $period_year.'-'.$period_month.'-01 00:00:00';
+			$tanggalakhir = cal_days_in_month(CAL_GREGORIAN, $period_month, $period_year);
+			$selesai = $period_year.'-'.$period_month.'-'.$tanggalakhir.' 23:59:59';
 		}elseif($report_type=='yearly') {
-			
+			$mulai = $period_year.'-01-01 00:00:00';
+			$selesai = $period_year.'-12-31 23:59:59';
 		}elseif($report_type=='period') {
-			
+			$mulai = Carbon::createFromFormat('d/m/Y', $period_start)->toDateString() . ' 00:00:00';
+			$selesai = Carbon::createFromFormat('d/m/Y', $period_end)->toDateString() . ' 23:59:59';
 		}else{
-			$result = DB::raw("SELECT 
+			$mulai = '1990-01-01 00:00:00';
+			$selesai = '2050-12-31 23:59:59';
+
+			/*$result = DB::raw("SELECT 
 										spmb.*,
 									    company_name,
 									    division_code,
@@ -79,9 +89,22 @@ class ReportController extends Controller
 									INNER JOIN users author ON author.user_id = spmb.created_by
 									LEFT JOIN users pic ON pic.user_id = spmb.pic
 									WHERE spmb.active = '1'
-									ORDER BY division_id,created_at,spmb_no,revision,created_by,pic");
+									ORDER BY division_id,created_at,spmb_no,revision,created_by,pic");*/
+		}
 
-			$result = DB::table('spmb')
+		if(is_null($division_ids)) {
+			$division_ids = Division::select('division_id')->where('active', '1')->get();
+		}
+
+		if(is_null($authors)) {
+			$authors = User::select('user_id')->where('active', '1')->whereHas('roles', function($query) {
+                            $query->where('role_name', '=', 'Admin Procurement');
+                        })->get();
+		}
+
+		if(is_null($pics)) {
+			if($revision=='yes'){
+				$result = DB::table('spmb')
 							->select(DB::raw("spmb.*,
 									    company_name,
 									    division_code,
@@ -96,6 +119,10 @@ class ReportController extends Controller
 							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
 							->leftJoin('users AS pic', 'pic.user_id', '=', 'spmb.pic')
 							->where('spmb.active', '1')
+							->whereBetween('spmb.created_at', [$mulai, $selesai])
+							->whereIn('spmb.division_id', $division_ids)
+							->whereIn('spmb.created_by', $authors)
+							->where('revision', '>', 0)
 							->orderBy('division_id', 'asc')
 							->orderBy('created_at', 'asc')
 							->orderBy('spmb_no', 'asc')
@@ -103,6 +130,145 @@ class ReportController extends Controller
 							->orderBy('author.user_firstname', 'asc')
 							->orderBy('pic.user_firstname', 'asc')
 							->get();
+			}else if($revision=='no'){
+				$result = DB::table('spmb')
+						->select(DB::raw("spmb.*,
+								    company_name,
+								    division_code,
+								    division_name,
+								    author.user_firstname AS author_firstname,
+								    author.user_lastname AS author_lastname,
+								    pic.user_firstname AS pic_firstname,
+								    pic.user_lastname AS pic_lastname,
+								    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+						->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+						->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+						->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
+						->leftJoin('users AS pic', 'pic.user_id', '=', 'spmb.pic')
+						->where('spmb.active', '1')
+						->whereBetween('spmb.created_at', [$mulai, $selesai])
+						->whereIn('spmb.division_id', $division_ids)
+						->whereIn('spmb.created_by', $authors)
+						->where('revision', '=', 0)
+						->orderBy('division_id', 'asc')
+						->orderBy('created_at', 'asc')
+						->orderBy('spmb_no', 'asc')
+						->orderBy('revision', 'asc')
+						->orderBy('author.user_firstname', 'asc')
+						->orderBy('pic.user_firstname', 'asc')
+						->get();
+			}else{
+				$result = DB::table('spmb')
+						->select(DB::raw("spmb.*,
+								    company_name,
+								    division_code,
+								    division_name,
+								    author.user_firstname AS author_firstname,
+								    author.user_lastname AS author_lastname,
+								    pic.user_firstname AS pic_firstname,
+								    pic.user_lastname AS pic_lastname,
+								    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+						->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+						->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+						->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
+						->leftJoin('users AS pic', 'pic.user_id', '=', 'spmb.pic')
+						->where('spmb.active', '1')
+						->whereBetween('spmb.created_at', [$mulai, $selesai])
+						->whereIn('spmb.division_id', $division_ids)
+						->whereIn('spmb.created_by', $authors)
+						->orderBy('division_id', 'asc')
+						->orderBy('created_at', 'asc')
+						->orderBy('spmb_no', 'asc')
+						->orderBy('revision', 'asc')
+						->orderBy('author.user_firstname', 'asc')
+						->orderBy('pic.user_firstname', 'asc')
+						->get();
+			}
+		}else{
+			if($revision=='yes') {
+				$result = DB::table('spmb')
+							->select(DB::raw("spmb.*,
+									    company_name,
+									    division_code,
+									    division_name,
+									    author.user_firstname AS author_firstname,
+									    author.user_lastname AS author_lastname,
+									    pic.user_firstname AS pic_firstname,
+									    pic.user_lastname AS pic_lastname,
+									    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
+							->leftJoin('users AS pic', 'pic.user_id', '=', 'spmb.pic')
+							->where('spmb.active', '1')
+							->whereBetween('spmb.created_at', [$mulai, $selesai])
+							->whereIn('spmb.division_id', $division_ids)
+							->whereIn('spmb.created_by', $authors)
+							->whereIn('spmb.pic', $pics)
+							->where('revision', '>', 0)
+							->orderBy('division_id', 'asc')
+							->orderBy('created_at', 'asc')
+							->orderBy('spmb_no', 'asc')
+							->orderBy('revision', 'asc')
+							->orderBy('author.user_firstname', 'asc')
+							->orderBy('pic.user_firstname', 'asc')
+							->get();
+			}else if($revision=='no') {
+				$result = DB::table('spmb')
+							->select(DB::raw("spmb.*,
+									    company_name,
+									    division_code,
+									    division_name,
+									    author.user_firstname AS author_firstname,
+									    author.user_lastname AS author_lastname,
+									    pic.user_firstname AS pic_firstname,
+									    pic.user_lastname AS pic_lastname,
+									    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
+							->leftJoin('users AS pic', 'pic.user_id', '=', 'spmb.pic')
+							->where('spmb.active', '1')
+							->whereBetween('spmb.created_at', [$mulai, $selesai])
+							->whereIn('spmb.division_id', $division_ids)
+							->whereIn('spmb.created_by', $authors)
+							->whereIn('spmb.pic', $pics)
+							->where('revision', '=', 0)
+							->orderBy('division_id', 'asc')
+							->orderBy('created_at', 'asc')
+							->orderBy('spmb_no', 'asc')
+							->orderBy('revision', 'asc')
+							->orderBy('author.user_firstname', 'asc')
+							->orderBy('pic.user_firstname', 'asc')
+							->get();
+			}else{
+				$result = DB::table('spmb')
+							->select(DB::raw("spmb.*,
+									    company_name,
+									    division_code,
+									    division_name,
+									    author.user_firstname AS author_firstname,
+									    author.user_lastname AS author_lastname,
+									    pic.user_firstname AS pic_firstname,
+									    pic.user_lastname AS pic_lastname,
+									    (SELECT SUM(spmb_detail_item_price * spmb_detail_qty) FROM spmb_details WHERE spmb_id = spmb.spmb_id) AS total_price"))
+							->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+							->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+							->join('users AS author', 'author.user_id', '=', 'spmb.created_by')
+							->leftJoin('users AS pic', 'pic.user_id', '=', 'spmb.pic')
+							->where('spmb.active', '1')
+							->whereBetween('spmb.created_at', [$mulai, $selesai])
+							->whereIn('spmb.division_id', $division_ids)
+							->whereIn('spmb.created_by', $authors)
+							->whereIn('spmb.pic', $pics)
+							->orderBy('division_id', 'asc')
+							->orderBy('created_at', 'asc')
+							->orderBy('spmb_no', 'asc')
+							->orderBy('revision', 'asc')
+							->orderBy('author.user_firstname', 'asc')
+							->orderBy('pic.user_firstname', 'asc')
+							->get();
+			}
 		}
 
 		$data['result'] = $result;
