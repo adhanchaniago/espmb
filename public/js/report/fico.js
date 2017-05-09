@@ -6,9 +6,8 @@ var period_year = '';
 var period_start = '';
 var period_end = '';
 var division_ids = [];
-var item_categories = [];
-var vendors = [];
-var pics = [];
+var payment_types = [];
+var payment_status = '';
 
 $(document).ready(function() {
 	clear_filter();
@@ -89,15 +88,15 @@ $(document).ready(function() {
 	$('#btn_export_report').click(function() {
 		$('#grid-data-result').table2excel({
 			exclude: ".noExl",
-			name: "Report Vendor SPMB",
-			filename: "report_vendor_spmb"
+			name: "Report FICO SPMB",
+			filename: "report_fico_spmb"
 		});
 	});
 });
 
 function generate_report() {
 	$.ajax({
-		url: base_url + 'report/api/generate-vendor',
+		url: base_url + 'report/api/generate-fico',
 		dataType: 'json',
 		type: 'POST',
 		data: {
@@ -109,9 +108,8 @@ function generate_report() {
 			period_start:period_start,
 			period_end:period_end,
 			division_ids:division_ids,
-			item_categories:item_categories,
-			vendors:vendors,
-			pics:pics
+			payment_types:payment_types,
+			payment_status:payment_status
 		},
 		error: function(data) {
 			console.log('error');
@@ -174,15 +172,13 @@ function clear_filter(){
 	refresh_period_container();
 
 	$('#division_ids').selectpicker('deselectAll');
-	$('#item_categories').selectpicker('deselectAll');
-	$('#vendors').selectpicker('deselectAll');
-	$('#pics').selectpicker('deselectAll');
+	$('#payment_types').selectpicker('deselectAll');
+	$('#payment_status').val('');
 	$('#report_type').val('');
 
 	$('#division_ids').selectpicker('refresh');
-	$('#item_categories').selectpicker('refresh');
-	$('#pics').selectpicker('refresh');
-	$('#vendors').selectpicker('refresh');
+	$('#payment_types').selectpicker('refresh');
+	$('#payment_status').selectpicker('refresh');
 	$('#report_type').selectpicker('refresh');
 
 	report_type = '';
@@ -192,9 +188,8 @@ function clear_filter(){
 	period_start = '';
 	period_end = '';
 	division_ids = [];
-	vendors = [];
-	item_categories = [];
-	pics = [];
+	payment_types = [];
+	payment_status = '';
 
 	$('#grid-data-result tbody').empty();
 }

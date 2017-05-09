@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Company;
 use App\Division;
 use App\ItemCategory;
+use App\PaymentType;
 use App\User;
 use App\Vendor;
 
@@ -51,6 +52,18 @@ class ReportController extends Controller
                         })->get();
 
     	return view('vendor.material.report.vendor', $data);
+    }
+
+    public function fico() {
+    	if(Gate::denies('FICO Report-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+    	$data = array();
+    	$data['divisions'] = Division::with('company')->where('active', '1')->orderBy('company_id')->orderBy('division_name')->get();
+    	$data['payment_types'] = PaymentType::where('active', '1')->orderBy('payment_type_name')->get();
+
+    	return view('vendor.material.report.fico', $data);
     }
 
     public function apiGenerateTimeProcess(Request $request) {

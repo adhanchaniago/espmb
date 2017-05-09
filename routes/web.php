@@ -272,6 +272,8 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('api/generate-time-process', 'ReportController@apiGenerateTimeProcess');
         Route::get('vendor', 'ReportController@vendor');
         Route::post('api/generate-vendor', 'ReportController@apiGenerateVendor');
+        Route::get('fico', 'ReportController@fico');
+        Route::post('api/generate-fico', 'ReportController@apiGenerateFico');
     });
 
     Route::group(['prefix' => 'config'], function() {
