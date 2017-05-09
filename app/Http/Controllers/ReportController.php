@@ -415,4 +415,141 @@ class ReportController extends Controller
 
 		return response()->json($data);
     }
+
+    public function apiGenerateFico(Request $request) {
+    	if(Gate::denies('FICO Report-Create')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $report_type = $request->input('report_type');
+		$period_daily = $request->input('period_daily');
+		$period_month = $request->input('period_month');
+		$period_year = $request->input('period_year');
+		$period_start = $request->input('period_start');
+		$period_end = $request->input('period_end');
+		$division_ids = $request->input('division_ids');
+		$payment_types = $request->input('payment_types');
+		$payment_status = $request->input('payment_status');
+
+		//dd($revision);
+		$mulai = '';
+		$selesai = '';
+		if($report_type=='daily') {
+			$mulai = Carbon::createFromFormat('d/m/Y', $period_daily)->toDateString() . ' 00:00:00';
+			$selesai = Carbon::createFromFormat('d/m/Y', $period_daily)->toDateString() . ' 23:59:59';
+		}elseif($report_type=='monthly') {
+			$mulai = $period_year.'-'.$period_month.'-01 00:00:00';
+			$tanggalakhir = cal_days_in_month(CAL_GREGORIAN, $period_month, $period_year);
+			$selesai = $period_year.'-'.$period_month.'-'.$tanggalakhir.' 23:59:59';
+		}elseif($report_type=='yearly') {
+			$mulai = $period_year.'-01-01 00:00:00';
+			$selesai = $period_year.'-12-31 23:59:59';
+		}elseif($report_type=='period') {
+			$mulai = Carbon::createFromFormat('d/m/Y', $period_start)->toDateString() . ' 00:00:00';
+			$selesai = Carbon::createFromFormat('d/m/Y', $period_end)->toDateString() . ' 23:59:59';
+		}else{
+			$mulai = '1990-01-01 00:00:00';
+			$selesai = '2050-12-31 23:59:59';
+		}
+
+		if(is_null($division_ids)) {
+			$division_ids = Division::select('division_id')->where('active', '1')->get();
+		}
+
+		if(is_null($payment_types)) {
+			$payment_types = PaymentType::select('payment_type_id')->where('active', '1')->get();
+		}
+
+		if($payment_status=='1') {
+			$result = DB::table('spmb')
+						->select(DB::raw("spmb.*,
+								    company_name,
+								    division_code,
+								    division_name,
+								    spmb_detail_payment_amount,
+								    spmb_detail_payment_request_date,
+								    spmb_detail_payment_transfer_date,
+								    spmb_detail_payment_finish_date,
+								    spmb_detail_payment_status,
+								    spmb_detail_payment_note,
+								    spmb_detail_payment_request_name,
+								    payment_type_name"))
+						->join('spmb_details', 'spmb_details.spmb_id', '=', 'spmb.spmb_id')
+						->join('spmb_detail_payments', 'spmb_detail_payments.spmb_detail_id', '=', 'spmb_details.spmb_detail_id')
+						->join('payment_types', 'payment_types.payment_type_id', '=', 'spmb_detail_payments.payment_type_id')
+						->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+						->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+						->where('spmb.active', '1')
+						->whereBetween('spmb.created_at', [$mulai, $selesai])
+						->whereIn('spmb.division_id', $division_ids)
+						->whereIn('spmb_detail_payments.payment_type_id', $payment_types)
+						->where('spmb_detail_payments.spmb_detail_payment_status', '1')
+						->orderBy('division_id', 'asc')
+						->orderBy('created_at', 'asc')
+						->orderBy('payment_type_name', 'asc')
+						->get();
+		}else if($payment_status=='0') {
+			$result = DB::table('spmb')
+						->select(DB::raw("spmb.*,
+								    company_name,
+								    division_code,
+								    division_name,
+								    spmb_detail_payment_amount,
+								    spmb_detail_payment_request_date,
+								    spmb_detail_payment_transfer_date,
+								    spmb_detail_payment_finish_date,
+								    spmb_detail_payment_status,
+								    spmb_detail_payment_note,
+								    spmb_detail_payment_request_name,
+								    payment_type_name"))
+						->join('spmb_details', 'spmb_details.spmb_id', '=', 'spmb.spmb_id')
+						->join('spmb_detail_payments', 'spmb_detail_payments.spmb_detail_id', '=', 'spmb_details.spmb_detail_id')
+						->join('payment_types', 'payment_types.payment_type_id', '=', 'spmb_detail_payments.payment_type_id')
+						->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+						->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+						->where('spmb.active', '1')
+						->whereBetween('spmb.created_at', [$mulai, $selesai])
+						->whereIn('spmb.division_id', $division_ids)
+						->whereIn('spmb_detail_payments.payment_type_id', $payment_types)
+						->where('spmb_detail_payments.spmb_detail_payment_status', '0')
+						->orderBy('division_id', 'asc')
+						->orderBy('created_at', 'asc')
+						->orderBy('payment_type_name', 'asc')
+						->get();
+		}else{
+			$result = DB::table('spmb')
+						->select(DB::raw("spmb.*,
+								    company_name,
+								    division_code,
+								    division_name,
+								    spmb_detail_payment_amount,
+								    spmb_detail_payment_request_date,
+								    spmb_detail_payment_transfer_date,
+								    spmb_detail_payment_finish_date,
+								    spmb_detail_payment_status,
+								    spmb_detail_payment_note,
+								    spmb_detail_payment_request_name,
+								    payment_type_name"))
+						->join('spmb_details', 'spmb_details.spmb_id', '=', 'spmb.spmb_id')
+						->join('spmb_detail_payments', 'spmb_detail_payments.spmb_detail_id', '=', 'spmb_details.spmb_detail_id')
+						->join('payment_types', 'payment_types.payment_type_id', '=', 'spmb_detail_payments.payment_type_id')
+						->join('divisions', 'divisions.division_id', '=', 'spmb.division_id')
+						->join('companies', 'companies.company_id', '=', 'divisions.company_id')
+						->where('spmb.active', '1')
+						->whereBetween('spmb.created_at', [$mulai, $selesai])
+						->whereIn('spmb.division_id', $division_ids)
+						->whereIn('spmb_detail_payments.payment_type_id', $payment_types)
+						->orderBy('division_id', 'asc')
+						->orderBy('created_at', 'asc')
+						->orderBy('payment_type_name', 'asc')
+						->get();
+		}
+
+
+		$data['result'] = $result;
+
+		return response()->json($data);
+    }
 }

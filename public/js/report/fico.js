@@ -44,9 +44,8 @@ $(document).ready(function() {
 		period_start = $('#period_start').val();
 		period_end = $('#period_end').val();
 		division_ids = $('#division_ids').val();
-		item_categories = $('#item_categories').val();
-		vendors = $('#vendors').val();
-		pics = $('#pics').val();
+		payment_types = $('#payment_types').val();
+		payment_status = $('#payment_status').val();
 
 		if(report_type=='daily') {
 			if(period_daily=='') {
@@ -119,32 +118,32 @@ function generate_report() {
 
 			var html = '';
 			var sum_spmb = 0;
-			var sum_total_price = 0;
+			var sum_total_amount = 0;
 			$('#grid-data-result tbody').empty();
 			$.each(data.result, function(key, value){
-				var total_price = (value.total_price==null) ? '-' : 'Rp ' + convertNumber(value.total_price);
-				var pic_name = (value.pic_firstname ==null) ? '-' : value.pic_firstname + ' ' + value.pic_lastname;
+				var payment_amount = (value.spmb_detail_payment_amount==null) ? '-' : 'Rp ' + convertNumber(value.spmb_detail_payment_amount);
+				var payment_status = (value.spmb_detail_payment_status==0) ? 'Waiting Payment' : 'Completed';
 				html += '<tr>';
 				html += '<td>'  + value.company_name + '</td>';
 				html += '<td>'  + value.division_name + '</td>';
 				html += '<td>'  + value.created_at + '</td>';
 				html += '<td>'  + value.spmb_no + '</td>';
-				html += '<td>'  + value.vendor_name + '</td>';
-				html += '<td>'  + value.item_category_name + '</td>';
-				html += '<td>'  + pic_name + '</td>';
-				html += '<td>'  + value.spmb_detail_vendor_offer_price + '</td>';
-				html += '<td>'  + value.spmb_detail_vendor_deal_price + '</td>';
-				html += '<td>'  + value.spmb_detail_qty + '</td>';
-				html += '<td>'  + total_price + '</td>';
+				html += '<td>'  + payment_amount + '</td>';
+				html += '<td>'  + value.payment_type_name + '</td>';
+				html += '<td>'  + payment_status + '</td>';
+				html += '<td>'  + value.spmb_detail_payment_request_date + '</td>';
+				html += '<td>'  + value.spmb_detail_payment_transfer_date + '</td>';
+				html += '<td>'  + value.spmb_detail_payment_finish_date + '</td>';
+				html += '<td>'  + value.spmb_detail_payment_request_name + '</td>';
 				html += '</tr>';
 				sum_spmb += 1;
-				sum_total_price += value.total_price;
+				sum_total_amount += value.spmb_detail_payment_amount;
 			});
 
 			html += '<tr>';
-			html += '<td colspan="9">Total</td>';
-			html += '<td>'  + sum_spmb + '</td>';
-			html += '<td>Rp '  + convertNumber(sum_total_price) + '</td>';
+			html += '<td colspan="4">Total</td>';
+			html += '<td>Rp '  + convertNumber(sum_total_amount) + '</td>';
+			html += '<td colspan="5"></td>';
 			html += '</tr>';
 
 			$('#grid-data-result tbody').append(html);
