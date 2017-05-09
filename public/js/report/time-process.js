@@ -129,7 +129,7 @@ function generate_report() {
 				html += '<tr>';
 				html += '<td>'  + value.company_name + '</td>';
 				html += '<td>'  + value.division_name + '</td>';
-				html += '<td>'  + value.created_at + '</td>';
+				html += '<td>'  + convertDate(value.created_at) + '</td>';
 				html += '<td>'  + value.spmb_no + '</td>';
 				html += '<td>'  + value.spmb_type_name + '</td>';
 				html += '<td>'  + value.revision + '</td>';

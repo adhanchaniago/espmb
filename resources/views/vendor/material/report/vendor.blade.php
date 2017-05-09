@@ -136,6 +136,9 @@
 							                    <th>DEAL PRICE</th>
 							                    <th>QTY</th>
 							                    <th>TOTAL PRICE</th>
+							                    <th>PRICE RATING</th>
+							                    <th>SPEED RATING</th>
+							                    <th>QUALITY RATING</th>
 							                </tr>
 							            </thead>
 							            <tbody>

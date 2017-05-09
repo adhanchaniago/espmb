@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Vendor extends Model
 {
@@ -49,5 +50,14 @@ class Vendor extends Model
     public function spmbdetailvendors()
     {
     	return $this->hasMany('App\SPMBDetailVendor', 'vendor_id');
+    }
+
+    public function _avg_rating($rating_id, $vendor_id)
+    {
+    	$rate = DB::table("spmb_detail_vendor_rating_score")->where('rating_id', $rating_id)->where('vendor_id', $vendor_id)->avg('score');
+
+    	//dd($rate);
+
+    	return $rate;
     }
 }

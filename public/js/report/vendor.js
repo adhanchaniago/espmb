@@ -122,6 +122,11 @@ function generate_report() {
 			var html = '';
 			var sum_spmb = 0;
 			var sum_total_price = 0;
+			var sum_offer_price = 0;
+			var sum_deal_price = 0;
+			var sum_price_rating = 0;
+			var sum_speed_rating = 0;
+			var sum_quality_rating = 0;
 			$('#grid-data-result tbody').empty();
 			$.each(data.result, function(key, value){
 				var total_price = (value.total_price==null) ? '-' : 'Rp ' + convertNumber(value.total_price);
@@ -129,24 +134,39 @@ function generate_report() {
 				html += '<tr>';
 				html += '<td>'  + value.company_name + '</td>';
 				html += '<td>'  + value.division_name + '</td>';
-				html += '<td>'  + value.created_at + '</td>';
+				html += '<td>'  + convertDate(value.created_at) + '</td>';
 				html += '<td>'  + value.spmb_no + '</td>';
 				html += '<td>'  + value.vendor_name + '</td>';
 				html += '<td>'  + value.item_category_name + '</td>';
 				html += '<td>'  + pic_name + '</td>';
-				html += '<td>'  + value.spmb_detail_vendor_offer_price + '</td>';
-				html += '<td>'  + value.spmb_detail_vendor_deal_price + '</td>';
+				html += '<td>Rp '  + convertNumber(value.spmb_detail_vendor_offer_price) + '</td>';
+				html += '<td>Rp '  + convertNumber(value.spmb_detail_vendor_deal_price) + '</td>';
 				html += '<td>'  + value.spmb_detail_qty + '</td>';
 				html += '<td>'  + total_price + '</td>';
+				html += '<td>'  + value.price_rating + '</td>';
+				html += '<td>'  + value.speed_rating + '</td>';
+				html += '<td>'  + value.quality_rating + '</td>';
 				html += '</tr>';
 				sum_spmb += 1;
 				sum_total_price += value.total_price;
+				sum_offer_price += value.spmb_detail_vendor_offer_price * value.spmb_detail_qty;
+				sum_deal_price += value.spmb_detail_vendor_deal_price * value.spmb_detail_qty;
+				sum_price_rating += value.price_rating;
+				sum_speed_rating += value.speed_rating;
+				sum_quality_rating += value.quality_rating;
 			});
 
 			html += '<tr>';
-			html += '<td colspan="9">Total</td>';
+			html += '<td colspan="3">Total</td>';
 			html += '<td>'  + sum_spmb + '</td>';
+			html += '<td colspan="3"></td>';
+			html += '<td>Rp '  + convertNumber(sum_offer_price) + '</td>';
+			html += '<td>Rp '  + convertNumber(sum_deal_price) + '</td>';
+			html += '<td></td>';
 			html += '<td>Rp '  + convertNumber(sum_total_price) + '</td>';
+			html += '<td>'  + (sum_price_rating / sum_spmb).toFixed(2) + '</td>';
+			html += '<td>'  + (sum_speed_rating / sum_spmb).toFixed(2) + '</td>';
+			html += '<td>'  + (sum_quality_rating / sum_spmb).toFixed(2) + '</td>';
 			html += '</tr>';
 
 			$('#grid-data-result tbody').append(html);

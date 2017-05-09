@@ -100,7 +100,7 @@
 	                <div class="col-sm-10">
 	                    <div class="fg-line">
 	                    	@foreach($vendor->ratings as $row)
-	                    		<span class="badge">{{ $row->rating_name }}</span><br/>
+	                    		<span class="badge">{{ $row->rating_name }} = &nbsp;{{ number_format($vendor->_avg_rating($row->rating_id, $vendor->vendor_id), 2) }}</span><br/>
 	                    	@endforeach
 	                    </div>
 	                    @if ($errors->has('rating_id'))

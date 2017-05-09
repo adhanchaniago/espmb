@@ -388,7 +388,10 @@ class ReportController extends Controller
 									    spmb_detail_vendors.spmb_detail_vendor_offer_price,
 									    spmb_detail_vendors.spmb_detail_vendor_deal_price,
 									    spmb_details.spmb_detail_qty,
-									    (spmb_detail_vendors.spmb_detail_vendor_deal_price * spmb_details.spmb_detail_qty) AS total_price"))
+									    (spmb_detail_vendors.spmb_detail_vendor_deal_price * spmb_details.spmb_detail_qty) AS total_price,
+									    (SELECT score FROM spmb_detail_vendor_rating_score WHERE spmb_detail_id = spmb_details.spmb_detail_id AND vendor_id = spmb_detail_vendors.vendor_id AND rating_id = 1) AS price_rating,
+									    (SELECT score FROM spmb_detail_vendor_rating_score WHERE spmb_detail_id = spmb_details.spmb_detail_id AND vendor_id = spmb_detail_vendors.vendor_id AND rating_id = 2) AS speed_rating,
+									    (SELECT score FROM spmb_detail_vendor_rating_score WHERE spmb_detail_id = spmb_details.spmb_detail_id AND vendor_id = spmb_detail_vendors.vendor_id AND rating_id = 3) AS quality_rating"))
 							->join('spmb_details', 'spmb_details.spmb_id', '=', 'spmb.spmb_id')
 							->join('spmb_detail_vendors', 'spmb_detail_vendors.spmb_detail_id', '=', 'spmb_details.spmb_detail_id')
 							->join('item_categories', 'item_categories.item_category_id', '=', 'spmb_details.item_category_id')
