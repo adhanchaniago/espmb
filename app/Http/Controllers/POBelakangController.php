@@ -138,7 +138,9 @@ class POBelakangController extends Controller
 
         $obj->save();
 
-        SPMB::find($obj->spmb_id)->rules()->sync($request->input('spmb_rules'));
+        if(!empty($request->input('spmb_rules'))) {
+            SPMB::find($obj->spmb_id)->rules()->sync($request->input('spmb_rules'));
+        }
 
         //store details
         if($request->session()->has('otherspmb_details_' . $request->user()->user_id)) {
@@ -356,7 +358,9 @@ class POBelakangController extends Controller
 
         $obj->save();
 
-        SPMB::find($id)->rules()->sync($request->input('spmb_rules'));
+        if(!empty($request->input('spmb_rules'))) {
+            SPMB::find($id)->rules()->sync($request->input('spmb_rules'));
+        }
 
         //remove & store details
         $old_detail = SPMBDetail::where('spmb_id', $id)->get();

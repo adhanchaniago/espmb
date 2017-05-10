@@ -29,7 +29,7 @@ $(document).ready(function() {
             	var dr = '';
             	$('#division_id').empty();
             	$.each(data, function(key, value) {
-            		dr += '<option value="' + value.division_id + '">' + value.division_name + '</option>';
+            		dr += '<option data-costcenter="' + value.division_code + '" value="' + value.division_id + '">' + value.division_name + '</option>';
             	});
             	$('#division_id').append(dr);
 
