@@ -9,6 +9,7 @@ var division_ids = [];
 var authors = [];
 var pics = [];
 var revision = '';
+var spmb_method = '';
 
 $(document).ready(function() {
 	clear_filter();
@@ -48,6 +49,7 @@ $(document).ready(function() {
 		authors = $('#authors').val();
 		pics = $('#pics').val();
 		revision = $('#revision').val();
+		spmb_method = $('#spmb_method').val();
 
 		if(report_type=='daily') {
 			if(period_daily=='') {
@@ -111,6 +113,7 @@ function generate_report() {
 			division_ids:division_ids,
 			authors:authors,
 			pics:pics,
+			spmb_method:spmb_method,
 			revision:revision
 		},
 		error: function(data) {
@@ -126,12 +129,14 @@ function generate_report() {
 			$.each(data.result, function(key, value){
 				var total_price = (value.total_price==null) ? '-' : 'Rp ' + convertNumber(value.total_price);
 				var pic_name = (value.pic_firstname ==null) ? '-' : value.pic_firstname + ' ' + value.pic_lastname;
+				var method = (value.spmb_method=='ABNORMAL') ? 'PO Belakang' : 'Normal';
 				html += '<tr>';
 				html += '<td>'  + value.company_name + '</td>';
 				html += '<td>'  + value.division_name + '</td>';
 				html += '<td>'  + convertDate(value.created_at) + '</td>';
 				html += '<td>'  + value.spmb_no + '</td>';
 				html += '<td>'  + value.spmb_type_name + '</td>';
+				html += '<td>'  + method + '</td>';
 				html += '<td>'  + value.revision + '</td>';
 				html += '<td>'  + value.author_firstname + ' ' + value.author_lastname + '</td>';
 				html += '<td>'  + pic_name + '</td>';
@@ -142,7 +147,7 @@ function generate_report() {
 			});
 
 			html += '<tr>';
-			html += '<td colspan="7">Total</td>';
+			html += '<td colspan="8">Total</td>';
 			html += '<td>'  + sum_spmb + '</td>';
 			html += '<td>Rp '  + convertNumber(sum_total_price) + '</td>';
 			html += '</tr>';
@@ -175,11 +180,13 @@ function clear_filter(){
 	$('#authors').selectpicker('deselectAll');
 	$('#pics').selectpicker('deselectAll');
 	$('#revision').val('');
+	$('#spmb_method').val('');
 	$('#report_type').val('');
 
 	$('#division_ids').selectpicker('refresh');
 	$('#authors').selectpicker('refresh');
 	$('#pics').selectpicker('refresh');
+	$('#spmb_method').selectpicker('refresh');
 	$('#revision').selectpicker('refresh');
 	$('#report_type').selectpicker('refresh');
 
@@ -193,6 +200,7 @@ function clear_filter(){
 	authors = [];
 	pics = [];
 	revision = '';
+	spmb_method = '';
 
 	$('#grid-data-result tbody').empty();
 }

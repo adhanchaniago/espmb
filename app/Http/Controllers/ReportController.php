@@ -83,6 +83,7 @@ class ReportController extends Controller
 		$authors = $request->input('authors');
 		$pics = $request->input('pics');
 		$revision = $request->input('revision');
+		$spmb_method = $request->input('spmb_method');
 
 		//dd($revision);
 		$mulai = '';
@@ -133,6 +134,14 @@ class ReportController extends Controller
                         })->get();
 		}
 
+		if($spmb_method == 'NORMAL') {
+			$whereMethod = "spmb.spmb_method='NORMAL'";
+		}else if($spmb_method == 'ABNORMAL') {
+			$whereMethod = "spmb.spmb_method='ABNORMAL'";
+		}else{
+			$whereMethod = "spmb.spmb_method='NORMAL' OR spmb.spmb_method='ABNORMAL'";
+		}
+
 		if(is_null($pics)) {
 			if($revision=='yes'){
 				$result = DB::table('spmb')
@@ -156,6 +165,7 @@ class ReportController extends Controller
 							->whereIn('spmb.division_id', $division_ids)
 							->whereIn('spmb.created_by', $authors)
 							->where('revision', '>', 0)
+							->where($whereMethod)
 							->orderBy('division_id', 'asc')
 							->orderBy('created_at', 'asc')
 							->orderBy('spmb_no', 'asc')
@@ -185,6 +195,7 @@ class ReportController extends Controller
 						->whereIn('spmb.division_id', $division_ids)
 						->whereIn('spmb.created_by', $authors)
 						->where('revision', '=', 0)
+						->where($whereMethod)
 						->orderBy('division_id', 'asc')
 						->orderBy('created_at', 'asc')
 						->orderBy('spmb_no', 'asc')
@@ -213,6 +224,7 @@ class ReportController extends Controller
 						->whereBetween('spmb.created_at', [$mulai, $selesai])
 						->whereIn('spmb.division_id', $division_ids)
 						->whereIn('spmb.created_by', $authors)
+						->whereRaw($whereMethod)
 						->orderBy('division_id', 'asc')
 						->orderBy('created_at', 'asc')
 						->orderBy('spmb_no', 'asc')

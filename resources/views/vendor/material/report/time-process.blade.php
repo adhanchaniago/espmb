@@ -87,6 +87,14 @@
 			                            </select>
 						            </div>
 						            <div class="form-group">
+						                <label for="spmb_method">Method</label>
+						                <select name="spmb_method" id="spmb_method" class="form-control input-sm selectpicker" data-live-search="true">
+						                	<option value="">All</option>
+			                                <option value="NORMAL">Normal</option>
+			                                <option value="ABNORMAL">PO Belakang</option>
+			                            </select>
+						            </div>
+						            <div class="form-group">
 						                <label for="authors">Author</label>
 						                <select name="authors[]" id="authors" class="form-control input-sm selectpicker" data-live-search="true" multiple="true">
 			                                @foreach($authors as $author)
@@ -130,6 +138,7 @@
 							                    <th>DATE</th>
 							                    <th>SPMB NO</th>
 							                    <th>TYPE</th>
+							                    <th>METHOD</th>
 							                    <th>REVISION</th>
 							                    <th>AUTHOR</th>
 							                    <th>PIC</th>
