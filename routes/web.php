@@ -274,6 +274,8 @@ Route::group(['middleware' => ['auth', 'menu']], function() {
         Route::post('api/generate-vendor', 'ReportController@apiGenerateVendor');
         Route::get('fico', 'ReportController@fico');
         Route::post('api/generate-fico', 'ReportController@apiGenerateFico');
+        Route::get('api/getSPMBPerItemCategory', 'ReportController@apiGetSPMBPerItemCategory');
+        Route::get('api/getSPMBPerDivision', 'ReportController@apiGetSPMBPerDivision');
     });
 
     Route::group(['prefix' => 'config'], function() {

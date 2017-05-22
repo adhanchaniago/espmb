@@ -13,7 +13,7 @@ use Log;
 use Notification;
 
 use App\Announcement;
-use App\Religion;
+use App\SPMB;
 use Carbon\Carbon;
 use App\Mail\TestMail;
 
@@ -71,6 +71,22 @@ class HomeController extends Controller
                                                     $query->where('announcement_startdate', '<=', $today)
                                                             ->where('announcement_enddate', '>=', $today);
                                                 })->where('active', '=', '1')->get();
+
+        $year_start = date('Y') . '-01-01 00:00:00';
+        $year_end = date('Y') . '-12-31 23:59:59';
+        $month_start = date('Y-m') . '-01 00:00:00';
+        $lastdate = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
+        $month_end = date('Y-m-') . $lastdate . ' 23:59:59';
+        $today_start = date('Y-m-d') . ' 00:00:00';
+        $today_end = date('Y-m-d') . ' 23:59:59';
+
+        $data['total_year'] = SPMB::where('active','1')->whereBetween('spmb.created_at', [$year_start, $year_end])->count();
+        $data['total_month'] = SPMB::where('active','1')->whereBetween('spmb.created_at', [$month_start, $month_end])->count();
+        $data['total_today'] = SPMB::where('active','1')->whereBetween('spmb.created_at', [$today_start, $today_end])->count();
+
+        $data['total_po_belakang_year'] = SPMB::where('spmb_method', 'ABNORMAL')->where('active','1')->whereBetween('spmb.created_at', [$year_start, $year_end])->count();
+        $data['total_po_belakang_month'] = SPMB::where('spmb_method', 'ABNORMAL')->where('active','1')->whereBetween('spmb.created_at', [$month_start, $month_end])->count();
+        $data['total_po_belakang_today'] = SPMB::where('spmb_method', 'ABNORMAL')->where('active','1')->whereBetween('spmb.created_at', [$today_start, $today_end])->count();
 
 
         return view('home', $data);

@@ -567,4 +567,50 @@ class ReportController extends Controller
 
 		return response()->json($data);
     }
+
+    public function apiGetSPMBPerDivision() {
+    	if(Gate::denies('Home-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $year_start = date('Y') . '-01-01 00:00:00';
+        $year_end = date('Y') . '-12-31 23:59:59';
+
+        $q = DB::select("
+                    SELECT 
+                    	spmb.division_id, division_name, count(spmb_id) as total 
+                    FROM spmb 
+                    INNER JOIN divisions ON divisions.division_id = spmb.division_id 
+                    WHERE spmb.active = '1' AND (spmb.created_at BETWEEN '" . $year_start . "' AND '" . $year_end . "')
+                    GROUP BY division_id");
+
+        $data['result'] = $q;
+
+        return response()->json($data);
+    }
+
+    public function apiGetSPMBPerItemCategory() {
+    	if(Gate::denies('Home-Read')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $data = array();
+
+        $year_start = date('Y') . '-01-01 00:00:00';
+        $year_end = date('Y') . '-12-31 23:59:59';
+
+        $q = DB::select("
+                    SELECT 
+                    	spmb_details.item_category_id, item_category_name, count(spmb_detail_id) as total 
+                    FROM spmb_details 
+                    INNER JOIN item_categories ON item_categories.item_category_id = spmb_details.item_category_id 
+                    WHERE spmb_details.created_at BETWEEN '" . $year_start . "' AND '" . $year_end . "' 
+                    GROUP BY item_category_id");
+
+        $data['result'] = $q;
+
+        return response()->json($data);
+    }
 }
