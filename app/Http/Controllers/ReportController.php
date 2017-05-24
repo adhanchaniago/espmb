@@ -584,7 +584,7 @@ class ReportController extends Controller
                     FROM spmb 
                     INNER JOIN divisions ON divisions.division_id = spmb.division_id 
                     WHERE spmb.active = '1' AND (spmb.created_at BETWEEN '" . $year_start . "' AND '" . $year_end . "')
-                    GROUP BY division_id");
+                    GROUP BY division_id, division_name");
 
         $data['result'] = $q;
 
@@ -607,7 +607,7 @@ class ReportController extends Controller
                     FROM spmb_details 
                     INNER JOIN item_categories ON item_categories.item_category_id = spmb_details.item_category_id 
                     WHERE spmb_details.created_at BETWEEN '" . $year_start . "' AND '" . $year_end . "' 
-                    GROUP BY item_category_id");
+                    GROUP BY item_category_id, item_category_name");
 
         $data['result'] = $q;
 
