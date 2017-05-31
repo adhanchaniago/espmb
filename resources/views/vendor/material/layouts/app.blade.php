@@ -16,8 +16,8 @@
         <link href="{{ url('css/jquery.mCustomScrollbar.min.css') }}" rel="stylesheet">
         <link href="{{ url('css/jquery.bootgrid.min.css') }}" rel="stylesheet">
         <link href="{{ url('css/material-design-iconic-font.min.css') }}" rel="stylesheet">
-        <link href="{{ url('css/font-awesome.min.css') }}" rel="stylesheet">
-        <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"> -->
+        <!-- <link href="{{ url('css/font-awesome.min.css') }}" rel="stylesheet"> -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
         <link href="{{ url('css/fontawesome-stars.css') }}" rel="stylesheet">
         <link href="{{ url('css/fontawesome-stars-o.css') }}" rel="stylesheet">
         @yield('vendorcss')
