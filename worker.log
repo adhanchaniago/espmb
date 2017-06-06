@@ -3476,3 +3476,1779 @@
   SQLSTATE[HY000] [2002] Connection refused  
                                              
 
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                                                    
+  [Predis\Connection\ConnectionException]                           
+  Error while reading line from the server. [tcp://127.0.0.1:6379]  
+                                                                    
+
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+
+
+
+
+
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+
+                                             
+  [Predis\Connection\ConnectionException]    
+  Connection refused [tcp://127.0.0.1:6379]  
+                                             
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+
+
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                                          
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+
+
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                               
+  [Illuminate\Database\QueryException]                                         
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `menus` where  
+   `active` = 1)                                                               
+                                                                               
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                                                                          
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+
+  [Doctrine\DBAL\Driver\PDOException]        
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
+                                             
+  [PDOException]                             
+  SQLSTATE[HY000] [2002] Connection refused  
+                                             
+
